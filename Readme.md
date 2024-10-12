@@ -7,7 +7,7 @@ Game 2D tiêu diệt zombie sử dụng Unity
 - git reset --mixed id (những staged changes được thêm sau commit id sẽ quay về trạng thái changes và có thể tiếp tục sửa và thêm file, [phù hợp để sửa file])
 - git rest --hard id (quay về commit id và những commit và code của commit được thêm sau commit id sẽ bị xoá)
 
-git log --online (xem lịch sử commit)
+git log --oneline (xem lịch sử commit)
 
 Lưu ý conflict message:
 - current changes (thay đổi hiện tại)
