@@ -3,7 +3,7 @@ Game 2D tiêu diệt zombie sử dụng Unity
 -- Git Command --
 
 (reset)
-- git reset --soft id (quay về trạng thái staged changes của commit trước đó và có thể sửa về thêm file, [phù hợp để thêm file thiếu])
+- git reset --soft id (quay về trạng thái staged changes của commit trước đó và có thể sửa về thêm file mà ko bị mất commit trước đó, [phù hợp để thêm file thiếu])
 - git reset --mixed id (những staged changes được thêm sau commit id sẽ quay về trạng thái changes và có thể tiếp tục sửa và thêm file, [phù hợp để sửa file])
 - git rest --hard id (quay về commit id và những commit và code của commit được thêm sau commit id sẽ bị xoá)
 
