@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //cho phép chuyển thông số trong unity
     [SerializeField]
     private float _speed;
     bool isWallTouch;
