@@ -11,6 +11,14 @@ public class HealthController : MonoBehaviour
     [SerializeField]
     private float _maximumHealth;
 
+    public HealthBarUI healthBarUI;
+
+    void Start()
+    {
+        _currentHealth = _maximumHealth;
+        healthBarUI.SetMaxHealth(_maximumHealth);
+    }
+
     public float RemainingHealthPercentage
     {
         get
@@ -52,6 +60,8 @@ public class HealthController : MonoBehaviour
         {
             OnDamaged.Invoke();
         }
+
+        healthBarUI.SetHealth(_currentHealth);
     }
 
     public void AddHealth(float amountToAdd)
