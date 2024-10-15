@@ -20,14 +20,24 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _movementInput; 
     private Vector2 _smoothMovementInput; 
     private Vector2 _movementInputSmoothVelocity; 
-    private bool facingRight = true; 
+    private bool facingRight = true;
+
+    public GameObject bulletPrefab; // Đổi tên biến thành bulletPrefab cho rõ ràng hơn
+    public Transform firePos;
+    public float TimeBtwFire = 0.2f;
+    public float bulletForce;
+
+    private float timeBtwFire;
 
     //Được gọi khi script được khởi tạo.
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
-
+    void Start()
+    {
+        timeBtwFire = 0; // Khởi tạo timeBtwFire
+    }
     private void FixedUpdate()
     {
         // Áp dụng chuyển động và xoay trong FixedUpdate để có vật lý nhất quán
@@ -55,7 +65,14 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
         */
+        timeBtwFire -= Time.deltaTime; // Giảm thời gian chờ
+
+        if (Input.GetMouseButton(0) && timeBtwFire <= 0) // Kiểm tra nếu có thể bắn
+        {
+            FireBullet();
+        }
     }
+
 
     private void SetPlayerVelocity()
     {
@@ -80,17 +97,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotateInDirectionOfInput()
     {
-        // Kiểm tra nếu có bất kỳ đầu vào chuyển động nào
-        if (_movementInput != Vector2.zero)
+        foreach (Transform child in transform)
         {
-            // Tính toán góc xoay mục tiêu dựa trên hướng chuyển động
-            Quaternion targetRotation = Quaternion.LookRotation(transform.forward, _smoothMovementInput);
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 lookDir = mousePos - child.position;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
-            // Xoay tới góc xoay mục tiêu
-            Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed + Time.deltaTime);
+            Quaternion rotation = Quaternion.Euler(0, 0, angle+90);
+            child.rotation = rotation;
 
-            // Áp dụng góc xoay cho Rigidbody2D
-            _rigidbody.MoveRotation(rotation);
+            
         }
     }
 
@@ -99,4 +115,28 @@ public class PlayerMovement : MonoBehaviour
     {
         _movementInput = inputValue.Get<Vector2>();
     }
+
+
+    void FireBullet()
+    {
+        timeBtwFire = TimeBtwFire; // Đặt lại thời gian chờ
+
+        // Tạo một góc quay mới cho viên đạn, xoay thêm 90 độ so với hướng hiện tại của firePos
+        Quaternion bulletRotation = firePos.rotation * Quaternion.Euler(0, 0, 90);
+
+        // Sử dụng góc quay mới này khi tạo ra viên đạn
+        GameObject bulletInstance = Instantiate(bulletPrefab, firePos.position, bulletRotation);
+
+        // Thay đổi tỷ lệ của viên đạn để nó nhỏ hơn 10 lần
+        bulletInstance.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        // Thêm lực cho viên đạn
+        Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
+        if (rb != null) // Kiểm tra xem Rigidbody2D có tồn tại không
+        {
+            rb.AddForce(firePos.up * bulletForce, ForceMode2D.Impulse);
+        }
+    }
+
+
 }
