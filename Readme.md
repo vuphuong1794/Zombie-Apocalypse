@@ -21,7 +21,7 @@ Lưu ý conflict message:
     + git commit -m "text"
     + git push origin branchName
 
-+ git push 
++ git push origin branchName
 
 - git rebase branchName (hợp nhất code với nhánh khác không theo thứ tự, những commit của nhánh kia sẽ được ưu tiên lên trước rồi mới tới commit của mình)
 + xử lý conflict nếu có:
