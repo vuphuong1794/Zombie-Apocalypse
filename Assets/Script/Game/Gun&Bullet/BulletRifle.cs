@@ -44,6 +44,8 @@ public class BulletRifle : MonoBehaviour
         {
             // Hủy viên đạn khi va chạm với zombie
             Destroy(gameObject);
+            //  Xóa zombie bị đạn va chạm
+            Destroy(collision.gameObject);
         }
         // Kiểm tra nếu viên đạn va chạm với đối tượng có tag "Wall"
         else if (collision.gameObject.tag=="Wall")
