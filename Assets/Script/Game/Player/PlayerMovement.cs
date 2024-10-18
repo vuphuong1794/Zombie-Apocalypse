@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
     {
         facingRight = !facingRight;  // Đảo ngược hướng mặt
         Vector3 localScale = transform.localScale;
-        localScale.x *= -1; // Đảo ngược tỷ lệ X để lật sprite
+        //localScale.x *= -1; // Đảo ngược tỷ lệ X để lật sprite
         transform.localScale = localScale;
     }
 
@@ -105,8 +105,6 @@ public class PlayerMovement : MonoBehaviour
 
             Quaternion rotation = Quaternion.Euler(0, 0, angle+90);
             child.rotation = rotation;
-
-            
         }
     }
 
