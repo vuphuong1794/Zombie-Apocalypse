@@ -8,6 +8,7 @@ Game 2D tiêu diệt zombie sử dụng Unity
 - git rest --hard id (quay về commit id và những commit và code của commit được thêm sau commit id sẽ bị xoá)
 
 git log --oneline (xem lịch sử commit)
+git merge --abort (hủy bỏ quá trình hợp nhất)
 
 Lưu ý conflict message:
 - current changes (thay đổi hiện tại)
