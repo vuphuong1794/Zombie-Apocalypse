@@ -1,29 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private float _speed;
-
-    [SerializeField]
-    private float _rotationSpeed;
-
-    bool isWallTouch;
-
-    public LayerMask wallLayer;
-    public Transform wallCheckPoint;
-
-    private Rigidbody2D _rigidbody;
-
-    private Vector2 _movementInput;
-    private Vector2 _smoothMovementInput;
-    private Vector2 _movementInputSmoothVelocity;
-
-    private bool facingRight = true;
+    private float _speed = 5f; // Tốc độ di chuyển của người chơi
+    private Rigidbody2D _rigidbody; // Thân vật lý của người chơi
+    private Vector2 _movementInput; // Đầu vào chuyển động
 
     private void Awake()
     {
@@ -32,64 +15,36 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //di chuyển mượt hơn
-        SetPlayerVelocity();
-        RotateInDirectionOfInput();
-
-        /*
-        // Kiểm tra va chạm tường
-        isWallTouch = Physics2D.OverlapBox(wallCheckPoint.position, new Vector2(0.3f, 1f), 0, wallLayer);
-
-        // Nếu chạm tường thì xoay người
-        if (isWallTouch)
-        {
-            Flip();
-        }
-
-        // Xoay nhân vật theo hướng di chuyển
-        if (_movementInput.x > 0 && !facingRight)
-        {
-            Flip();
-        }
-        else if (_movementInput.x < 0 && facingRight)
-        {
-            Flip();
-        }*/
+        // Di chuyển và xoay nhân vật trong FixedUpdate để đảm bảo tính nhất quán của vật lý
+        MovePlayer();
+        RotateTowardsMouse();
     }
 
-    private void SetPlayerVelocity()
+    private void MovePlayer()
     {
-        _smoothMovementInput = Vector2.SmoothDamp(
-                    _smoothMovementInput,
-                    _movementInput,
-                    ref _movementInputSmoothVelocity,
-                    0.1f);
+        // Tính toán vị trí mục tiêu mới
+        Vector2 targetPosition = _rigidbody.position + _movementInput * _speed * Time.fixedDeltaTime;
 
-        // Di chuyển nhân vật theo đầu vào
-        _rigidbody.velocity = _smoothMovementInput * _speed;
+        // Di chuyển đối tượng đến vị trí mục tiêu bằng MovePosition
+        _rigidbody.MovePosition(targetPosition);
     }
 
-    // Xoay mặt nhân vật mà không ảnh hưởng đến hướng di chuyển
-    public void Flip()
+    private void RotateTowardsMouse()
     {
-        facingRight = !facingRight;  // Đảo trạng thái hướng quay
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1; // Đảo chiều đối tượng theo trục X
-        transform.localScale = localScale;
+        // Lấy vị trí chuột trong không gian thế giới 2D
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Tính toán vector hướng từ vị trí của nhân vật đến vị trí của chuột
+        Vector2 direction = mousePos - transform.position;
+
+        // Tính góc giữa hướng này và trục x, sau đó chuyển từ radian sang độ
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Xoay nhân vật sao cho nó hướng về phía chuột
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    private void RotateInDirectionOfInput()
-    {
-        //kiểm tra nếu người chơi có di chuyển hay không 
-        if(_movementInput != Vector2.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(transform.forward, _smoothMovementInput);
-            Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed + Time.deltaTime);
-
-            _rigidbody.MoveRotation(rotation);  
-        }
-    }
-
+    // Được gọi bởi Input System khi phát hiện đầu vào chuyển động
     private void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
