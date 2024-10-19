@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeMaxExist: 3
+  _damageAmount: 20
 --- !u!70 &5907471751085082707
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

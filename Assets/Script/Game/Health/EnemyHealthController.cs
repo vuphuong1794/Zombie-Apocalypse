@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class HealthController : MonoBehaviour
+public class EnemyHealthController : MonoBehaviour
 {
     [SerializeField]
     private float _currentHealth;
@@ -12,14 +12,14 @@ public class HealthController : MonoBehaviour
     [SerializeField]
     private float _maximumHealth;
 
-    public HealthBarUI healthBarUI;
+    public EnemyHealthBarUI enemyHealthBarUI;
 
     void Start()
     {
         _currentHealth = _maximumHealth;
-        if (healthBarUI != null)
+        if (enemyHealthBarUI != null)
         {
-            healthBarUI.SetMaxHealth(_maximumHealth);
+            enemyHealthBarUI.SetMaxHealth(_maximumHealth);
         }
     }
 
@@ -58,16 +58,17 @@ public class HealthController : MonoBehaviour
 
         if (_currentHealth == 0)
         {
-            OnDied.Invoke();
+            //OnDied.Invoke();
+            Destroy(gameObject);
         }
         else
         {
             OnDamaged.Invoke();
         }
 
-        if (healthBarUI != null)
+        if (enemyHealthBarUI != null)
         {
-            healthBarUI.SetHealth(_currentHealth);
+            enemyHealthBarUI.SetHealth(_currentHealth);
         }
     }
 
@@ -85,9 +86,9 @@ public class HealthController : MonoBehaviour
             _currentHealth = _maximumHealth;
         }
 
-        if (healthBarUI != null)
+        if (enemyHealthBarUI != null)
         {
-            healthBarUI.SetHealth(_currentHealth);
+            enemyHealthBarUI.SetHealth(_currentHealth);
         }
     }
 }
