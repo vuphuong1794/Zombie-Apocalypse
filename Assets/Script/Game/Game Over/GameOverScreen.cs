@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,11 +14,13 @@ public class GameOverScreen : MonoBehaviour
         pointsText.text = score.ToString() + " SCORES";
     }
 
+    //chuyển đến scene Game
     public void RestartButton()
     {
         SceneManager.LoadScene("Game");
     }
 
+    //chuyển đến scene Main Menu
     public void ExitButton()
     {
         SceneManager.LoadScene("Main Menu");

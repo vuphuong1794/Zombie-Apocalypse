@@ -6,6 +6,9 @@ public class BulletRifle : MonoBehaviour
     private Rigidbody2D bulletBody;
     float timeCount;
 
+    [SerializeField]
+    private float _damageAmount;
+
     private void Start()
     {
         //Do viên đạn nó bị vuông góc theo trục y thay vì song song
@@ -44,6 +47,10 @@ public class BulletRifle : MonoBehaviour
         {
             // Hủy viên đạn khi va chạm với zombie
             Destroy(gameObject);
+            //  Giảm máu zombie bị đạn va chạm
+            var enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
+
+            enemyHealthController.TakeDamage(_damageAmount);
         }
         // Kiểm tra nếu viên đạn va chạm với đối tượng có tag "Wall"
         else if (collision.gameObject.tag=="Wall")
@@ -64,7 +71,5 @@ public class BulletRifle : MonoBehaviour
             bulletBody.velocity = reflectedVel;
         }
     }
-
-
 
 }
