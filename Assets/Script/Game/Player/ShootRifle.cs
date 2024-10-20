@@ -38,7 +38,7 @@ public class GunShooting : MonoBehaviour
         Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
         if (bulletRb != null)
         {
-            bulletRb.velocity = transform.up * bulletSpeed*0.1f;
+            bulletRb.velocity = transform.up * bulletSpeed;
         }
     }
 }
