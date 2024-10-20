@@ -14,6 +14,8 @@ public class InvincibilityController : MonoBehaviour
 
     public void StartInvincibility(float invincibilityDuration)
     {
+        //thực hiện tiến trình không đồng bộ
+        //thực hiện hàm mà không dừng chương trình lại
         StartCoroutine(InvincibilityCoroutine(invincibilityDuration));
     }
 
