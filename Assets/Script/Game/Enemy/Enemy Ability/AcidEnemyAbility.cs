@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class AcidEnemyAbility : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private float _acidDamageAmount;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.GetComponent<PlayerMovement>())
+        {
+            var healthController = collision.gameObject.GetComponent<HealthController>();
+
+            healthController.TakeDamage(_acidDamageAmount);
+        }
     }
 }
