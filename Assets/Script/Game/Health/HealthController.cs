@@ -71,6 +71,31 @@ public class HealthController : MonoBehaviour
         }
     }
 
+    public void TakeAbilityDamage(float abilityDamageAmount)
+    {
+        if (_currentHealth == 0)
+        {
+            return;
+        }
+
+        _currentHealth -= abilityDamageAmount;
+
+        if (_currentHealth < 0)
+        {
+            _currentHealth = 0;
+        }
+
+        if (_currentHealth == 0)
+        {
+            OnDied.Invoke();
+        }
+
+        if (healthBarUI != null)
+        {
+            healthBarUI.SetHealth(_currentHealth);
+        }
+    }
+
     public void AddHealth(float amountToAdd)
     {
         if (_currentHealth == _maximumHealth)

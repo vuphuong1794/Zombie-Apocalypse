@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public bool canMove=true;
+
     [SerializeField]
     private float _speed;
 
@@ -24,9 +26,12 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateTargetDirection();
-        RotateTowardsTarget();
-        SetVelocity();
+        if (canMove)
+        {
+            UpdateTargetDirection();
+            RotateTowardsTarget();
+            SetVelocity();
+        }
     }
 
     //update hướng đi của enemy
@@ -36,6 +41,7 @@ public class EnemyMovement : MonoBehaviour
         HandlePlayerTargeting();
     }
 
+    // Hành vi chuyển động loạn xạ của zombie khi không tìm thấy người chơi
     private void HandleRandomDirectionChange()
     {
         _changeDirectionCooldown -= Time.deltaTime;
@@ -50,6 +56,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    // Tìm vị trị player
     private void HandlePlayerTargeting()
     {
         if (_playerAwarenessController.AwareOfPlayer)

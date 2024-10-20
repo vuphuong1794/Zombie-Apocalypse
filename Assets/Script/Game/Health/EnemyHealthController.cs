@@ -61,10 +61,6 @@ public class EnemyHealthController : MonoBehaviour
             //OnDied.Invoke();
             Destroy(gameObject);
         }
-        else
-        {
-            OnDamaged.Invoke();
-        }
 
         if (enemyHealthBarUI != null)
         {
