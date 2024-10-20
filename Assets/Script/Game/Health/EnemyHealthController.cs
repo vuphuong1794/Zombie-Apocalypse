@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class HealthController : MonoBehaviour
+public class EnemyHealthController : MonoBehaviour
 {
     [SerializeField]
     private float _currentHealth;
@@ -12,14 +12,14 @@ public class HealthController : MonoBehaviour
     [SerializeField]
     private float _maximumHealth;
 
-    public HealthBarUI healthBarUI;
+    public EnemyHealthBarUI enemyHealthBarUI;
 
     void Start()
     {
         _currentHealth = _maximumHealth;
-        if (healthBarUI != null)
+        if (enemyHealthBarUI != null)
         {
-            healthBarUI.SetMaxHealth(_maximumHealth);
+            enemyHealthBarUI.SetMaxHealth(_maximumHealth);
         }
     }
 
@@ -58,41 +58,13 @@ public class HealthController : MonoBehaviour
 
         if (_currentHealth == 0)
         {
-            OnDied.Invoke();
-        }
-        else
-        {
-            OnDamaged.Invoke();
+            //OnDied.Invoke();
+            Destroy(gameObject);
         }
 
-        if (healthBarUI != null)
+        if (enemyHealthBarUI != null)
         {
-            healthBarUI.SetHealth(_currentHealth);
-        }
-    }
-
-    public void TakeAbilityDamage(float abilityDamageAmount)
-    {
-        if (_currentHealth == 0)
-        {
-            return;
-        }
-
-        _currentHealth -= abilityDamageAmount;
-
-        if (_currentHealth < 0)
-        {
-            _currentHealth = 0;
-        }
-
-        if (_currentHealth == 0)
-        {
-            OnDied.Invoke();
-        }
-
-        if (healthBarUI != null)
-        {
-            healthBarUI.SetHealth(_currentHealth);
+            enemyHealthBarUI.SetHealth(_currentHealth);
         }
     }
 
@@ -110,9 +82,9 @@ public class HealthController : MonoBehaviour
             _currentHealth = _maximumHealth;
         }
 
-        if (healthBarUI != null)
+        if (enemyHealthBarUI != null)
         {
-            healthBarUI.SetHealth(_currentHealth);
+            enemyHealthBarUI.SetHealth(_currentHealth);
         }
     }
 }

@@ -11,6 +11,9 @@ public class BulletRifle : MonoBehaviour
     private AudioSource audioSource;
     private float timeCount;
 
+    [SerializeField]
+    private float _damageAmount;
+
     private void Start()
     {
         Debug.Log("Dan sinh ra");
@@ -53,7 +56,15 @@ public class BulletRifle : MonoBehaviour
         if (collision.gameObject.CompareTag("Zombie"))
         {
             // Hủy viên đạn khi va chạm với zombie
+
             DestroyBullet();
+
+            Destroy(gameObject);
+            //  Giảm máu zombie bị đạn va chạm
+            var enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
+
+            enemyHealthController.TakeDamage(_damageAmount);
+
         }
         // Kiểm tra nếu viên đạn va chạm với đối tượng có tag "Wall"
         else if (collision.gameObject.CompareTag("Wall"))
@@ -71,6 +82,7 @@ public class BulletRifle : MonoBehaviour
             DestroyBullet();
         }
     }
+
 
     // Phương thức hủy viên đạn và tạo hiệu ứng vụn nổ nếu cần
     private void DestroyBullet()
@@ -96,4 +108,5 @@ public class BulletRifle : MonoBehaviour
             Destroy(effect, impactEffectLifetime); // Hủy hiệu ứng sau một khoảng thời gian
         }
     }
+
 }

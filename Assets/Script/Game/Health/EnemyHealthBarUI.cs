@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarUI : MonoBehaviour
+public class EnemyHealthBarUI : MonoBehaviour
 {
     public Slider slider;
     public Gradient gradient;
     public Image fill;
+
+    [SerializeField]
+    private Vector3 offsetPosition;
+
+    [SerializeField]
+    private Camera _camera;
+
+    [SerializeField]
+    private Transform _target;
+
+    void Update()
+    {
+        transform.rotation = _camera.transform.rotation;
+        transform.position = _target.position + offsetPosition;
+    }
 
     //Thay đổi độ dài tối đa thanh máu
     public void SetMaxHealth(float health)
