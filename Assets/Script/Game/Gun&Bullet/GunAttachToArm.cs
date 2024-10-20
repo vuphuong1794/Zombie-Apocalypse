@@ -5,7 +5,6 @@ using UnityEngine;
 public class GunAttachToArm : MonoBehaviour
 {
     public GameObject RightHand;
-    public GameObject[] Bullet;
     
     // Start is called before the first frame update
     void Start()
@@ -18,8 +17,5 @@ public class GunAttachToArm : MonoBehaviour
     {
         this.transform.position = RightHand.transform.position;
     }
-    public void Shooting()
-    {
-        Instantiate(Bullet[Random.Range(0, Bullet.Length)], gameObject.transform.position, gameObject.transform.rotation);
-    }
+
 }
