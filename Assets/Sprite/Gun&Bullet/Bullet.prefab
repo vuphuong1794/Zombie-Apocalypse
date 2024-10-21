@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7311422464202619382}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.92214, y: -50.543877, z: 0}
+  m_LocalPosition: {x: -6.92214, y: -50.543877, z: -3}
   m_LocalScale: {x: 0.1, y: 0.11962899, z: 1.0950786}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -127,6 +127,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeMaxExist: 3
+  defScaleBullet: 0.1
+  hitSound: {fileID: 8300000, guid: d9783635130a30943924e83eed23e818, type: 3}
+  impactEffect: {fileID: 1521305775188045284, guid: 31d0ef9df8198b34cabd8070339c54f8, type: 3}
+  impactEffectLifetime: 0.5
   _damageAmount: 20
 --- !u!70 &5907471751085082707
 CapsuleCollider2D:
