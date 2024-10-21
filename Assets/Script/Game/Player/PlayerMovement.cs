@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidbody; // Thân vật lý của người chơi
     private Vector2 _movementInput; // Đầu vào chuyển động
 
-    private void Awake()
+    private void Awake()    
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
