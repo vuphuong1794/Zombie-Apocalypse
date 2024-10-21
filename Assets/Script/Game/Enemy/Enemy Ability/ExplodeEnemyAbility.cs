@@ -7,6 +7,15 @@ public class ExplodeEnemyAbility : MonoBehaviour
     [SerializeField]
     private float explodeDamage;
 
+    //materials
+    private UnityEngine.Object explosionRef;
+    private Vector3 scaleChange;
+
+    void Start()
+    {
+        explosionRef = Resources.Load("Explosion");
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -20,9 +29,18 @@ public class ExplodeEnemyAbility : MonoBehaviour
 
     private IEnumerator ExplodeDelay(HealthController healthController)
     {
-        yield return new WaitForSeconds(3);
+        scaleChange = new Vector3(0.05f, 0.05f, 0.05f);
+
+        for(int i=0; i<8; i++)
+        {
+            transform.localScale += scaleChange;
+            yield return new WaitForSeconds(.5f);
+        }
+
+        GameObject explosion = (GameObject)Instantiate(explosionRef);
+        explosion.transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z);
+
         Destroy(gameObject);
-        //PlayerMovement moveScript = GetComponent<PlayerMovement>();
 
         healthController.TakeDamage(40);
 

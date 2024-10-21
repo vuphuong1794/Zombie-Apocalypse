@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -36,6 +37,7 @@ public class EnemyHealthController : MonoBehaviour
     public UnityEvent OnDied;
 
     public UnityEvent OnDamaged;
+    private Object explosionRef;
 
     public void TakeDamage(float damageAmount)
     {
