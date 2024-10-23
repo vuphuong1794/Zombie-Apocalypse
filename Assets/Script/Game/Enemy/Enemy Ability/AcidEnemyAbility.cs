@@ -19,28 +19,25 @@ public class AcidZombieAbility : MonoBehaviour
     // Khi player chạm vào zombie, bắt đầu quá trình gây sát thương
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerMovement>())
-        {
-            var healthController = collision.gameObject.GetComponent<HealthController>();
+        var healthController = collision.gameObject.GetComponent<HealthController>();
 
-            // Nếu chưa có sát thương nào đang diễn ra, bắt đầu
-            if (!_isDamaging)
-            {
-                _isDamaging = true;
-                _damageCoroutine = StartCoroutine(InfectOverTime(healthController));
-            }
+        if (healthController != null && !_isDamaging) // Bắt đầu quá trình gây sát thương khi va chạm với người chơi
+        {
+            _isDamaging = true;
+            _damageCoroutine = StartCoroutine(InfectOverTime(healthController));
         }
     }
 
     // Ngừng va chạm nhưng vẫn tiếp tục gây sát thương sau khi player rời đi
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<PlayerMovement>())
-        {
-            // Không cần dừng coroutine, vì sát thương vẫn tiếp tục thêm vài lần sau đó
-            _isDamaging = false;
-        }
-    }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    var healthController = collision.gameObject.GetComponent<HealthController>();
+
+    //    if (healthController != null && !_isDamaging) // Bắt đầu quá trình gây sát thương khi va chạm với người chơi
+    //    {
+    //        _isDamaging = false;
+    //    }
+    //}
 
     // Coroutine để gây sát thương dần dần ngay cả khi player rời khỏi zombie
     private IEnumerator InfectOverTime(HealthController healthController)
@@ -48,7 +45,7 @@ public class AcidZombieAbility : MonoBehaviour
         int timesDamaged = 0;
 
         // Gây sát thương liên tục cho tới khi đạt số lần quy định
-        while (timesDamaged < _damageTimes)
+        while (timesDamaged < _damageTimes && healthController != null)
         {
             healthController.TakeAbilityDamage(_acidDamageAmount);
             timesDamaged++;

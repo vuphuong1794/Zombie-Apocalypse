@@ -52,6 +52,11 @@ public class BulletRifle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject == null)
+        {
+            Debug.Log("Collision object is null!");
+        }
+
         // Kiểm tra nếu viên đạn va chạm với đối tượng có tag "Zombie"
         if (collision.gameObject.CompareTag("Zombie"))
         {
@@ -62,6 +67,11 @@ public class BulletRifle : MonoBehaviour
             Destroy(gameObject);
             //  Giảm máu zombie bị đạn va chạm
             var enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
+
+            if (enemyHealthController == null)
+            {
+                Debug.Log("enemyHealthController is null!");
+            }
 
             enemyHealthController.TakeDamage(_damageAmount);
 

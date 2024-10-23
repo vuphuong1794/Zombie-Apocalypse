@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class EnemyHealthController : MonoBehaviour
 {
+    // Khai báo delegate cho sự kiện tiêu diệt
+    public delegate void EnemyDestroyedHandler();
+    public event EnemyDestroyedHandler OnEnemyDestroyed;
+
     [SerializeField]
     private float _currentHealth;
 
@@ -60,8 +64,8 @@ public class EnemyHealthController : MonoBehaviour
 
         if (_currentHealth == 0)
         {
-            //OnDied.Invoke();
-            Destroy(gameObject);
+            //StopAllCoroutines(); // Dừng tất cả các coroutine của zombie
+            Die();  
         }
 
         if (enemyHealthBarUI != null)
@@ -88,5 +92,18 @@ public class EnemyHealthController : MonoBehaviour
         {
             enemyHealthBarUI.SetHealth(_currentHealth);
         }
+    }
+
+    // Hàm xử lý khi kẻ thù chết
+    private void Die()
+    {
+        // Kiểm tra nếu có sự kiện đã được gán, thì gọi sự kiện
+        if (OnEnemyDestroyed != null)
+        {
+            OnEnemyDestroyed();
+        }
+
+        // Hủy đối tượng sau khi tiêu diệt
+        Destroy(gameObject);
     }
 }
