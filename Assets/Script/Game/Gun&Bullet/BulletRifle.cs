@@ -50,48 +50,40 @@ public class BulletRifle : MonoBehaviour
         }
     }
 
+    // Phương thức OnCollisionEnter2D với điều chỉnh lực phản xạ
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == null)
-        {
-            Debug.Log("Collision object is null!");
-        }
-
         // Kiểm tra nếu viên đạn va chạm với đối tượng có tag "Zombie"
         if (collision.gameObject.CompareTag("Zombie"))
         {
-            // Hủy viên đạn khi va chạm với zombie
-
             DestroyBullet();
-
-            Destroy(gameObject);
-            //  Giảm máu zombie bị đạn va chạm
             var enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
-
-            if (enemyHealthController == null)
-            {
-                Debug.Log("enemyHealthController is null!");
-            }
-
             enemyHealthController.TakeDamage(_damageAmount);
-
         }
         // Kiểm tra nếu viên đạn va chạm với đối tượng có tag "Wall"
         else if (collision.gameObject.CompareTag("Wall"))
         {
-            // Lấy điểm tiếp xúc đầu tiên khi va chạm với tường
             ContactPoint2D contactPoint = collision.contacts[0];
 
+            // Tính hướng phản xạ của viên đạn
+            Vector2 incomingVector = bulletBody.velocity;
+            Vector2 normalVector = contactPoint.normal;
+            Vector2 reflectedVector = Vector2.Reflect(incomingVector, normalVector);
+
+            // Cập nhật hướng di chuyển của viên đạn sau khi phản xạ
+            bulletBody.velocity = reflectedVector * 0.8f; // Điều chỉnh hệ số nhân để kiểm soát tốc độ sau phản xạ
+
             // Phát âm thanh khi đạn va chạm vào tường
-            
+            if (hitSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(hitSound);
+            }
 
             // Hiển thị hiệu ứng va chạm tại vị trí tiếp xúc
             ShowImpactEffect(contactPoint.point);
-
-            // Hủy viên đạn khi va chạm với tường
-            DestroyBullet();
         }
     }
+
 
 
     // Phương thức hủy viên đạn và tạo hiệu ứng vụn nổ nếu cần
@@ -108,7 +100,7 @@ public class BulletRifle : MonoBehaviour
         Destroy(gameObject);
     }
 
-    
+
     // Phương thức hiển thị hiệu ứng va chạm tại điểm va chạm
     private void ShowImpactEffect(Vector2 position)
     {
