@@ -34232,6 +34232,7 @@ GameObject:
   - component: {fileID: 1302706646}
   - component: {fileID: 1302706647}
   - component: {fileID: 1302706648}
+  - component: {fileID: 1302706649}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -34452,6 +34453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _invincibilityDuration: 3
+  _flashColor: {r: 0.9169811, g: 0.90487003, b: 0.90487003, a: 0.5882353}
+  _numberOfFlashes: 10
 --- !u!114 &1302706648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34462,6 +34465,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c741d0839bde17408cc0a9995dd687e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1302706649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302706639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d44969821c5d944a313284d4d5e65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1315602965 stripped
