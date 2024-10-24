@@ -18,6 +18,15 @@ public class EnemyHealthBarUI : MonoBehaviour
     [SerializeField]
     private Transform _target;
 
+    void Start()
+    {
+        if (_camera == null)
+        {
+            _camera = Camera.main; // Camera chính sẽ tự động được gán.
+        }
+    }
+
+
     void Update()
     {
         transform.rotation = _camera.transform.rotation;

@@ -415,6 +415,8 @@ GameObject:
   - component: {fileID: 7304097323235465739}
   - component: {fileID: 3794015968097107641}
   - component: {fileID: 7866105125295366083}
+  - component: {fileID: 7880549797215187064}
+  - component: {fileID: 8791955662939080336}
   m_Layer: 0
   m_Name: Bommer
   m_TagString: Zombie
@@ -431,7 +433,7 @@ Transform:
   m_GameObject: {fileID: 6305319682651096255}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.71, y: 2.54, z: 0.046990335}
+  m_LocalPosition: {x: -6.59, y: 2.54, z: 0.046990335}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -478,6 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43eef7554cf7fd54ea83b2055c598c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
   _speed: 2
   _rotationSpeed: 100
 --- !u!114 &7027333853952300377
@@ -662,6 +665,54 @@ MonoBehaviour:
   OnDamaged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!58 &7880549797215187064
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305319682651096255}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.2, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
+--- !u!114 &8791955662939080336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305319682651096255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5470bab541301143aa0d34a2a17e328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explodeDamage: 40
 --- !u!1 &9053096405781619524
 GameObject:
   m_ObjectHideFlags: 0
