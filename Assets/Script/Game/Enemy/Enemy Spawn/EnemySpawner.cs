@@ -19,8 +19,9 @@ public class EnemySpawner : MonoBehaviour
         if (collision.gameObject.tag == "Player" && _spawnedEnemy == null && !_isWaitingForRespawn)
         {
             // Tạo enemy tại vị trí spawner
-            _spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
-            _spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
+            //_spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
+            //_spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
+            SpawnEnemy();
         }
     }
 
@@ -38,8 +39,20 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    // Spawn zombie
+    private void SpawnEnemy()
+    {
+        // Tạo enemy tại vị trí spawner
+        _spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
+        _spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
+        var explodeAbility = _spawnedEnemy.GetComponent<ExplodeEnemyAbility>();
+
+        // Truyền EnemySpawner vào ExplodeEnemyAbility để quản lý respawn
+        if(explodeAbility) explodeAbility.SetSpawner(this);
+    }
+
     // Xử lý khi enemy bị tiêu diệt
-    private void HandleEnemyDestroyed()
+    public void HandleEnemyDestroyed()
     {
         // Đặt biến _spawnedEnemy về null và bắt đầu Coroutine để đợi respawn
         _spawnedEnemy = null;
@@ -56,8 +69,9 @@ public class EnemySpawner : MonoBehaviour
         if (_spawnedEnemy == null)
         {
             // Tạo lại enemy sau khi đợi
-            _spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
-            _spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
+            //_spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
+            //_spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
+            SpawnEnemy();
         }
     }
 }

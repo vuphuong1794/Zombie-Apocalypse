@@ -2,59 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Lớp này đại diện cho khả năng của Zombie Acid
 public class AcidZombieAbility : MonoBehaviour
 {
+    // Số lượng sát thương gây ra bởi acid
     [SerializeField]
     private float _acidDamageAmount = 10;
 
+    // Thời gian giữa các lần gây sát thương (tính bằng giây)
     [SerializeField]
     private float _damageInterval = 2f; // Thời gian giữa các lần gây sát thương
 
+    // Số lần gây sát thương tối đa
     [SerializeField]
     private int _damageTimes = 3; // Số lần gây sát thương
 
-    private bool _isDamaging = false; // Cờ để theo dõi quá trình sát thương
-    private Coroutine _damageCoroutine; // Để dừng hoặc bắt đầu lại coroutine khi cần
-
-    // Khi player chạm vào zombie, bắt đầu quá trình gây sát thương
+    // Phương thức này được gọi khi có va chạm với người chơi
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Lấy thành phần HealthController từ đối tượng va chạm
         var healthController = collision.gameObject.GetComponent<HealthController>();
 
-        if (healthController != null && !_isDamaging) // Bắt đầu quá trình gây sát thương khi va chạm với người chơi
+        // Kiểm tra xem đối tượng có HealthController và DamageOverTimeManager đã được khởi tạo
+        if (healthController != null && DamageOverTimeManager.Instance != null)
         {
-            _isDamaging = true;
-            _damageCoroutine = StartCoroutine(InfectOverTime(healthController));
+            // Gọi phương thức ApplyAcidDamage trên DamageOverTimeManager để bắt đầu gây sát thương
+            DamageOverTimeManager.Instance.ApplyAcidDamage(collision.gameObject, _acidDamageAmount, _damageInterval, _damageTimes);
         }
-    }
-
-    // Ngừng va chạm nhưng vẫn tiếp tục gây sát thương sau khi player rời đi
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    var healthController = collision.gameObject.GetComponent<HealthController>();
-
-    //    if (healthController != null && !_isDamaging) // Bắt đầu quá trình gây sát thương khi va chạm với người chơi
-    //    {
-    //        _isDamaging = false;
-    //    }
-    //}
-
-    // Coroutine để gây sát thương dần dần ngay cả khi player rời khỏi zombie
-    private IEnumerator InfectOverTime(HealthController healthController)
-    {
-        int timesDamaged = 0;
-
-        // Gây sát thương liên tục cho tới khi đạt số lần quy định
-        while (timesDamaged < _damageTimes && healthController != null)
-        {
-            healthController.TakeAbilityDamage(_acidDamageAmount);
-            timesDamaged++;
-
-            // Chờ trong 2 giây (hoặc thời gian tùy chỉnh) trước khi gây sát thương tiếp
-            yield return new WaitForSeconds(_damageInterval);
-        }
-
-        // Sau khi sát thương đủ số lần, dừng lại
-        _isDamaging = false;
     }
 }
