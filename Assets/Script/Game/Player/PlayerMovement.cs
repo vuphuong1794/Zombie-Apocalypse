@@ -7,10 +7,12 @@ public class PlayerMovement : MonoBehaviour
     private float _speed = 5f; // Tốc độ di chuyển của người chơi
     private Rigidbody2D _rigidbody; // Thân vật lý của người chơi
     private Vector2 _movementInput; // Đầu vào chuyển động
+    private Inventory inventory;
 
     private void Awake()    
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        inventory = new Inventory();
     }
 
     private void FixedUpdate()
