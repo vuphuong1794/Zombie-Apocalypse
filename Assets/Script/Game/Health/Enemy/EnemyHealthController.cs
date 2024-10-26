@@ -19,6 +19,8 @@ public class EnemyHealthController : MonoBehaviour
 
     public EnemyHealthBarUI enemyHealthBarUI;
 
+    private ExplodeEnemyAbility explodeAbility; // Biến lưu ExplodeEnemyAbility
+
     void Start()
     {
         _currentHealth = _maximumHealth;
@@ -26,6 +28,7 @@ public class EnemyHealthController : MonoBehaviour
         {
             enemyHealthBarUI.SetMaxHealth(_maximumHealth);
         }
+        explodeAbility = GetComponent<ExplodeEnemyAbility>();
     }
 
     public float RemainingHealthPercentage
@@ -36,21 +39,15 @@ public class EnemyHealthController : MonoBehaviour
         }
     }
 
-    public bool IsInvincible { get; set; }
-
-    public UnityEvent OnDied;
-
-    public UnityEvent OnDamaged;
     private Object explosionRef;
 
     public void TakeDamage(float damageAmount)
     {
-        if (_currentHealth == 0)
-        {
+        // Ngăn chặn mất máu nếu đang trong quá trình nổ
+        if (explodeAbility != null && explodeAbility.isExploding)
             return;
-        }
 
-        if (IsInvincible)
+        if (_currentHealth == 0)
         {
             return;
         }
