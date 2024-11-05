@@ -19,7 +19,7 @@ public class BulletRifle : MonoBehaviour
         Debug.Log("Dan sinh ra");
         // Xoay đạn 90 độ để đúng hướng với hướng người chơi
         transform.Rotate(new Vector3(0, 0, 90));
-
+        transform.localScale = new Vector3(10,10,10);
         // Định dạng kích thước mặc định của viên đạn
         gameObject.transform.localScale = new Vector3(defScaleBullet, defScaleBullet, defScaleBullet);
 
@@ -53,36 +53,39 @@ public class BulletRifle : MonoBehaviour
     // Phương thức OnCollisionEnter2D với điều chỉnh lực phản xạ
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Kiểm tra nếu viên đạn va chạm với đối tượng có tag "Zombie"
-        if (collision.gameObject.CompareTag("Zombie"))
+        if (collision.gameObject.tag=="Zombie")
         {
-            DestroyBullet();
+            
             var enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
-            enemyHealthController.TakeDamage(_damageAmount);
+
+            if (enemyHealthController != null)
+            {
+                enemyHealthController.TakeDamage(_damageAmount);
+            }
+            else
+            {
+                Debug.LogWarning("Thành phần EnemyHealthController không được tìm thấy trên đối tượng Zombie.");
+            }
+            DestroyBullet();
         }
-        // Kiểm tra nếu viên đạn va chạm với đối tượng có tag "Wall"
         else if (collision.gameObject.CompareTag("Wall"))
         {
+            // Xử lý va chạm với tường
             ContactPoint2D contactPoint = collision.contacts[0];
-
-            // Tính hướng phản xạ của viên đạn
             Vector2 incomingVector = bulletBody.velocity;
             Vector2 normalVector = contactPoint.normal;
             Vector2 reflectedVector = Vector2.Reflect(incomingVector, normalVector);
+            bulletBody.velocity = reflectedVector * 0.8f;
 
-            // Cập nhật hướng di chuyển của viên đạn sau khi phản xạ
-            bulletBody.velocity = reflectedVector * 0.8f; // Điều chỉnh hệ số nhân để kiểm soát tốc độ sau phản xạ
-
-            // Phát âm thanh khi đạn va chạm vào tường
             if (hitSound != null && audioSource != null)
             {
                 audioSource.PlayOneShot(hitSound);
             }
 
-            // Hiển thị hiệu ứng va chạm tại vị trí tiếp xúc
             ShowImpactEffect(contactPoint.point);
         }
     }
+
 
 
 

@@ -13,6 +13,10 @@ public class EnemySpawner : MonoBehaviour
     // Biến kiểm tra kẻ thù có đang chờ để spawn lại không
     private bool _isWaitingForRespawn = false;
 
+    private void Start()
+    {
+        _enemyPrefab.transform.SetParent(null);
+    }
     // Khi Player vào vùng spawner
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,7 +47,9 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         // Tạo enemy tại vị trí spawner
-        _spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
+        _spawnedEnemy = Instantiate(_enemyPrefab, this.transform.position, this.transform.rotation);
+        Debug.Log("Spawnzombie object locate at: " + this.transform.position);
+        Debug.Log("Zombie spawn at: "+_spawnedEnemy.transform.position);
         _spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
         var explodeAbility = _spawnedEnemy.GetComponent<ExplodeEnemyAbility>();
 
