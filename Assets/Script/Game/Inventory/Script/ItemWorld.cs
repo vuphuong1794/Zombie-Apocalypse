@@ -1,13 +1,22 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeMonkey.Utils;
 
 public class ItemWorld : MonoBehaviour
 {
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
-        ItemAssets.Instance.pfItemWorld.localScale = Vector3.one * 0.03f;
-       
+        if (item.itemType == Item.ItemType.HealthPotion)
+        {
+            ItemAssets.Instance.pfItemWorld.localScale = Vector3.one * 0.15f; // Adjust the scale for HealthPotion
+        } 
+        else
+        {
+            ItemAssets.Instance.pfItemWorld.localScale = Vector3.one * 0.06f; // Use the default scale for other items
+        }
+
+
         Transform transform = Instantiate(ItemAssets.Instance.pfItemWorld, position, Quaternion.identity);
 
         ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
@@ -30,10 +39,23 @@ public class ItemWorld : MonoBehaviour
         spriteRenderer.sprite = item.GetSprite();
     }
 
-    public Item GetItem() { return item;}
+    public Item GetItem() { return item; }
 
+    //xóa vật phẩm
     public void DestroySelf()
     {
         Destroy(gameObject);
     }
+
+    //vất vật phẩm ra khỏi kho đồ
+    public static ItemWorld DropItem(Vector3 dropPosition, Item item)
+    {
+        Vector3 randomDir = UtilsClass.GetRandomDir();
+        ItemWorld itemWorld = SpawnItemWorld(dropPosition + randomDir * 2f, item);
+        Rigidbody2D itemRigidbody = itemWorld.GetComponent<Rigidbody2D>();
+        itemRigidbody.AddForce(randomDir * 2f, ForceMode2D.Force);
+        return itemWorld;
+    }
+
 }
+

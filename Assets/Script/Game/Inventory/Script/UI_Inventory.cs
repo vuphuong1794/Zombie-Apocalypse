@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using CodeMonkey.Utils;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Inventory : MonoBehaviour
@@ -10,6 +12,12 @@ public class UI_Inventory : MonoBehaviour
     [Header("Layout Settings")]
 
     private Inventory inventory;
+    private PlayerMovement player;
+
+    public void SetPlayer(PlayerMovement player)
+    {
+        this.player = player;
+    }
 
     public void SetInventory(Inventory inventory)
     {
@@ -24,18 +32,24 @@ public class UI_Inventory : MonoBehaviour
         RefreshInventoryItems();
     }
 
+    //cập nhật lại kho đồ 
     private void RefreshInventoryItems()
     {
-
-        foreach(Transform child in itemSlotContainer)
+        if (itemSlotContainer == null)
         {
-            if (child == itemSlotTemplate) continue;
-            Destroy(child.gameObject);
+            Debug.LogError($"itemSlotContainer is null in UI_Inventory on {gameObject.name}");
+            return;
         }
 
-        if (itemSlotContainer == null || itemSlotTemplate == null || inventory == null)
+        if (itemSlotTemplate == null)
         {
-            Debug.LogError($"Required references missing in UI_Inventory on {gameObject.name}");
+            Debug.LogError($"itemSlotTemplate is null in UI_Inventory on {gameObject.name}");
+            return;
+        }
+
+        if (inventory == null)
+        {
+            Debug.LogError($"inventory is null in UI_Inventory on {gameObject.name}");
             return;
         }
 
@@ -58,9 +72,41 @@ public class UI_Inventory : MonoBehaviour
         {
             RectTransform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
             itemSlot.gameObject.SetActive(true);
+            
+            itemSlot.GetComponent<Button_UI>().ClickFunc = () =>
+            {
+                //use item
+                inventory.UseItem(item);
+            };
+
+            itemSlot.GetComponent<Button_UI>().MouseRightClickFunc = () => {
+                //Drop item
+                inventory.RemoveItem(item);
+                ItemWorld.DropItem(player.GetPosition(), item);
+               
+            };
+
             itemSlot.anchoredPosition = new Vector2(x * totalCellSize, y * totalCellSize);
-            Image image = itemSlot.Find("image").GetComponent<Image>();
-            image.sprite = item.GetSprite();
+
+            Image image = itemSlot.Find("image")?.GetComponent<Image>();
+            if (image != null)
+            {
+                image.sprite = item.GetSprite();
+            }
+
+            //tăng số lượng vật phẩm nêu trùng 
+            
+            TextMeshProUGUI uiText = itemSlot.Find("text")?.GetComponent<TextMeshProUGUI>();
+            if (uiText != null)
+            {
+                if (item.amount > 1)
+                {
+                    uiText.SetText(item.amount.ToString());
+                }
+                else
+                    uiText.SetText("");
+            }
+
             x++;
             if (x > 4)
             {

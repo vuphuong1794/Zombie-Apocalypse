@@ -19,11 +19,14 @@ public class PlayerMovement : MonoBehaviour
 
         inventory = GetComponent<Inventory>();
         uiInventory.SetInventory(inventory);
-        /*
+        
+        //khởi tạo nơi tạo ra vật phẩm
         ItemWorld.SpawnItemWorld(new Vector3(-3, 3,-0.1f), new Item { itemType = Item.ItemType.Gun1, amount = 1 });
         ItemWorld.SpawnItemWorld(new Vector3(-7, 2, -0.1f), new Item { itemType = Item.ItemType.Gun2, amount = 1 });
         ItemWorld.SpawnItemWorld(new Vector3(-6, -2, -0.1f), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
-        */
+        
+
+        uiInventory.SetPlayer(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -61,5 +64,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
+    }
+
+    //lấy vị trí của người chơi 
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 }

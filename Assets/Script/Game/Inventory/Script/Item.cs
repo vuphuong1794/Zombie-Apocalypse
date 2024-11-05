@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 [Serializable]
@@ -16,8 +16,6 @@ public class Item
 
     public Sprite GetSprite()
     {
-
-        
         switch (itemType)
         {
             case ItemType.Gun1: return ItemAssets.Instance.gun1Sprite;
@@ -26,4 +24,20 @@ public class Item
             default: return null;
         }
     }
+
+    //điều kiện tăng số lượng vật phẩm
+    public bool IsStackable()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.Gun1:
+            case ItemType.Gun2:
+                return false;
+            case ItemType.HealthPotion:
+                return true;
+            
+        }
+    }
+    
 }
