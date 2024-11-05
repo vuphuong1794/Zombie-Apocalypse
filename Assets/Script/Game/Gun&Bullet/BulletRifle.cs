@@ -20,6 +20,8 @@ public class BulletRifle : MonoBehaviour
     {
         Debug.Log("Dan sinh ra");
         transform.Rotate(new Vector3(0, 0, 90));
+        transform.localScale = new Vector3(10,10,10);
+        // Định dạng kích thước mặc định của viên đạn
         gameObject.transform.localScale = new Vector3(defScaleBullet, defScaleBullet, defScaleBullet);
         bulletBody = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
@@ -51,16 +53,27 @@ public class BulletRifle : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Zombie") || collision.gameObject.CompareTag("Player"))
         {
-            DestroyBullet();
+            
             var enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
-            enemyHealthController.TakeDamage(_damageAmount);
+
+            if (enemyHealthController != null)
+            {
+                enemyHealthController.TakeDamage(_damageAmount);
+            }
+            else
+            {
+                Debug.LogWarning("Thành phần EnemyHealthController không được tìm thấy trên đối tượng Zombie.");
+            }
+            DestroyBullet();
         }
         else if (collision.gameObject.CompareTag("Wall"))
         {
+            // Xử lý va chạm với tường
             ContactPoint2D contactPoint = collision.contacts[0];
             Vector2 incomingVector = bulletBody.velocity;
             Vector2 normalVector = contactPoint.normal;
             Vector2 reflectedVector = Vector2.Reflect(incomingVector, normalVector);
+            bulletBody.velocity = reflectedVector * 0.8f;
 
             bulletBody.velocity = reflectedVector * 1f;
 
@@ -77,6 +90,10 @@ public class BulletRifle : MonoBehaviour
         }
     }
 
+
+
+
+    // Phương thức hủy viên đạn và tạo hiệu ứng vụn nổ nếu cần
     private void DestroyBullet()
     {
         if (impactEffect != null)
