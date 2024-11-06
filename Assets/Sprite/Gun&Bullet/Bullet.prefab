@@ -5080,3 +5080,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 0
+  m_Offset: {x: 1.527674, y: 0.4156475}
+  m_Size: {x: 1.8524135, y: 0.88829005}
+  m_Direction: 1
