@@ -12,6 +12,7 @@ public class BulletRifle : MonoBehaviour
     private Rigidbody2D bulletBody;
     private AudioSource audioSource;
     private float timeCount;
+    private bool hasReflected = false; // Trạng thái để ngăn phản xạ liên tiếp
 
     [SerializeField]
     private float _damageAmount;
@@ -20,7 +21,7 @@ public class BulletRifle : MonoBehaviour
     {
         Debug.Log("Dan sinh ra");
         transform.Rotate(new Vector3(0, 0, 90));
-        transform.localScale = new Vector3(10,10,10);
+        transform.localScale = new Vector3(10, 10, 10);
         // Định dạng kích thước mặc định của viên đạn
         gameObject.transform.localScale = new Vector3(defScaleBullet, defScaleBullet, defScaleBullet);
         bulletBody = GetComponent<Rigidbody2D>();
@@ -53,7 +54,6 @@ public class BulletRifle : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Zombie") || collision.gameObject.CompareTag("Player"))
         {
-            
             var enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
 
             if (enemyHealthController != null)
@@ -66,32 +66,46 @@ public class BulletRifle : MonoBehaviour
             }
             DestroyBullet();
         }
-        else if (collision.gameObject.CompareTag("Wall"))
+        else if (collision.gameObject.CompareTag("Wall") && !hasReflected)
         {
-            // Xử lý va chạm với tường
+            hasReflected = true; // Đặt trạng thái phản xạ
             ContactPoint2D contactPoint = collision.contacts[0];
             Vector2 incomingVector = bulletBody.velocity;
             Vector2 normalVector = contactPoint.normal;
             Vector2 reflectedVector = Vector2.Reflect(incomingVector, normalVector);
-            bulletBody.velocity = reflectedVector * 0.8f;
 
-            bulletBody.velocity = reflectedVector * 1f;
+            // Hạn chế thay đổi quá lớn về vận tốc
+            reflectedVector = reflectedVector.normalized * Mathf.Min(reflectedVector.magnitude, 10f); // Giới hạn vận tốc
 
-            // Cập nhật hướng của viên đạn theo hướng mới
+            // Tắt angular velocity để tránh xoay vòng không mong muốn
+            bulletBody.angularVelocity = 0f;
+
+            // Cập nhật vận tốc viên đạn theo hướng phản xạ
+            bulletBody.velocity = reflectedVector;
+
+            // Cập nhật hướng của viên đạn theo phản xạ
             float angle = Mathf.Atan2(reflectedVector.y, reflectedVector.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
+            // Phát âm thanh va chạm
             if (hitSound != null && audioSource != null)
             {
                 audioSource.PlayOneShot(hitSound);
             }
 
+            // Hiển thị hiệu ứng va chạm
             ShowImpactEffect(contactPoint.point);
+
+            // Đặt lại trạng thái phản xạ sau một khoảng thời gian ngắn
+            Invoke(nameof(ResetReflection), 0.1f);
         }
     }
 
-
-
+    // Phương thức để đặt lại trạng thái phản xạ
+    private void ResetReflection()
+    {
+        hasReflected = false;
+    }
 
     // Phương thức hủy viên đạn và tạo hiệu ứng vụn nổ nếu cần
     private void DestroyBullet()
