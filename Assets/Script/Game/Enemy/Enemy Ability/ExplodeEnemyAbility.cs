@@ -5,44 +5,84 @@ using UnityEngine;
 public class ExplodeEnemyAbility : MonoBehaviour
 {
     [SerializeField]
-    private float explodeDamage;
+    private float explodeDamage = 40f; // Sát thương gây ra khi nổ
 
-    //materials
+    [SerializeField]
+    private float explodeSpeed = 2f; // Tốc độ nổ (thời gian tăng kích thước)
+
+    [SerializeField]
+    private float scaleTimes = 8f; // Số lần tăng kích thước trước khi nổ
+
+    [SerializeField]
+    private float maxSizeAdd = 0.3f; // Kích thước tối đa mà zombie sẽ tăng lên
+
+    // Tài nguyên cho hiệu ứng nổ
     private UnityEngine.Object explosionRef;
-    private Vector3 scaleChange;
+    // Kích thước thay đổi từng lần
+    private Vector3 scaleChange; 
+
+    private EnemySpawner enemySpawner;  // Biến để lưu spawner
+
+    // Biến để theo dõi trạng thái nổ
+    public bool isExploding = false;
+
+    // Hàm thiết lập EnemySpawner
+    public void SetSpawner(EnemySpawner spawner)
+    {
+        enemySpawner = spawner; // Lưu trữ spawner
+    }
 
     void Start()
     {
-        explosionRef = Resources.Load("Explosion");
+        isExploding = false; // Khởi tạo trạng thái nổ là false
+        explosionRef = Resources.Load("Explosion"); // Tải tài nguyên nổ từ thư mục Resources
     }
 
+    // Phương thức xử lý va chạm
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        // Kiểm tra xem đối tượng va chạm có phải là người chơi không
+        if (collision.gameObject.tag == "Player")
         {
-            EnemyMovement moveScript = GetComponent<EnemyMovement>();
-            moveScript.canMove = false;
-            HealthController healthController = collision.gameObject.GetComponent<HealthController>();
-            StartCoroutine(ExplodeDelay(healthController));
+            EnemyMovement moveScript = GetComponent<EnemyMovement>(); // Lấy script di chuyển của zombie
+            moveScript.canMove = false; // Ngăn không cho zombie di chuyển
+
+            HealthController healthController = collision.gameObject.GetComponent<HealthController>(); // Lấy HealthController của người chơi
+            StartCoroutine(ExplodeDelay(healthController)); // Bắt đầu coroutine để xử lý hiệu ứng nổ
         }
     }
 
+    // Coroutine để xử lý quá trình nổ
     private IEnumerator ExplodeDelay(HealthController healthController)
     {
-        scaleChange = new Vector3(0.05f, 0.05f, 0.05f);
+        isExploding = true; // Đánh dấu là đang nổ
 
-        for(int i=0; i<8; i++)
+        // Tính toán kích thước tăng thêm cho mỗi lần tăng kích thước
+        float sizeAddPerScale = maxSizeAdd / scaleTimes;
+        scaleChange = new Vector3(sizeAddPerScale, sizeAddPerScale, sizeAddPerScale); // Tạo vector thay đổi kích thước
+
+        // Tính thời gian cho mỗi lần thay đổi kích thước
+        float timePerScale = explodeSpeed / scaleTimes;
+        for (int i = 0; i < scaleTimes; i++)
         {
-            transform.localScale += scaleChange;
-            yield return new WaitForSeconds(.5f);
+            transform.localScale += scaleChange; // Tăng kích thước
+            yield return new WaitForSeconds(timePerScale); // Chờ trước khi thay đổi kích thước tiếp theo
         }
 
+        // Tạo hiệu ứng nổ
         GameObject explosion = (GameObject)Instantiate(explosionRef);
-        explosion.transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z);
+        // Đặt vị trí của hiệu ứng nổ
+        explosion.transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z); 
 
+        // Xóa đối tượng kẻ thù sau khi nổ
         Destroy(gameObject);
 
-        healthController.TakeDamage(40);
+        // Gọi hàm từ EnemySpawner để đặt _spawnedEnemy = null
+        if (enemySpawner != null)
+        {
+            enemySpawner.HandleEnemyDestroyed(); // Thông báo cho spawner rằng enemy đã bị tiêu diệt
+        }
 
+        healthController.TakeDamage(40); // Gây sát thương cho người chơi
     }
 }
