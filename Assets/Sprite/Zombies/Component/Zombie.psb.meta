@@ -4203,8 +4203,8 @@ ScriptedImporter:
     spritePosition: {x: 1443, y: 2502}
   - name: "M\u1EB7t t\u1ED1c \u0111\u1ED9"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.43692374, y: 0.5374005}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -4719,8 +4719,8 @@ ScriptedImporter:
     spritePosition: {x: 1862, y: 2542}
   - name: "M\u1EB7t th\u01B0\u1EDDng"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.42545605, y: 0.51495945}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -5762,8 +5762,8 @@ ScriptedImporter:
     spritePosition: {x: 1749, y: 2601}
   - name: "\xE1o v\xE0ng"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.52367383, y: 0.63085216}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -6633,8 +6633,8 @@ ScriptedImporter:
     spritePosition: {x: 1036, y: 2214}
   - name: "\xE1o gi\xE1p"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.56355006, y: 0.71771014}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -7680,8 +7680,8 @@ ScriptedImporter:
     spritePosition: {x: 883, y: 1258}
   - name: "\xE1o \u0111\u1ECF"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.55795455, y: 0.7550478}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -8870,8 +8870,8 @@ ScriptedImporter:
     spritePosition: {x: 1088, y: 1439}
   - name: "\xC1o xanh"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.50814205, y: 0.65068525}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -9697,8 +9697,8 @@ ScriptedImporter:
     spritePosition: {x: 1074, y: 1998}
   - name: "T\u1EA7m xa"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.55947804, y: 0.8132997}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -10975,8 +10975,8 @@ ScriptedImporter:
     spritePosition: {x: 916, y: 571}
   - name: "N\u1ED5"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5563984, y: 0.690376}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -12022,8 +12022,8 @@ ScriptedImporter:
     spritePosition: {x: 849, y: 351}
   - name: "th\xE2n th\u01B0\u1EDDng"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.56939054, y: 0.82088673}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
