@@ -54,15 +54,29 @@ public class BulletRifle : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Zombie") || collision.gameObject.CompareTag("Player"))
         {
-            var enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
+            HealthController healthController = null;
+            EnemyHealthController enemyHealthController = null;
 
-            if (enemyHealthController != null)
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                healthController = collision.gameObject.GetComponent<HealthController>();
+            }
+            else if (collision.gameObject.CompareTag("Zombie"))
+            {
+                enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
+            }
+
+            if (healthController != null)
+            {
+                healthController.TakeDamage(_damageAmount);
+            }
+            else if (enemyHealthController != null)
             {
                 enemyHealthController.TakeDamage(_damageAmount);
             }
             else
             {
-                Debug.LogWarning("Thành phần EnemyHealthController không được tìm thấy trên đối tượng Zombie.");
+                Debug.LogWarning("Không tìm thấy HealthController hoặc EnemyHealthController trên đối tượng va chạm.");
             }
             DestroyBullet();
         }
