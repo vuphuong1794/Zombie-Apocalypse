@@ -556,6 +556,11 @@ MonoBehaviour:
   canMove: 1
   _speed: 2
   _rotationSpeed: 100
+  _obstacleCheckCircleRadius: 0.45
+  _obstacleCheckDistance: 1
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &3927806925596555975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,9 +737,3 @@ MonoBehaviour:
   _currentHealth: 100
   _maximumHealth: 100
   enemyHealthBarUI: {fileID: 8891764697657928213}
-  OnDied:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDamaged:
-    m_PersistentCalls:
-      m_Calls: []
