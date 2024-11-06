@@ -50,7 +50,7 @@ public class EnemyMovement : MonoBehaviour
     //update hướng đi của enemy
     private void UpdateTargetDirection()
     {
-        //HandleRandomDirectionChange();
+        HandleRandomDirectionChange();
         HandlePlayerTargeting();
         HandleObstacles();
     }
