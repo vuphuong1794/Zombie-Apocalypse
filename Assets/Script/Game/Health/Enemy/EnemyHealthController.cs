@@ -1,106 +1,114 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class EnemyHealthController : MonoBehaviour
 {
-    // Khai báo delegate cho sự kiện tiêu diệt
     public delegate void EnemyDestroyedHandler();
     public event EnemyDestroyedHandler OnEnemyDestroyed;
 
-    [SerializeField]
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
+    [SerializeField] private float _maximumHealth;
 
-    [SerializeField]
-    private float _maximumHealth;
-
+    public ParticleSystem damageParticlePrefab;
     public EnemyHealthBarUI enemyHealthBarUI;
+    private ExplodeEnemyAbility explodeAbility;
 
-    private ExplodeEnemyAbility explodeAbility; // Biến lưu ExplodeEnemyAbility
+    public Sound[] sounds;
+    private float timeCount = 0f;
+    private float soundCooldown = 3f;
 
-    void Start()
+    private void Start()
     {
+        SetupAudioSources();
         _currentHealth = _maximumHealth;
+
         if (enemyHealthBarUI != null)
-        {
             enemyHealthBarUI.SetMaxHealth(_maximumHealth);
-        }
+
         explodeAbility = GetComponent<ExplodeEnemyAbility>();
     }
 
-    public float RemainingHealthPercentage
+    private void Update()
     {
-        get
+        timeCount += Time.deltaTime;
+    }
+
+    private void SetupAudioSources()
+    {
+        foreach (Sound s in sounds)
         {
-            return _currentHealth / _maximumHealth;
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = 1f;
+            s.source.pitch = 1f;
+            s.source.playOnAwake = false;
         }
     }
 
-    private Object explosionRef;
-
     public void TakeDamage(float damageAmount)
     {
-        // Ngăn chặn mất máu nếu đang trong quá trình nổ
-        if (explodeAbility != null && explodeAbility.isExploding)
+        if (explodeAbility != null && explodeAbility.isExploding || _currentHealth <= 0)
             return;
-
-        if (_currentHealth == 0)
-        {
-            return;
-        }
 
         _currentHealth -= damageAmount;
 
-        if (_currentHealth < 0)
-        {
-            _currentHealth = 0;
-        }
-
-        if (_currentHealth == 0)
-        {
-            //StopAllCoroutines(); // Dừng tất cả các coroutine của zombie
-            Die();  
-        }
+        PlayDamageEffect();
+        PlayDamageSound();
 
         if (enemyHealthBarUI != null)
-        {
             enemyHealthBarUI.SetHealth(_currentHealth);
+
+        if (_currentHealth <= 0)
+            Die();
+    }
+
+    private void PlayDamageEffect()
+    {
+        if (damageParticlePrefab != null)
+        {
+            ParticleSystem damageEffect = Instantiate(damageParticlePrefab, transform.position, Quaternion.identity);
+            damageEffect.Play();
+            Destroy(damageEffect.gameObject, damageEffect.main.duration);
+        }
+    }
+
+    private void PlayDamageSound()
+    {
+        if (timeCount >= soundCooldown)
+        {
+            StartCoroutine(PlayRandomDamageSound());
+            timeCount = 0f;
+        }
+    }
+
+    private IEnumerator PlayRandomDamageSound()
+    {
+        int randomSoundIndex = Random.Range(0, sounds.Length);
+        Sound selectedSound = sounds[randomSoundIndex];
+
+        if (selectedSound != null && selectedSound.source != null && !selectedSound.source.isPlaying)
+        {
+            selectedSound.source.Play();
+            yield return new WaitForSeconds(selectedSound.source.clip.length);
         }
     }
 
     public void AddHealth(float amountToAdd)
     {
         if (_currentHealth == _maximumHealth)
-        {
             return;
-        }
 
-        _currentHealth += amountToAdd;
-
-        if (_currentHealth > _maximumHealth)
-        {
-            _currentHealth = _maximumHealth;
-        }
+        _currentHealth = Mathf.Min(_currentHealth + amountToAdd, _maximumHealth);
 
         if (enemyHealthBarUI != null)
-        {
             enemyHealthBarUI.SetHealth(_currentHealth);
-        }
     }
 
-    // Hàm xử lý khi kẻ thù chết
     private void Die()
     {
-        // Kiểm tra nếu có sự kiện đã được gán, thì gọi sự kiện
-        if (OnEnemyDestroyed != null)
-        {
-            OnEnemyDestroyed();
-        }
-
-        // Hủy đối tượng sau khi tiêu diệt
+        OnEnemyDestroyed?.Invoke();
         Destroy(gameObject);
     }
+
+   
 }

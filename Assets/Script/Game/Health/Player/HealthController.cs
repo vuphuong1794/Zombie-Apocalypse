@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -13,13 +14,28 @@ public class HealthController : MonoBehaviour
     private float _maximumHealth;
 
     public HealthBarUI healthBarUI;
-
+    public Sound[] sounds;
+    private float timeCount = 0f;
+    private float soundCooldown = 3f;
     void Start()
     {
+        SetupAudioSources();
+
         _currentHealth = _maximumHealth;
         if (healthBarUI != null)
         {
             healthBarUI.SetMaxHealth(_maximumHealth);
+        }
+    }
+    private void SetupAudioSources()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = 1f;
+            s.source.pitch = 1f;
+            s.source.playOnAwake = false;
         }
     }
 
@@ -37,10 +53,16 @@ public class HealthController : MonoBehaviour
 
     public UnityEvent OnDamaged;
 
+    private void Update()
+    {
+        timeCount += Time.deltaTime;
+    }
+
     public void TakeDamage(float damageAmount)
     {
         if (_currentHealth == 0)
         {
+
             return;
         }
 
@@ -50,6 +72,8 @@ public class HealthController : MonoBehaviour
         }
 
         _currentHealth -= damageAmount;
+        PlayDamageSound();
+
 
         if (_currentHealth < 0)
         {
@@ -68,6 +92,25 @@ public class HealthController : MonoBehaviour
         if (healthBarUI != null)
         {
             healthBarUI.SetHealth(_currentHealth);
+        }
+    }
+    private void PlayDamageSound()
+    {
+        if (timeCount >= soundCooldown)
+        {
+            StartCoroutine(PlayRandomDamageSound());
+            timeCount = 0f;
+        }
+    }
+    private IEnumerator PlayRandomDamageSound()
+    {
+        int randomSoundIndex = Random.Range(0, sounds.Length);
+        Sound selectedSound = sounds[randomSoundIndex];
+
+        if (selectedSound != null && selectedSound.source != null && !selectedSound.source.isPlaying)
+        {
+            selectedSound.source.Play();
+            yield return new WaitForSeconds(selectedSound.source.clip.length);
         }
     }
 

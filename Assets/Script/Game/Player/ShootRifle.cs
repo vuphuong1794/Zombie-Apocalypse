@@ -25,6 +25,7 @@ public class GunShooting : MonoBehaviour
         {
             FireBullet();
             timeSinceLastShot = 0f; // Đặt lại thời gian chờ giữa các lần bắn
+            m_ShoottingPistol.volume = 0.5f;
             m_ShoottingPistol.Play();
         }
     }
@@ -33,7 +34,7 @@ public class GunShooting : MonoBehaviour
     {
         // Tạo viên đạn tại vị trí firePos với góc quay mặc định
         GameObject bulletInstance = Instantiate(bulletPrefab, firePos.position, transform.rotation);
-
+        bulletInstance.transform.localScale = new Vector3(2, 2, 2);
         // Lấy Rigidbody2D của viên đạn và đặt vận tốc cho nó
         Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
         if (bulletRb != null)
