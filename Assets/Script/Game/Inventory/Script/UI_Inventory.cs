@@ -81,9 +81,14 @@ public class UI_Inventory : MonoBehaviour
 
             itemSlot.GetComponent<Button_UI>().MouseRightClickFunc = () => {
                 //Drop item
-                inventory.RemoveItem(item);
-                ItemWorld.DropItem(player.GetPosition(), item);
-               
+                if (!item.IsPistol())
+                {
+                    inventory.RemoveItem(item);
+
+                    WeaponHolder weaponHolder = FindObjectOfType<WeaponHolder>();
+                    ItemWorld.DropItem(player.GetPosition(), item, weaponHolder);
+                }
+                
             };
 
             itemSlot.anchoredPosition = new Vector2(x * totalCellSize, y * totalCellSize);
@@ -94,8 +99,13 @@ public class UI_Inventory : MonoBehaviour
                 image.sprite = item.GetSprite();
             }
 
+            if (item.IsGun())
+            {
+                Debug.Log($"UI_Inventory: Found gun item with index: {item.GetGunIndex()}"); // Thêm log
+            }
+
             //tăng số lượng vật phẩm nêu trùng 
-            
+
             TextMeshProUGUI uiText = itemSlot.Find("text")?.GetComponent<TextMeshProUGUI>();
             if (uiText != null)
             {
@@ -106,7 +116,6 @@ public class UI_Inventory : MonoBehaviour
                 else
                     uiText.SetText("");
             }
-
             x++;
             if (x > 4)
             {

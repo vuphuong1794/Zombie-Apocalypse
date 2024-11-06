@@ -47,15 +47,21 @@ public class ItemWorld : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //vất vật phẩm ra khỏi kho đồ
-    public static ItemWorld DropItem(Vector3 dropPosition, Item item)
+    //vứt vật phẩm ra khỏi kho đồ
+    public static ItemWorld DropItem(Vector3 dropPosition, Item item, WeaponHolder weaponHolder)
     {
-        Vector3 randomDir = UtilsClass.GetRandomDir();
-        ItemWorld itemWorld = SpawnItemWorld(dropPosition + randomDir * 2f, item);
-        Rigidbody2D itemRigidbody = itemWorld.GetComponent<Rigidbody2D>();
-        itemRigidbody.AddForce(randomDir * 2f, ForceMode2D.Force);
+            Vector3 randomDir = UtilsClass.GetRandomDir();
+            ItemWorld itemWorld = SpawnItemWorld(dropPosition + randomDir * 1f, item);
+            Rigidbody2D itemRigidbody = itemWorld.GetComponent<Rigidbody2D>();
+            itemRigidbody.AddForce(randomDir * 1f, ForceMode2D.Force);
+
+            if (item.IsGun())
+            {
+                int gunIndex = item.GetGunIndex();
+                weaponHolder.DeactivateWeapon(gunIndex);
+            }
+
         return itemWorld;
     }
-
 }
 

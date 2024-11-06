@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-
     public event EventHandler OnItemListChanged;
     private List<Item> itemList;
 
@@ -17,36 +16,53 @@ public class Inventory : MonoBehaviour
 
     private void AddStartingItems()
     {
-        //AddItem(new Item { itemType = Item.ItemType.Gun1, amount = 1 });
-        //AddItem(new Item { itemType = Item.ItemType.Gun2, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.Pistol, amount = 1 });
+        //AddItem(new Item { itemType = Item.ItemType.Sniper, amount = 1 });
         //AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
     }
 
     //thêm vật phẩm
+    // Add item to the inventory
     public void AddItem(Item item)
     {
-        //kiểm tra xem vật phẩm này có tăng số lượng được không 
-        /*
-        if (item.IsStackable())
+        if (item.itemType == Item.ItemType.Pistol)
         {
-            bool itemAlreadyInInventory = false;
-            foreach (Item inventoryItem in itemList) { 
-                if(inventoryItem.itemType == item.itemType)
+            // Always allow adding a pistol, even if one already exists
+            itemList.Add(item);
+            Debug.Log($"Added {item.itemType} to inventory and firing OnItemListChanged event");
+            OnItemListChanged?.Invoke(this, EventArgs.Empty);
+        }
+        else if (item.itemType == Item.ItemType.Rifle || item.itemType == Item.ItemType.Sniper || item.itemType == Item.ItemType.Grenade)
+        {
+            // Check if the player already has a gun besides the pistol
+            bool hasOtherGun = false;
+            foreach (Item inventoryItem in itemList)
+            {
+                if (inventoryItem.itemType == Item.ItemType.Rifle || inventoryItem.itemType == Item.ItemType.Sniper || inventoryItem.itemType == Item.ItemType.Grenade)
                 {
-                    inventoryItem.amount += item.amount;
+                    hasOtherGun = true;
+                    break; // If already has one of these guns, don't allow adding another
                 }
             }
-            if(!itemAlreadyInInventory)
+
+            if (!hasOtherGun)
             {
                 itemList.Add(item);
+                Debug.Log($"Added {item.itemType} to inventory and firing OnItemListChanged event");
+                OnItemListChanged?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                Debug.Log($"Already have a gun besides the pistol, can't add {item.itemType}");
             }
         }
         else
         {
+            // Add other items (like Grenades or Potions)
             itemList.Add(item);
-        }*/
-        itemList.Add(item);
-        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+            Debug.Log($"Added {item.itemType} to inventory and firing OnItemListChanged event");
+            OnItemListChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public List<Item> GetItemList()
@@ -82,8 +98,11 @@ public class Inventory : MonoBehaviour
         {
             itemList.Remove(item);
         }*/
-        itemList.Remove(item);
-        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+       
+        
+            itemList.Remove(item);
+            OnItemListChanged?.Invoke(this, EventArgs.Empty);
+        
     }
 
     public void UseItem(Item item)

@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
         uiInventory.SetInventory(inventory);
         
         //khởi tạo nơi tạo ra vật phẩm
-        ItemWorld.SpawnItemWorld(new Vector3(-3, 3,-0.1f), new Item { itemType = Item.ItemType.Gun1, amount = 1 });
-        ItemWorld.SpawnItemWorld(new Vector3(-7, 2, -0.1f), new Item { itemType = Item.ItemType.Gun2, amount = 1 });
+        ItemWorld.SpawnItemWorld(new Vector3(-3, 3,-0.1f), new Item { itemType = Item.ItemType.Rifle, amount = 1 });
+        ItemWorld.SpawnItemWorld(new Vector3(-7, 2, -0.1f), new Item { itemType = Item.ItemType.Sniper, amount = 1 });
         ItemWorld.SpawnItemWorld(new Vector3(-6, -2, -0.1f), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
         
 
@@ -32,14 +32,33 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-        if(itemWorld != null)
+        if (itemWorld != null)
         {
-            //touching item
-            inventory.AddItem(itemWorld.GetItem()); //them item vao inventory
-            itemWorld.DestroySelf();//xoa item tren ban do
+            Item item = itemWorld.GetItem();
 
+            if (item.itemType == Item.ItemType.Rifle || item.itemType == Item.ItemType.Sniper || item.itemType == Item.ItemType.Grenade)
+            {
+                bool hasPistol = inventory.GetItemList().Find(i => i.itemType == Item.ItemType.Pistol) != null;
+
+                // kiểm tra hiện tại player đang có bao nhiêu cây súng 
+                int gunCount = inventory.GetItemList().FindAll(i => i.itemType == Item.ItemType.Rifle || i.itemType == Item.ItemType.Sniper || i.itemType == Item.ItemType.Grenade).Count;
+
+                //chỉ có thể có pistol và 1 khẩu chính 
+                if (hasPistol && gunCount < 1)
+                {
+                    inventory.AddItem(item);
+                    itemWorld.DestroySelf(); 
+                }
+            }
+            else
+            {
+                inventory.AddItem(item);
+                itemWorld.DestroySelf();
+            }
         }
     }
+
+
 
     private void FixedUpdate()
     {
