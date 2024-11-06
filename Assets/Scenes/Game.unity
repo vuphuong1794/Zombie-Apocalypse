@@ -313,7 +313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 99014949}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 103453683}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 225701276}
   - component: {fileID: 225701278}
   - component: {fileID: 225701279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -877,7 +877,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270648190}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2147,7 +2147,7 @@ GameObject:
   - component: {fileID: 708662638}
   - component: {fileID: 708662637}
   - component: {fileID: 708662636}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2700,7 +2700,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1038944419}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2958,7 +2958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1280038939}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallCheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2989,7 +2989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1289628177}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3103,7 +3103,7 @@ GameObject:
   - component: {fileID: 1302706647}
   - component: {fileID: 1302706648}
   - component: {fileID: 1302706649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3384,7 +3384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1317993787}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3420,7 +3420,7 @@ GameObject:
   - component: {fileID: 1395877072}
   - component: {fileID: 1395877071}
   - component: {fileID: 1395877070}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13375,7 +13375,7 @@ GameObject:
   - component: {fileID: 1448956425}
   - component: {fileID: 1448956424}
   - component: {fileID: 1448956422}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13523,7 +13523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1542080950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13670,7 +13670,7 @@ GameObject:
   - component: {fileID: 1619481018}
   - component: {fileID: 1619481019}
   - component: {fileID: 1619481020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14120,7 +14120,7 @@ GameObject:
   - component: {fileID: 1833746760}
   - component: {fileID: 1833746759}
   - component: {fileID: 1833746758}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14675,6 +14675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.1
@@ -14751,6 +14755,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 119.39
       objectReference: {fileID: 0}
+    - target: {fileID: -6455343447489727280, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4841584339430887281, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4432182174125202716, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 15569954838206961, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 386791141387813222, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1330916564162855106, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3297364353584691495, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3890223988216273544, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.600444
@@ -14807,6 +14839,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -140.742
       objectReference: {fileID: 0}
+    - target: {fileID: 4668063753296080412, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4752976386374262124, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.5129065
@@ -14826,6 +14862,22 @@ PrefabInstance:
     - target: {fileID: 4752976386374262124, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -118.285
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891915868413900037, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640486056620652017, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773769766514381084, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831407614585003388, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14847,7 +14899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2126301901}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14863,7 +14915,7 @@ Transform:
   m_GameObject: {fileID: 2126301900}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 183.5, y: -227.5, z: 0}
+  m_LocalPosition: {x: 183.3, y: -219.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

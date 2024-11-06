@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     private float _rotationSpeed;
 
     [SerializeField]
-    private float _obstacleCheckCircleRadius=4.5f;
+    private float _obstacleCheckCircleRadius=0.45f;
 
     [SerializeField]
     private float _obstacleCheckDistance=1;
