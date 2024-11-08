@@ -3,52 +3,90 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed = 5f; // Tốc độ di chuyển của người chơi
-    private Rigidbody2D _rigidbody; // Thân vật lý của người chơi
-    private Vector2 _movementInput; // Đầu vào chuyển động
+    [Header("Required References")]
+    [SerializeField] private UI_Inventory uiInventory;
+
+    [Header("Movement Settings")]
+    [SerializeField] private float _speed = 5f;
+
+    private Rigidbody2D _rigidbody;
+    private Vector2 _movementInput;
     private Inventory inventory;
 
-    private void Awake()    
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        inventory = new Inventory();
+
+        inventory = GetComponent<Inventory>();
+        uiInventory.SetInventory(inventory);
+        
+        //khởi tạo nơi tạo ra vật phẩm
+        ItemWorld.SpawnItemWorld(new Vector3(-3, 3,-0.1f), new Item { itemType = Item.ItemType.Rifle, amount = 1 });
+        ItemWorld.SpawnItemWorld(new Vector3(-7, 2, -0.1f), new Item { itemType = Item.ItemType.Sniper, amount = 1 });
+        ItemWorld.SpawnItemWorld(new Vector3(-6, -2, -0.1f), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        
+
+        uiInventory.SetPlayer(this);
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+        if (itemWorld != null)
+        {
+            Item item = itemWorld.GetItem();
+
+            if (item.itemType == Item.ItemType.Rifle || item.itemType == Item.ItemType.Sniper || item.itemType == Item.ItemType.Grenade)
+            {
+                bool hasPistol = inventory.GetItemList().Find(i => i.itemType == Item.ItemType.Pistol) != null;
+
+                // kiểm tra hiện tại player đang có bao nhiêu cây súng 
+                int gunCount = inventory.GetItemList().FindAll(i => i.itemType == Item.ItemType.Rifle || i.itemType == Item.ItemType.Sniper || i.itemType == Item.ItemType.Grenade).Count;
+
+                //chỉ có thể có pistol và 1 khẩu chính 
+                if (hasPistol && gunCount < 1)
+                {
+                    inventory.AddItem(item);
+                    itemWorld.DestroySelf(); 
+                }
+            }
+            else
+            {
+                inventory.AddItem(item);
+                itemWorld.DestroySelf();
+            }
+        }
+    }
+
 
     private void FixedUpdate()
     {
-        // Di chuyển và xoay nhân vật trong FixedUpdate để đảm bảo tính nhất quán của vật lý
         MovePlayer();
         RotateTowardsMouse();
     }
 
     private void MovePlayer()
     {
-        // Tính toán vị trí mục tiêu mới
         Vector2 targetPosition = _rigidbody.position + _movementInput * _speed * Time.fixedDeltaTime;
-
-        // Di chuyển đối tượng đến vị trí mục tiêu bằng MovePosition
         _rigidbody.MovePosition(targetPosition);
     }
 
     private void RotateTowardsMouse()
     {
-        // Lấy vị trí chuột trong không gian thế giới 2D
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        // Tính toán vector hướng từ vị trí của nhân vật đến vị trí của chuột
         Vector2 direction = mousePos - transform.position;
-
-        // Tính góc giữa hướng này và trục x, sau đó chuyển từ radian sang độ
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Xoay nhân vật sao cho nó hướng về phía chuột
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    // Được gọi bởi Input System khi phát hiện đầu vào chuyển động
     private void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
+    }
+
+    //lấy vị trí của người chơi 
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 }

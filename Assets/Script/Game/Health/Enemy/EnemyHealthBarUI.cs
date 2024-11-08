@@ -20,6 +20,7 @@ public class EnemyHealthBarUI : MonoBehaviour
 
     void Start()
     {
+        _target=GetComponentInParent<Transform>();
         if (_camera == null)
         {
             _camera = Camera.main; // Camera chính sẽ tự động được gán.

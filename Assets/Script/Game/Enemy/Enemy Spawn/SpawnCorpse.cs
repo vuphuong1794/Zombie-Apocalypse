@@ -11,7 +11,6 @@ public class SpawnCorpse : MonoBehaviour
     {
         spriteCorpse.transform.localScale=gameObject.transform.localScale;
         spriteCorpse.transform.position=gameObject.transform.position;
-        Debug.Log(spriteCorpse.transform.localScale+", "+ gameObject.transform.localScale);
         Instantiate(spriteCorpse,gameObject.transform.position,gameObject.transform.rotation);
     }
 }

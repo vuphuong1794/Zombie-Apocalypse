@@ -26,6 +26,8 @@ public class ExplodeEnemyAbility : MonoBehaviour
     // Biến để theo dõi trạng thái nổ
     public bool isExploding = false;
 
+    public Animator animator;
+
     // Hàm thiết lập EnemySpawner
     public void SetSpawner(EnemySpawner spawner)
     {
@@ -36,6 +38,8 @@ public class ExplodeEnemyAbility : MonoBehaviour
     {
         isExploding = false; // Khởi tạo trạng thái nổ là false
         explosionRef = Resources.Load("Explosion"); // Tải tài nguyên nổ từ thư mục Resources
+        animator = GetComponent<Animator>();
+
     }
 
     // Phương thức xử lý va chạm
@@ -44,6 +48,7 @@ public class ExplodeEnemyAbility : MonoBehaviour
         // Kiểm tra xem đối tượng va chạm có phải là người chơi không
         if (collision.gameObject.tag == "Player")
         {
+            animator.SetBool("AttackPlayer", true);
             EnemyMovement moveScript = GetComponent<EnemyMovement>(); // Lấy script di chuyển của zombie
             moveScript.canMove = false; // Ngăn không cho zombie di chuyển
 

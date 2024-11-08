@@ -15,7 +15,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        _enemyPrefab.transform.SetParent(null);
     }
     // Khi Player vào vùng spawner
     private void OnTriggerEnter2D(Collider2D collision)
