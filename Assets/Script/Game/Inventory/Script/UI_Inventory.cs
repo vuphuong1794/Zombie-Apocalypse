@@ -72,7 +72,7 @@ public class UI_Inventory : MonoBehaviour
         {
             RectTransform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
             itemSlot.gameObject.SetActive(true);
-            
+
             itemSlot.GetComponent<Button_UI>().ClickFunc = () =>
             {
                 //use item
@@ -88,7 +88,7 @@ public class UI_Inventory : MonoBehaviour
                     WeaponHolder weaponHolder = FindObjectOfType<WeaponHolder>();
                     ItemWorld.DropItem(player.GetPosition(), item, weaponHolder);
                 }
-                
+
             };
 
             itemSlot.anchoredPosition = new Vector2(x * totalCellSize, y * totalCellSize);

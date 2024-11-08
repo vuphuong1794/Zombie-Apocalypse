@@ -98,11 +98,11 @@ public class Inventory : MonoBehaviour
         {
             itemList.Remove(item);
         }*/
-       
-        
-            itemList.Remove(item);
-            OnItemListChanged?.Invoke(this, EventArgs.Empty);
-        
+
+
+        itemList.Remove(item);
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+
     }
 
     public void UseItem(Item item)

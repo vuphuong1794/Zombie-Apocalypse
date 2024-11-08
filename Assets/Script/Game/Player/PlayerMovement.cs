@@ -19,12 +19,12 @@ public class PlayerMovement : MonoBehaviour
 
         inventory = GetComponent<Inventory>();
         uiInventory.SetInventory(inventory);
-        
+
         //khởi tạo nơi tạo ra vật phẩm
-        ItemWorld.SpawnItemWorld(new Vector3(-3, 3,-0.1f), new Item { itemType = Item.ItemType.Rifle, amount = 1 });
-        ItemWorld.SpawnItemWorld(new Vector3(-7, 2, -0.1f), new Item { itemType = Item.ItemType.Sniper, amount = 1 });
-        ItemWorld.SpawnItemWorld(new Vector3(-6, -2, -0.1f), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
-        
+        //ItemWorld.SpawnItemWorld(new Vector3(-3, 3, -0.1f), new Item { itemType = Item.ItemType.Rifle, amount = 1 });
+        //ItemWorld.SpawnItemWorld(new Vector3(-7, 2, -0.1f), new Item { itemType = Item.ItemType.Sniper, amount = 1 });
+        //ItemWorld.SpawnItemWorld(new Vector3(-6, -2, -0.1f), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+
 
         uiInventory.SetPlayer(this);
     }
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
                 if (hasPistol && gunCount < 1)
                 {
                     inventory.AddItem(item);
-                    itemWorld.DestroySelf(); 
+                    itemWorld.DestroySelf();
                 }
             }
             else
@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
 
 
     private void FixedUpdate()

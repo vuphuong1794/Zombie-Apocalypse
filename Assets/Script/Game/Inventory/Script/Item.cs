@@ -10,7 +10,8 @@ public class Item
         Rifle,   // index 1
         Sniper,   // index 2
         Grenade, //index 3
-        HealthPotion
+        HealthPotion,
+
     }
 
     public ItemType itemType;
@@ -18,14 +19,20 @@ public class Item
 
     public Sprite GetSprite()
     {
+        if (ItemAssets.Instance == null)
+        {
+            Debug.LogError("ItemAssets.Instance is null!");
+            return null;
+        }
         switch (itemType)
         {
+            default:
             case ItemType.Pistol: return ItemAssets.Instance.pistolSprite;
             case ItemType.Sniper: return ItemAssets.Instance.sniperSprite;
             case ItemType.Rifle: return ItemAssets.Instance.rifleSprite;
             case ItemType.Grenade: return ItemAssets.Instance.grenadeSprite;
             case ItemType.HealthPotion: return ItemAssets.Instance.healthPotionSprite;
-            default: return null;
+
         }
     }
 
@@ -36,7 +43,7 @@ public class Item
 
     public bool IsPistol()
     {
-        return itemType == ItemType.Pistol; 
+        return itemType == ItemType.Pistol;
     }
 
 
@@ -52,8 +59,9 @@ public class Item
             case ItemType.Rifle:
                 return false;
             case ItemType.HealthPotion:
+
                 return true;
-            
+
         }
     }
 
