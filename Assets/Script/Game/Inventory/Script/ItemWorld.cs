@@ -26,7 +26,7 @@ public class ItemWorld : MonoBehaviour
         }
         else
         {
-            ItemAssets.Instance.pfItemWorld.localScale = Vector3.one * 0.06f;
+            ItemAssets.Instance.pfItemWorld.localScale = new Vector3(0.05f, 0.03f, 1f);
         }
 
         // Instantiate item in the world

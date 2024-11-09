@@ -23,7 +23,6 @@ public class WeaponHolder : MonoBehaviour
         if (inventory != null)
         {
             inventory.OnItemListChanged += Inventory_OnItemListChanged;
-            Debug.Log("test debug");
         }
         else
         {

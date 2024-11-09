@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2860623779248191980}
   - component: {fileID: 274998263668834903}
-  - component: {fileID: 4499996895164646203}
+  - component: {fileID: -6916091496486976689}
   - component: {fileID: -8343878212392275050}
   - component: {fileID: -1070671768150186083}
   m_Layer: 0
@@ -31,7 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.4, y: -3.0999997, z: -12.368468}
   m_LocalScale: {x: 6.088, y: 7.3, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 1713768267, guid: 7e36c0d2225283a4bb80b981eb0d9c32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4499996895164646203
+--- !u!114 &-6916091496486976689
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1330353218234278323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ef462c294987147905e3fa82e380e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 50107e23147f2b745acac059945cf246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &-8343878212392275050

@@ -106,14 +106,16 @@ public class UI_Inventory : MonoBehaviour
 
             //tăng số lượng vật phẩm nêu trùng 
 
-            TextMeshProUGUI uiText = itemSlot.Find("text")?.GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI uiText = itemSlot.Find("amountText")?.GetComponent<TextMeshProUGUI>();
             if (uiText != null)
             {
+                Debug.Log("tim thay textmeshpro");
                 if (item.amount > 1)
                 {
                     uiText.SetText(item.amount.ToString());
                 }
                 else
+                    
                     uiText.SetText("");
             }
             x++;

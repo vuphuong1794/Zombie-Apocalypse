@@ -10,9 +10,9 @@ public class ItemAssets : MonoBehaviour
     public Sprite rifleSprite;
     public Sprite grenadeSprite;
     public Sprite healthPotionSprite;
+    public Sprite bulletSprite;
 
-
-    private void Awake() // Use Awake to initialize the instance
+    private void Awake()
     {
         Debug.Log("item Assets awake call");
         if (Instance == null)

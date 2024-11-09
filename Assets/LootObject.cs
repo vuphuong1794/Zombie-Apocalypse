@@ -7,7 +7,7 @@ public class LootObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.transform.localScale = new Vector3(0.04f, 0.04f, 0.04f);
+        gameObject.transform.localScale = new Vector3(6.088f, 7.3f, 1);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
