@@ -16,9 +16,10 @@ public class Inventory : MonoBehaviour
 
     private void AddStartingItems()
     {
-        AddItem(new Item { itemType = Item.ItemType.Pistol, amount = 1 });
+        //AddItem(new Item { itemType = Item.ItemType.Pistol, amount = 1 });
         //AddItem(new Item { itemType = Item.ItemType.Sniper, amount = 1 });
         AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.bullet, amount = 1 });
     }
 
     //thêm vật phẩm
