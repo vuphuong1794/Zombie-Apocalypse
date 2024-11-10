@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Zombie
   - Wall
+  - ExplorGrenade
   layers:
   - Default
   - TransparentFX
