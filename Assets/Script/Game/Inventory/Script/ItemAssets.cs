@@ -4,20 +4,27 @@ public class ItemAssets : MonoBehaviour
 {
     public static ItemAssets Instance { get; private set; }
 
-    public Transform pfItemWorld; 
+    public Transform pfItemWorld;
     public Sprite pistolSprite;
     public Sprite sniperSprite;
     public Sprite rifleSprite;
     public Sprite grenadeSprite;
     public Sprite healthPotionSprite;
+    public Sprite bulletSprite;
 
     private void Awake()
     {
-        Instance = this;  // Set instance first
-
-        if (pfItemWorld == null) // Kiểm tra prefab
+        Debug.Log("item Assets awake call");
+        if (Instance == null)
         {
-            Debug.LogError("Chưa gán prefab ItemWorld!");
+            Instance = this;
+            Debug.Log("ItemAssets instance initialized in Awake.");
+        }
+        else
+        {
+            Debug.LogWarning("Multiple ItemAssets instances detected! Destroying duplicate.");
+            Destroy(gameObject);
         }
     }
+
 }

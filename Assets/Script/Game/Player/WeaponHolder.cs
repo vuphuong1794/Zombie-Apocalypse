@@ -23,7 +23,6 @@ public class WeaponHolder : MonoBehaviour
         if (inventory != null)
         {
             inventory.OnItemListChanged += Inventory_OnItemListChanged;
-            Debug.Log("test debug");
         }
         else
         {
@@ -74,7 +73,7 @@ public class WeaponHolder : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) // Rifle
         {
-             SwitchGun(0);
+            SwitchGun(0);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2)) // Try to switch to another gun if unlocked (not pistol)
         {

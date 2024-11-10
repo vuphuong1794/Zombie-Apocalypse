@@ -72,7 +72,7 @@ public class UI_Inventory : MonoBehaviour
         {
             RectTransform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
             itemSlot.gameObject.SetActive(true);
-            
+
             itemSlot.GetComponent<Button_UI>().ClickFunc = () =>
             {
                 //use item
@@ -88,7 +88,7 @@ public class UI_Inventory : MonoBehaviour
                     WeaponHolder weaponHolder = FindObjectOfType<WeaponHolder>();
                     ItemWorld.DropItem(player.GetPosition(), item, weaponHolder);
                 }
-                
+
             };
 
             itemSlot.anchoredPosition = new Vector2(x * totalCellSize, y * totalCellSize);
@@ -106,14 +106,16 @@ public class UI_Inventory : MonoBehaviour
 
             //tăng số lượng vật phẩm nêu trùng 
 
-            TextMeshProUGUI uiText = itemSlot.Find("text")?.GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI uiText = itemSlot.Find("amountText")?.GetComponent<TextMeshProUGUI>();
             if (uiText != null)
             {
+                Debug.Log("tim thay textmeshpro");
                 if (item.amount > 1)
                 {
                     uiText.SetText(item.amount.ToString());
                 }
                 else
+                    
                     uiText.SetText("");
             }
             x++;
