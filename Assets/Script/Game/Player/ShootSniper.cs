@@ -27,6 +27,7 @@ public class ShootSniper : MonoBehaviour
     {
         // Tạo viên đạn tại vị trí firePos với góc quay mặc định
         GameObject bulletInstance = Instantiate(bulletPrefab, firePos.position, transform.rotation);
+
         // Lấy Rigidbody2D của viên đạn và đặt vận tốc cho nó
         Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
         if (bulletRb != null)

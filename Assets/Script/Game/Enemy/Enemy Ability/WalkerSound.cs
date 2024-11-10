@@ -14,16 +14,22 @@ public class WalkerSound : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-            s.source.volume = s.volume=0.3f;
-            s.source.pitch = s.pitch=1;
+
+            // Set volume and pitch separately to avoid assignment issues
+            s.volume = 0.1f;
+            s.source.volume = s.volume;
+
+            s.pitch = 1f;
+            s.source.pitch = s.pitch;
         }
 
         TimeCount = 0;
         indexSound = Random.Range(0, sounds.Length);
-        sounds[0].source.Play();
+
         // Play the initial sound
         sounds[indexSound].source.Play();
     }
+
 
     void Update()
     {

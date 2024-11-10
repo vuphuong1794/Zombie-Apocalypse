@@ -1,4 +1,3 @@
 repository "ZombieApocalypse@maikhoa2015@cloud"
   path "/"
-    br "/main"
-    co "/main"
+    smartbranch "/main/phuong"
