@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8260358259063919164}
   - component: {fileID: 5484664491945158224}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,13 +129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184327484c34b5e41b9640fd57318d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeMaxExist: 3
+  timeMaxExist: 5
   defScaleBullet: 0.1
   hitSound: {fileID: 8300000, guid: d9783635130a30943924e83eed23e818, type: 3}
   impactEffect: {fileID: 1521305775188045284, guid: 31d0ef9df8198b34cabd8070339c54f8, type: 3}
   impactEffectLifetime: 0.5
   trailRenderer: {fileID: 0}
-  _damageAmount: 20
+  _damageAmount: 40
 --- !u!70 &5907471751085082707
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -37,6 +37,14 @@ public class WeaponHolder : MonoBehaviour
         {
             SwitchGun(1);
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) // Press '3'
+        {
+            SwitchGun(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4)) // Press '4'
+        {
+            SwitchGun(3);
+        }
     }
 
     private void SwitchGun(int index)
