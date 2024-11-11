@@ -16,10 +16,12 @@ public class EnemyHealthBarUI : MonoBehaviour
     private Camera _camera;
 
     [SerializeField]
-    private Transform _target;
+    private GameObject _target;
 
     void Start()
     {
+        _target = transform.parent.gameObject;
+        Debug.Log("_target: "+_target);
         if (_camera == null)
         {
             _camera = Camera.main; // Camera chính sẽ tự động được gán.
@@ -30,7 +32,7 @@ public class EnemyHealthBarUI : MonoBehaviour
     void Update()
     {
         transform.rotation = _camera.transform.rotation;
-        transform.position = _target.position + offsetPosition;
+        transform.position = _target.transform.position + offsetPosition;
     }
 
     //Thay đổi độ dài tối đa thanh máu
