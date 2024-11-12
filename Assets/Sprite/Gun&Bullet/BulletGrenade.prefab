@@ -5088,7 +5088,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   explosionEffect: {fileID: 1521305775188045284, guid: f5a05c57e240d3147836123c7fbab0cd, type: 3}
-  explosionEffectLifetime: 1
+  explosionEffectLifetime: 0.3
   _damageAmount: 200
 --- !u!95 &8094150186782376464
 Animator:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class BulletGrenade : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class BulletGrenade : MonoBehaviour
     [SerializeField] private LayerMask damageableLayer; // Layer của các đối tượng có thể nhận sát thương
     [SerializeField] private LayerMask obstacleLayer; // Layer của vật cản (tường hoặc chướng ngại)
     [SerializeField] private GameObject explosionEffect; // Hiệu ứng nổ khi viên đạn phát nổ
-    [SerializeField] private float explosionEffectLifetime = 1f; // Thời gian tồn tại của hiệu ứng nổ
+    [SerializeField] private float explosionEffectLifetime = 0.3f; // Thời gian tồn tại của hiệu ứng nổ
     [SerializeField] private float _damageAmount; // Lượng sát thương mà viên đạn gây ra
 
     private Rigidbody2D bulletBody; // Tham chiếu tới Rigidbody của viên đạn
@@ -39,6 +40,21 @@ public class BulletGrenade : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Zombie")
+        {
+            // Kiểm tra nếu mục tiêu có thành phần EnemyHealthController (giả sử là Zombie)
+            EnemyHealthController enemyHealth = collision.gameObject.GetComponent<EnemyHealthController>();
+            if (enemyHealth != null)
+            {
+                Vector2 directionToTarget = collision.gameObject.transform.position - transform.position;
+                float distanceToTarget = directionToTarget.magnitude; // Tính khoảng cách đến mục tiêu
+                // Tính phần trăm sát thương dựa trên khoảng cách
+                float damagePercentage = Mathf.Clamp01(1 - (distanceToTarget / explosionRadius));
+                float damageToApply = _damageAmount * damagePercentage;
+
+                enemyHealth.TakeDamage(damageToApply);
+            }
+            }
         DestroyBullet();
     }
 
@@ -71,42 +87,27 @@ public class BulletGrenade : MonoBehaviour
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(transform.position, explosionRadius, damageableLayer);
         foreach (Collider2D target in hitTargets)
         {
-            Vector2 directionToTarget = target.transform.position - transform.position;
-            float distanceToTarget = directionToTarget.magnitude; // Tính khoảng cách đến mục tiêu
 
-            // Kiểm tra nếu không có vật cản trên đường đi từ vụ nổ đến mục tiêu
-            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, directionToTarget, distanceToTarget, obstacleLayer);
 
-            bool isBlocked = false;
-            foreach (RaycastHit2D hit in hits)
-            {
-                if (hit.collider != target)
-                {
-                    isBlocked = true;
-                    break;
-                }
-            }
+            // Kiểm tra nếu có vật cản với tag "Wall" giữa vụ nổ và mục tiêu Zombie
+            //RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleLayer);
 
-            // Nếu không có vật cản giữa vụ nổ và mục tiêu
-            if (!isBlocked)
-            {
-                EnemyHealthController enemyHealth = target.GetComponent<EnemyHealthController>();
-                if (enemyHealth != null)
-                {
-                    // Tính phần trăm sát thương dựa trên khoảng cách
-                    float damagePercentage = Mathf.Clamp01(1 - (distanceToTarget / explosionRadius));
-                    float damageToApply = _damageAmount * damagePercentage;
+            //// Nếu không có vật cản hoặc vật cản không phải là "Wall"
+            //if (hit.collider == null || !hit.collider.CompareTag("Wall"))
+            //{
 
-                    enemyHealth.TakeDamage(damageToApply);
-                }
-            }
+            //}
         }
     }
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
-}
+
+
+
+
+
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    //}
+
