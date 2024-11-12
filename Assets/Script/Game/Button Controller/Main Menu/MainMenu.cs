@@ -13,6 +13,11 @@ public class MainMenu : MonoBehaviour
         _sceneController.LoadScene("Game");
     }
 
+    public void PlayMultiplayerGamemode()
+    {
+        _sceneController.LoadScene("Multiplayer Gamemode");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
