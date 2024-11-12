@@ -16,10 +16,10 @@ public class Inventory : MonoBehaviour
 
     private void AddStartingItems()
     {
-        //AddItem(new Item { itemType = Item.ItemType.Pistol, amount = 1 });
+        AddItem(new Item { itemType = Item.ItemType.Pistol, amount = 1 });
         //AddItem(new Item { itemType = Item.ItemType.Sniper, amount = 1 });
-        AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
-        AddItem(new Item { itemType = Item.ItemType.bullet, amount = 1 });
+        //AddItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+        //AddItem(new Item { itemType = Item.ItemType.bullet, amount = 1 });
     }
 
     //thêm vật phẩm
@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour
                 itemList.Add(item);
             }
         }
+        /*
         else if (item.itemType == Item.ItemType.Pistol ||
                  item.itemType == Item.ItemType.Rifle ||
                  item.itemType == Item.ItemType.Sniper ||
@@ -48,7 +49,7 @@ public class Inventory : MonoBehaviour
             {
                 itemList.Add(item);
             }
-        }
+        }*/
         else
         {
             itemList.Add(item);
