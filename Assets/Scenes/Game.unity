@@ -419,7 +419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &99014949
 Transform:
   m_ObjectHideFlags: 0
@@ -462,7 +462,7 @@ Transform:
   m_GameObject: {fileID: 103453682}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.4, y: 35.6, z: 0}
+  m_LocalPosition: {x: 6.4, y: 23.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -573,6 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e1bca1d4cf90d43bc1ad99c001871c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sniper: {fileID: 270648189}
   smoothTime: 0
   positionOffset: {x: 0, y: 0, z: -10}
 --- !u!1 &178610629
@@ -766,6 +767,7 @@ GameObject:
   - component: {fileID: 225701276}
   - component: {fileID: 225701278}
   - component: {fileID: 225701279}
+  - component: {fileID: 225701280}
   m_Layer: 0
   m_Name: rifle
   m_TagString: Untagged
@@ -967,6 +969,51 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!61 &225701280
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225701274}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.083099365, y: 0.580554}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 50, y: 54.15124}
+    newSize: {x: 50, y: 54.15124}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.387211, y: 33.33555}
+  m_EdgeRadius: 0
 --- !u!1 &233143234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,7 +1388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &270648190
 Transform:
   m_ObjectHideFlags: 0
@@ -3697,6 +3744,7 @@ GameObject:
   - component: {fileID: 708662638}
   - component: {fileID: 708662637}
   - component: {fileID: 708662636}
+  - component: {fileID: 708662639}
   m_Layer: 0
   m_Name: grenade
   m_TagString: Untagged
@@ -3734,7 +3782,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7311422464202619382, guid: f3104f1eb02a45848ae15721bad34808, type: 3}
   firePos: {fileID: 1317993787}
   timeBetweenShots: 1
-  bulletSpeed: 5
+  bulletSpeed: 20
   damage: 1
 --- !u!114 &708662637
 MonoBehaviour:
@@ -3801,6 +3849,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &708662639
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708662634}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.83288, y: 0.4829216}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 50, y: 54.15124}
+    newSize: {x: 50, y: 54.15124}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 10.176205, y: 31.854115}
+  m_EdgeRadius: 0
 --- !u!1 &787295957
 GameObject:
   m_ObjectHideFlags: 0
@@ -6146,7 +6239,7 @@ Transform:
   m_GameObject: {fileID: 1317993786}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.5, y: 46.6, z: 0}
+  m_LocalPosition: {x: 5.95, y: 36.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16299,6 +16392,7 @@ GameObject:
   - component: {fileID: 1448956425}
   - component: {fileID: 1448956424}
   - component: {fileID: 1448956422}
+  - component: {fileID: 1448956426}
   m_Layer: 0
   m_Name: sniper
   m_TagString: Untagged
@@ -16403,6 +16497,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1448956426
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448956420}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.1115549, y: 3.5970402}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 50, y: 54.15124}
+    newSize: {x: 50, y: 54.15124}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 9.398277, y: 46.943386}
+  m_EdgeRadius: 0
 --- !u!1 &1542080949
 GameObject:
   m_ObjectHideFlags: 0
@@ -16418,7 +16557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1542080950
 Transform:
   m_ObjectHideFlags: 0
@@ -16598,7 +16737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guns: []
   weaponHolder: {fileID: 1619481017}
-  currentGun: {fileID: 0}
+  currentGun: {fileID: 270648189}
 --- !u!1 &1677208507
 GameObject:
   m_ObjectHideFlags: 0
@@ -17067,6 +17206,7 @@ GameObject:
   - component: {fileID: 1833746760}
   - component: {fileID: 1833746759}
   - component: {fileID: 1833746758}
+  - component: {fileID: 1833746761}
   m_Layer: 0
   m_Name: pistol
   m_TagString: Untagged
@@ -17083,7 +17223,7 @@ Transform:
   m_GameObject: {fileID: 1833746756}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: -0.0025312458, w: -0.99999684}
-  m_LocalPosition: {x: 14.9, y: -14.6, z: 4.950034}
+  m_LocalPosition: {x: 7.6, y: 15.1, z: 4.950034}
   m_LocalScale: {x: 1.1406001, y: 1.3642758, z: 0.041531004}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -17104,7 +17244,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7311422464202619382, guid: 3feb735bdb2b56e40bdd55847ff6024f, type: 3}
   firePos: {fileID: 103453683}
   timeBetweenShots: 0.4
-  bulletSpeed: 20
+  bulletSpeed: 80
   damage: 1
 --- !u!114 &1833746759
 MonoBehaviour:
@@ -17171,6 +17311,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1833746761
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833746756}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.14686453, y: -1.3403854}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 1.11}
+    pivot: {x: 0.51899636, y: 0.3752437}
+    oldSize: {x: 4.33, y: 11.89}
+    newSize: {x: 50, y: 54.15124}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.8396766, y: 10.999144}
+  m_EdgeRadius: 0
 --- !u!1 &1843061717
 GameObject:
   m_ObjectHideFlags: 0
@@ -18312,7 +18497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5046028
+      value: 0.8895998
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -18324,11 +18509,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.8633516
+      value: 0.4567408
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 119.39
+      value: 54.354
       objectReference: {fileID: 0}
     - target: {fileID: -6455343447489727280, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_Layer
@@ -18368,7 +18553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3890223988216273544, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97357756
+      value: 0.9640962
       objectReference: {fileID: 0}
     - target: {fileID: 3890223988216273544, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -18380,11 +18565,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3890223988216273544, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.22835656
+      value: -0.2655533
       objectReference: {fileID: 0}
     - target: {fileID: 3890223988216273544, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -26.401
+      value: -30.8
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18680,7 +18865,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 121161310}
   - {fileID: 1302706644}
-  - {fileID: 233143235}
   - {fileID: 241851990}
   - {fileID: 1564315200}
   - {fileID: 564453926}
@@ -18691,3 +18875,4 @@ SceneRoots:
   - {fileID: 1704665179}
   - {fileID: 1182976436}
   - {fileID: 1277571241}
+  - {fileID: 233143235}

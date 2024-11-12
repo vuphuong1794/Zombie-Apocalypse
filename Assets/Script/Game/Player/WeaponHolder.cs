@@ -18,6 +18,7 @@ public class WeaponHolder : MonoBehaviour
         guns = new GameObject[totalWeapon];
         weaponUnlocked = new bool[totalWeapon];
 
+
         // Lấy reference tới Inventory
         inventory = GetComponentInParent<Inventory>();
         if (inventory != null)
@@ -39,9 +40,9 @@ public class WeaponHolder : MonoBehaviour
         }
 
         // Mặc định cầm pistol (index 0)
-        weaponUnlocked[3] = true;
-        guns[3].SetActive(true);
-        currentGun = guns[3];
+        weaponUnlocked[0] = true;
+        guns[0].SetActive(true);
+        currentGun = guns[0];
         currentIndex = 0;
 
         Debug.Log("Weapon system initialized"); // Debug log

@@ -135,7 +135,7 @@ MonoBehaviour:
   impactEffect: {fileID: 1521305775188045284, guid: 31d0ef9df8198b34cabd8070339c54f8, type: 3}
   impactEffectLifetime: 0.5
   trailRenderer: {fileID: 0}
-  _damageAmount: 40
+  _damageAmount: 50
 --- !u!70 &5907471751085082707
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

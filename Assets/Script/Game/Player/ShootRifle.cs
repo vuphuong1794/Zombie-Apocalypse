@@ -15,6 +15,7 @@ public class GunShooting : MonoBehaviour
     private void Start()
     {
         m_ShoottingPistol = GetComponent<AudioSource>();
+        firePos.transform.localPosition = new Vector3(183f, -222f, 0);
     }
     private void Update()
     {

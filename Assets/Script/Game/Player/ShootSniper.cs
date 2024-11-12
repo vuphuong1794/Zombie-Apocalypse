@@ -10,7 +10,10 @@ public class ShootSniper : MonoBehaviour
     [SerializeField] private float damage = 1; // Sát thương của viên đạn
 
     private float timeSinceLastShot = 0f;
-
+    private void Start()
+    {
+        firePos.transform.localPosition = new Vector3(8f, 50f, 0);
+    }
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
