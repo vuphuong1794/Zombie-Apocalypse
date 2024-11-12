@@ -6,8 +6,8 @@ public class ShootGrenade : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab; // Prefab của viên đạn
     [SerializeField] private Transform firePos;       // Vị trí mà viên đạn sẽ được spawn ra
-    [SerializeField] private float timeBetweenShots = 0.2f; // Thời gian chờ giữa các lần bắn
-    [SerializeField] private float bulletSpeed = 1; // Tốc độ bay của viên đạn
+    [SerializeField] private float timeBetweenShots = 1f; // Thời gian chờ giữa các lần bắn
+    [SerializeField] private float bulletSpeed = 20; // Tốc độ bay của viên đạn
     [SerializeField] private float damage = 1; // Sát thương của viên đạn
 
     private float timeSinceLastShot = 0f;
