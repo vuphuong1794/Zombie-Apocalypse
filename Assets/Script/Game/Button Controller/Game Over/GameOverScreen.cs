@@ -8,6 +8,9 @@ public class GameOverScreen : MonoBehaviour
 {
     public Text pointsText;
 
+    [SerializeField]
+    private SceneController _sceneController;
+
     public void SetUp(int score)
     {
         gameObject.SetActive(true);
@@ -17,12 +20,12 @@ public class GameOverScreen : MonoBehaviour
     //chuyển đến scene Game
     public void RestartButton()
     {
-        SceneManager.LoadScene("Game");
+        _sceneController.LoadScene("Game");
     }
 
     //chuyển đến scene Main Menu
     public void ExitButton()
     {
-        SceneManager.LoadScene("Main Menu");
+        _sceneController.LoadScene("Main Menu");
     }
 }
