@@ -17244,7 +17244,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7311422464202619382, guid: 3feb735bdb2b56e40bdd55847ff6024f, type: 3}
   firePos: {fileID: 103453683}
   timeBetweenShots: 0.4
-  bulletSpeed: 80
+  bulletSpeed: 20
   damage: 1
 --- !u!114 &1833746759
 MonoBehaviour:
@@ -18497,7 +18497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8895998
+      value: 0.58528954
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -18509,11 +18509,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.4567408
+      value: 0.8108244
       objectReference: {fileID: 0}
     - target: {fileID: -7221020487405985688, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 54.354
+      value: 108.353
       objectReference: {fileID: 0}
     - target: {fileID: -6455343447489727280, guid: 3e63c0bbff20caa41a3db5c342fbbb0e, type: 3}
       propertyPath: m_Layer
