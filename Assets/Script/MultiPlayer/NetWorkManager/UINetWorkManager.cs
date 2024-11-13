@@ -1,5 +1,9 @@
 ﻿using System.Collections;
+using System.Net.Sockets;
+using System.Net;
+using TMPro;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,11 +12,25 @@ public class UINetWorkManager : MonoBehaviour
     [SerializeField]
     private SceneController _sceneController;
 
+    [SerializeField] TextMeshProUGUI ipAddressText;
+    [SerializeField] TMP_InputField ip;
+
+    [SerializeField] string ipAddress;
+    [SerializeField] UnityTransport transport;
+
+    void Start()
+    {
+        ipAddress = "0.0.0.0";
+        SetIpAddress(); // Set the Ip to the above address
+        //InvokeRepeating("assignPlayerController", 0.1f, 0.1f);
+    }
+
     // Hàm riêng để khởi chạy Host
     public void StartHost()
     {
         // Load scene và chờ cho đến khi nó được tải xong
         _sceneController.LoadScene("Multiplayer Gamemode");
+        GetLocalIPAddress();
         StartCoroutine(WaitForSceneLoadAndStartHost());
     }
 
@@ -21,6 +39,8 @@ public class UINetWorkManager : MonoBehaviour
     {
         // Load scene và chờ cho đến khi nó được tải xong
         _sceneController.LoadScene("Multiplayer Gamemode");
+        ipAddress = ip.text;
+        SetIpAddress();
         StartCoroutine(WaitForSceneLoadAndStartClient());
     }
 
@@ -71,4 +91,38 @@ public class UINetWorkManager : MonoBehaviour
         // Khi scene đã được tải hoàn toàn, bắt đầu Client
         NetworkManager.Singleton.StartClient();
     }
+
+
+    // ONLY FOR HOST SIDE 
+    public string GetLocalIPAddress()
+    {
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                ipAddressText.text = ip.ToString();
+                ipAddress = ip.ToString();
+                return ip.ToString();
+            }
+        }
+        throw new System.Exception("No network adapters with an IPv4 address in the system!");
+    }
+
+    // ONLY FOR CLIENT SIDE
+    public void SetIpAddress()
+    {
+        if (transport != null)
+        {
+            transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+            transport.ConnectionData.Address = ipAddress;
+            Debug.Log("IP Address set to: " + ipAddress);  // Kiểm tra xem IP có được gán đúng không
+            ipAddressText.text = ip.ToString();
+        }
+        else
+        {
+            Debug.LogError("UnityTransport is not found!");
+        }
+    }
+
 }
