@@ -13,22 +13,28 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _movementInput;
     private Inventory inventory;
 
-    private void Awake()
+    //private void Awake()
+    //{
+    //    _rigidbody = GetComponent<Rigidbody2D>();
+
+    //    inventory = GetComponent<Inventory>();
+    //    uiInventory.SetInventory(inventory);
+
+    //    //khởi tạo nơi tạo ra vật phẩm
+    //    //ItemWorld.SpawnItemWorld(new Vector3(-3, 3, -0.1f), new Item { itemType = Item.ItemType.Rifle, amount = 1 });
+    //    //ItemWorld.SpawnItemWorld(new Vector3(-7, 2, -0.1f), new Item { itemType = Item.ItemType.Sniper, amount = 1 });
+    //    //ItemWorld.SpawnItemWorld(new Vector3(-6, -2, -0.1f), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+
+
+    //    uiInventory.SetPlayer(this);
+    //}
+    private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-
         inventory = GetComponent<Inventory>();
         uiInventory.SetInventory(inventory);
-
-        //khởi tạo nơi tạo ra vật phẩm
-        //ItemWorld.SpawnItemWorld(new Vector3(-3, 3, -0.1f), new Item { itemType = Item.ItemType.Rifle, amount = 1 });
-        //ItemWorld.SpawnItemWorld(new Vector3(-7, 2, -0.1f), new Item { itemType = Item.ItemType.Sniper, amount = 1 });
-        //ItemWorld.SpawnItemWorld(new Vector3(-6, -2, -0.1f), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
-
-
         uiInventory.SetPlayer(this);
     }
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
