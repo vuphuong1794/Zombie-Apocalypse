@@ -33,7 +33,8 @@ public class UINetWorkManager : MonoBehaviour
     {
         // Load scene và chờ cho đến khi nó được tải xong
         _sceneController.LoadScene("Multiplayer Gamemode");
-
+        transport=this.GetComponent<UnityTransport>();
+        StartCoroutine(WaitForSceneLoadAndStartHost());
         GetLocalIPAddress();
         //string ipAddress = GetLocalIPAddress();
         //string randomKey = GenerateRandomKey();
@@ -41,7 +42,7 @@ public class UINetWorkManager : MonoBehaviour
         //// Lưu vào mảng 2 chiều dưới dạng Dictionary
         //ipMapping[randomKey] = ipAddress;
 
-        StartCoroutine(WaitForSceneLoadAndStartHost());
+        
     }
 
     // Hàm riêng để khởi chạy Client
@@ -111,8 +112,10 @@ public class UINetWorkManager : MonoBehaviour
         {
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
+                Debug.Log("Found id!!!!!!!!");
                 ipAddressText.text = ip.ToString();
                 ipAddress = ip.ToString();
+                transport.ConnectionData.Address=ipAddress;
                 return ip.ToString();
             }
         }
@@ -122,23 +125,9 @@ public class UINetWorkManager : MonoBehaviour
     // ONLY FOR CLIENT SIDE
     public void SetIpAddress()
     {
-        if (NetworkManager.Singleton != null && transport == null)
-        {
-            ipAddressText.text = ipAddress;
-
-        }
-
-        if (transport != null)
-        {
-            transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-            transport.ConnectionData.Address = ipAddress;
-            ipAddressText.text = ipAddress; // Hiển thị IP trên màn hình
-            Debug.Log("IP Address set to: " + ipAddress);
-        }
-        else
-        {
-            Debug.LogError("UnityTransport is not found!");
-        }
+        transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+        transport.ConnectionData.Address = ipAddress;
+        ipAddressText.text = ipAddress;
     }
 
     string GenerateRandomKey()
