@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     private GameObject Sniper;
     Transform target;
     Vector3 velocity = Vector3.zero;
-
+// haha
     [Range(0, 1)]
     public float smoothTime;
 
