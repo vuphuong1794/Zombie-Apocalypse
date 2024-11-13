@@ -127,7 +127,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 7311422464202619382}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 8103ca6270a004145aebe50807e75613, type: 2}
+  m_Material: {fileID: 6200000, guid: da511b1e6fc4b2c46b1a6ce173ee8e5c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5088,7 +5088,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   explosionEffect: {fileID: 1521305775188045284, guid: f5a05c57e240d3147836123c7fbab0cd, type: 3}
-  explosionEffectLifetime: 1
+  explosionEffectLifetime: 0.3
   _damageAmount: 200
 --- !u!95 &8094150186782376464
 Animator:
