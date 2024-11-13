@@ -6,9 +6,12 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class UINetWorkManager : MonoBehaviour
 {
+    private Dictionary<string, string> ipMapping = new Dictionary<string, string>();
+
     [SerializeField]
     private SceneController _sceneController;
 
@@ -30,7 +33,14 @@ public class UINetWorkManager : MonoBehaviour
     {
         // Load scene và chờ cho đến khi nó được tải xong
         _sceneController.LoadScene("Multiplayer Gamemode");
+
         GetLocalIPAddress();
+        //string ipAddress = GetLocalIPAddress();
+        //string randomKey = GenerateRandomKey();
+
+        //// Lưu vào mảng 2 chiều dưới dạng Dictionary
+        //ipMapping[randomKey] = ipAddress;
+
         StartCoroutine(WaitForSceneLoadAndStartHost());
     }
 
@@ -112,17 +122,28 @@ public class UINetWorkManager : MonoBehaviour
     // ONLY FOR CLIENT SIDE
     public void SetIpAddress()
     {
+        if (NetworkManager.Singleton != null && transport == null)
+        {
+            ipAddressText.text = ipAddress;
+
+        }
+
         if (transport != null)
         {
             transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
             transport.ConnectionData.Address = ipAddress;
-            Debug.Log("IP Address set to: " + ipAddress);  // Kiểm tra xem IP có được gán đúng không
-            ipAddressText.text = ip.ToString();
+            ipAddressText.text = ipAddress; // Hiển thị IP trên màn hình
+            Debug.Log("IP Address set to: " + ipAddress);
         }
         else
         {
             Debug.LogError("UnityTransport is not found!");
         }
+    }
+
+    string GenerateRandomKey()
+    {
+        return Random.Range(1000, 9999).ToString(); // Tạo mã ngẫu nhiên 4 chữ số
     }
 
 }
