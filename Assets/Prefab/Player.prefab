@@ -190,7 +190,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6944978524433751157}
   - component: {fileID: 7521532415536757321}
-  - component: {fileID: 9116347586248055493}
   - component: {fileID: 2415738219444973143}
   - component: {fileID: 7500736303294074904}
   - component: {fileID: 5567637153492864791}
@@ -199,6 +198,7 @@ GameObject:
   - component: {fileID: 2088012259034118801}
   - component: {fileID: 3027769915070665345}
   - component: {fileID: 6666007981543948880}
+  - component: {fileID: 6159762567748786530}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -249,20 +249,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &9116347586248055493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3191005929955729974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1917a976cf99be84fbb24f914256eb0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiInventory: {fileID: 0}
-  _speed: 5
 --- !u!114 &2415738219444973143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +363,7 @@ MonoBehaviour:
   OnDied:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9116347586248055493}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -491,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1990508092
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -500,6 +486,20 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &6159762567748786530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3191005929955729974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f947659ee36c0442833bd3e5f3e66ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiInventory: {fileID: 0}
+  _speed: 5
 --- !u!1 &3390682252149057671
 GameObject:
   m_ObjectHideFlags: 0

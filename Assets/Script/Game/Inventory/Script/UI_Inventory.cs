@@ -1,4 +1,5 @@
 ﻿using CodeMonkey.Utils;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -125,5 +126,10 @@ public class UI_Inventory : MonoBehaviour
                 y++;
             }
         }
+    }
+
+    internal void SetPlayer(MulPlayerMovement mulPlayerMovement)
+    {
+        throw new NotImplementedException();
     }
 }
