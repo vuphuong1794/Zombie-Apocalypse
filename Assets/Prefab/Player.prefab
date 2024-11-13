@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1990508092
+  GlobalObjectIdHash: 451291208
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -720,7 +720,7 @@ GameObject:
   - component: {fileID: 8465812064231694988}
   - component: {fileID: 759411692682121120}
   - component: {fileID: 2678532539287200332}
-  - component: {fileID: 7962955011092610715}
+  - component: {fileID: 8858850696883989988}
   m_Layer: 0
   m_Name: grenade
   m_TagString: Untagged
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RightHand: {fileID: 3487744564691393787}
---- !u!114 &7962955011092610715
+--- !u!114 &8858850696883989988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -817,13 +817,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4825580187593036097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e4eae08b2931724a92d3f7be5c86102, type: 3}
+  m_Script: {fileID: 11500000, guid: a12e5f8109a45054ea94f92270c436b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7311422464202619382, guid: f3104f1eb02a45848ae15721bad34808, type: 3}
   firePos: {fileID: 2465826428918363762}
   timeBetweenShots: 1
-  bulletSpeed: 5
+  bulletSpeed: 20
   damage: 1
 --- !u!1 &5175853701290822303
 GameObject:
