@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayMultiplayerGamemode()
     {
-        _sceneController.LoadScene("Multiplayer Gamemode");
+        _sceneController.LoadScene("Matchmaking");
     }
 
     public void QuitGame()

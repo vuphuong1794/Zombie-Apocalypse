@@ -1,4 +1,5 @@
 ﻿using CodeMonkey.Utils;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -109,7 +110,7 @@ public class UI_Inventory : MonoBehaviour
             TextMeshProUGUI uiText = itemSlot.Find("amountText")?.GetComponent<TextMeshProUGUI>();
             if (uiText != null)
             {
-                Debug.Log("tim thay textmeshpro");
+                
                 if (item.amount > 1)
                 {
                     uiText.SetText(item.amount.ToString());
@@ -125,5 +126,10 @@ public class UI_Inventory : MonoBehaviour
                 y++;
             }
         }
+    }
+
+    internal void SetPlayer(MulPlayerMovement mulPlayerMovement)
+    {
+        throw new NotImplementedException();
     }
 }
