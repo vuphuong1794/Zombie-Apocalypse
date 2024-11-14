@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
         //ItemWorld.SpawnItemWorld(new Vector3(-7, 2, -0.1f), new Item { itemType = Item.ItemType.Sniper, amount = 1 });
         //ItemWorld.SpawnItemWorld(new Vector3(-6, -2, -0.1f), new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
 
-
         uiInventory.SetPlayer(this);
     }
 
