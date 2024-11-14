@@ -22,13 +22,39 @@ public class BulletGrenade : MonoBehaviour
     private float timeCount; // Bộ đếm thời gian để theo dõi thời gian tồn tại của viên đạn
     private bool hasBounced = false; // Đánh dấu nếu viên đạn đã va vào tường
     private bool hasReflected = false; // Trạng thái để ngăn phản xạ liên tiếp
+
+    [SerializeField]
+    private Inventory inventory;
+    private static Inventory playerInventory;
+
     private void Start()
     {
         bulletBody = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         timeCount = 0;
 
+        if (playerInventory == null)
+        {
+            playerInventory = FindObjectOfType<Inventory>();
+            if (playerInventory == null)
+            {
+                Debug.LogError("Không tìm thấy Inventory trong scene!");
+            }
+        }
+
         if (trailRenderer != null) trailRenderer.Clear();
+        DecreaseBulletCount();
+    }
+
+
+    private void DecreaseBulletCount()
+    {
+        if (playerInventory != null)
+        {
+            // Giảm số đạn trong inventory
+            Item bulletItem = new Item { itemType = Item.ItemType.bullet, amount = 1 };
+            playerInventory.RemoveItem(bulletItem);
+        }
     }
 
     private void Update()

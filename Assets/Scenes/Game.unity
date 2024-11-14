@@ -340,7 +340,7 @@ Transform:
   m_GameObject: {fileID: 93264787}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.15, y: 3.19, z: -0.09510197}
+  m_LocalPosition: {x: 17.83, y: 7.05, z: -0.09510197}
   m_LocalScale: {x: 1.28, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -590,6 +590,7 @@ GameObject:
   - component: {fileID: 178610633}
   - component: {fileID: 178610632}
   - component: {fileID: 178610631}
+  - component: {fileID: 178610636}
   m_Layer: 0
   m_Name: Tudo_healthPotion
   m_TagString: Zombie
@@ -606,7 +607,7 @@ Transform:
   m_GameObject: {fileID: 178610629}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.0052480483, w: 0.9999863}
-  m_LocalPosition: {x: 27.19, y: 3.21, z: 0.1423893}
+  m_LocalPosition: {x: 2.25, y: 3.21, z: 0.1423893}
   m_LocalScale: {x: 7.240407, y: 8.331049, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -669,7 +670,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -754,6 +755,21 @@ MonoBehaviour:
   damageParticlePrefab: {fileID: 0}
   enemyHealthBarUI: {fileID: 0}
   sounds: []
+--- !u!114 &178610636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178610629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c9f1ee99c699e4191197824c1cb084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healAmount: 20
+  destroyOnPickup: 1
+  pickupSound: {fileID: 0}
 --- !u!1 &225701274
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,7 +888,9 @@ MonoBehaviour:
   timeBetweenShots: 0.2
   bulletSpeed: 20
   damage: 1
+  maxAmmo: 12
   m_ShoottingPistol: {fileID: 225701279}
+  emptyGunSound: {fileID: 0}
 --- !u!82 &225701279
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3250,7 +3268,7 @@ Transform:
   m_GameObject: {fileID: 567512135}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.0052480483, w: 0.9999863}
-  m_LocalPosition: {x: -14.27, y: -18.61, z: 0.1423893}
+  m_LocalPosition: {x: -16.67, y: -15.4, z: 0.1423893}
   m_LocalScale: {x: 7.240407, y: 8.331049, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3565,8 +3583,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -348.1, y: 179.77}
-  m_SizeDelta: {x: 274.0125, y: 120.02}
+  m_AnchoredPosition: {x: -349.29202, y: 180.36606}
+  m_SizeDelta: {x: 271.6284, y: 118.8279}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618153318
 MonoBehaviour:
@@ -3784,6 +3802,9 @@ MonoBehaviour:
   timeBetweenShots: 1
   bulletSpeed: 20
   damage: 1
+  maxAmmo: 12
+  m_ShoottingPistol: {fileID: 0}
+  emptyGunSound: {fileID: 0}
 --- !u!114 &708662637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4713,6 +4734,8 @@ GameObject:
   - component: {fileID: 996084279}
   - component: {fileID: 996084281}
   - component: {fileID: 996084280}
+  - component: {fileID: 996084282}
+  - component: {fileID: 996084283}
   m_Layer: 0
   m_Name: ItemWorldSpawner_HealthPotion
   m_TagString: Untagged
@@ -4729,7 +4752,7 @@ Transform:
   m_GameObject: {fileID: 996084278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.02337647, w: 0.9997268}
-  m_LocalPosition: {x: -2.736, y: -2.219, z: -12.70627}
+  m_LocalPosition: {x: -2.91, y: -1.65, z: -12.70627}
   m_LocalScale: {x: 0.31, y: 0.23, z: 1.0707}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4776,7 +4799,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9f16fc6abf85239419a3b4691c0d8973, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4784,7 +4807,7 @@ SpriteRenderer:
   m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &996084281
@@ -4802,6 +4825,66 @@ MonoBehaviour:
   item:
     itemType: 4
     amount: 1
+--- !u!114 &996084282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996084278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c9f1ee99c699e4191197824c1cb084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healAmount: 20
+  destroyOnPickup: 1
+  pickupSound: {fileID: 0}
+--- !u!61 &996084283
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996084278}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.56, y: 2.56}
+    newSize: {x: 2.56, y: 2.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.56, y: 2.56}
+  m_EdgeRadius: 0
 --- !u!1 &1024767979
 GameObject:
   m_ObjectHideFlags: 0
@@ -6082,6 +6165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: 100
   _maximumHealth: 100
+  canExceedMaxHealth: 0
   healthBarUI: {fileID: 526161871}
   sounds:
   - name: 
@@ -16432,6 +16516,9 @@ MonoBehaviour:
   timeBetweenShots: 1
   bulletSpeed: 40
   damage: 1
+  maxAmmo: 12
+  m_ShoottingPistol: {fileID: 0}
+  emptyGunSound: {fileID: 0}
 --- !u!114 &1448956424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17241,7 +17328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5452295e82953347af11c4064e50b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7311422464202619382, guid: 3feb735bdb2b56e40bdd55847ff6024f, type: 3}
+  bulletPrefab: {fileID: 7311422464202619382, guid: 54f7c285c58ba9e45960f46f86d210b7, type: 3}
   firePos: {fileID: 103453683}
   timeBetweenShots: 0.4
   bulletSpeed: 20

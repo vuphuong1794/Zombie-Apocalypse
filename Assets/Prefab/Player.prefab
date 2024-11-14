@@ -342,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: 100
   _maximumHealth: 100
+  canExceedMaxHealth: 0
   healthBarUI: {fileID: 0}
   sounds:
   - name: 
@@ -481,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 451291208
+  GlobalObjectIdHash: 1990508092
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -885,7 +886,6 @@ MonoBehaviour:
   firePos: {fileID: 2465826428918363762}
   timeBetweenShots: 1
   bulletSpeed: 20
-  damage: 1
 --- !u!1 &5175853701290822303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,6 +1033,9 @@ MonoBehaviour:
   timeBetweenShots: 0.4
   bulletSpeed: 20
   damage: 1
+  audioSource: {fileID: 0}
+  shootSound: {fileID: 0}
+  emptyGunSound: {fileID: 0}
 --- !u!1 &6525964547666816218
 GameObject:
   m_ObjectHideFlags: 0

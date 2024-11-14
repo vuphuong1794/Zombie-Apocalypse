@@ -3,14 +3,13 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Item;
 
 public class UI_Inventory : MonoBehaviour
 {
     [Header("Required References")]
     [SerializeField] private RectTransform itemSlotContainer;
     [SerializeField] private RectTransform itemSlotTemplate;
-
-    [Header("Layout Settings")]
 
     private Inventory inventory;
     private PlayerMovement player;
@@ -23,17 +22,24 @@ public class UI_Inventory : MonoBehaviour
     public void SetInventory(Inventory inventory)
     {
         this.inventory = inventory;
-
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
         RefreshInventoryItems();
     }
 
-    private void Inventory_OnItemListChanged(object sender, System.EventArgs e)
+    private void Inventory_OnItemListChanged(object sender, EventArgs e)
     {
         RefreshInventoryItems();
     }
 
-    //cập nhật lại kho đồ 
+    private void Update()
+    {
+        // Drop any equipped gun (Sniper, Grenade, Rifle) when Q is pressed
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            DropEquippedGun();
+        }
+    }
+
     private void RefreshInventoryItems()
     {
         if (itemSlotContainer == null)
@@ -74,24 +80,6 @@ public class UI_Inventory : MonoBehaviour
             RectTransform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
             itemSlot.gameObject.SetActive(true);
 
-            itemSlot.GetComponent<Button_UI>().ClickFunc = () =>
-            {
-                //use item
-                inventory.UseItem(item);
-            };
-
-            itemSlot.GetComponent<Button_UI>().MouseRightClickFunc = () => {
-                //Drop item
-                if (!item.IsPistol())
-                {
-                    inventory.RemoveItem(item);
-
-                    WeaponHolder weaponHolder = FindObjectOfType<WeaponHolder>();
-                    ItemWorld.DropItem(player.GetPosition(), item, weaponHolder);
-                }
-
-            };
-
             itemSlot.anchoredPosition = new Vector2(x * totalCellSize, y * totalCellSize);
 
             Image image = itemSlot.Find("image")?.GetComponent<Image>();
@@ -100,30 +88,46 @@ public class UI_Inventory : MonoBehaviour
                 image.sprite = item.GetSprite();
             }
 
-            if (item.IsGun())
-            {
-                Debug.Log($"UI_Inventory: Found gun item with index: {item.GetGunIndex()}"); // Thêm log
-            }
-
-            //tăng số lượng vật phẩm nêu trùng 
-
             TextMeshProUGUI uiText = itemSlot.Find("amountText")?.GetComponent<TextMeshProUGUI>();
             if (uiText != null)
             {
-                
                 if (item.amount > 1)
                 {
                     uiText.SetText(item.amount.ToString());
                 }
                 else
-                    
+                {
                     uiText.SetText("");
+                }
             }
+
             x++;
             if (x > 4)
             {
                 x = 0;
                 y++;
+            }
+        }
+    }
+
+    private void DropEquippedGun()
+    {
+        // Loop through the items in the inventory and check for gun types
+        foreach (Item item in inventory.GetItemList())
+        {
+            if (item != null && (item.itemType == ItemType.Sniper ||
+                                 item.itemType == ItemType.Grenade ||
+                                 item.itemType == ItemType.Rifle))
+            {
+                // Remove the item from the inventory
+                inventory.RemoveItem(item);
+
+                // Drop the item in the game world
+                WeaponHolder weaponHolder = FindObjectOfType<WeaponHolder>();
+                ItemWorld.DropItem(player.GetPosition(), item, weaponHolder);
+
+                Debug.Log($"Dropped gun: {item}");
+                break; // Exit after dropping one gun
             }
         }
     }

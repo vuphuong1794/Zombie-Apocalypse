@@ -58,8 +58,8 @@ public class Item
             case ItemType.Sniper:
             case ItemType.Grenade:
             case ItemType.Rifle:
-                return false;
             case ItemType.HealthPotion:
+                return false;
             case ItemType.bullet:
                 return true;
 

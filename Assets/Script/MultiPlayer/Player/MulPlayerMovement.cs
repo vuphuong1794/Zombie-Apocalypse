@@ -18,7 +18,7 @@ public class MulPlayerMovement : NetworkBehaviour
 
     private void Start()
     {
-        Debug.Log("Playerxuat hien");
+        Debug.Log("Player xuat hien");
         _rigidbody = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
         uiInventory.SetInventory(inventory);

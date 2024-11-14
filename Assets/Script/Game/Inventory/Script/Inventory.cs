@@ -31,50 +31,37 @@ public class Inventory : MonoBehaviour
 
             if (existingItem != null)
             {
-                // Kiểm tra giới hạn đạn nếu item là đạn
+                // Chỉ xử lý đạn
                 if (item.itemType == Item.ItemType.bullet)
                 {
                     int newAmount = existingItem.amount + item.amount;
                     existingItem.amount = Mathf.Min(newAmount, MAX_BULLETS);
                     Debug.Log($"Đạn hiện tại: {existingItem.amount}/{MAX_BULLETS}");
                 }
-                else
-                {
-                    existingItem.amount += item.amount;
-                }
-                Debug.Log($"Tăng số lượng {item.itemType} lên {existingItem.amount}");
             }
             else
             {
-                // Nếu là đạn, kiểm tra giới hạn
+                // Chỉ xử lý đạn mới
                 if (item.itemType == Item.ItemType.bullet)
                 {
                     item.amount = Mathf.Min(item.amount, MAX_BULLETS);
+                    itemList.Add(item);
+                    Debug.Log($"Thêm đạn mới với số lượng {item.amount}");
                 }
-                itemList.Add(item);
-                Debug.Log($"Thêm mới {item.itemType} với số lượng {item.amount}");
             }
         }
-        else
+        else if (item.IsGun())
         {
             // Xử lý thêm vũ khí
-            if (item.IsGun())
+            bool weaponExists = itemList.Exists(i => i.itemType == item.itemType);
+            if (!weaponExists)
             {
-                bool weaponExists = itemList.Exists(i => i.itemType == item.itemType);
-                if (!weaponExists)
-                {
-                    itemList.Add(item);
-                    Debug.Log($"Thêm vũ khí mới: {item.itemType}");
-                }
-                else
-                {
-                    Debug.Log($"Đã có vũ khí {item.itemType} trong inventory");
-                }
+                itemList.Add(item);
+                Debug.Log($"Thêm vũ khí mới: {item.itemType}");
             }
             else
             {
-                itemList.Add(item);
-                Debug.Log($"Thêm item không xếp chồng: {item.itemType}");
+                Debug.Log($"Đã có vũ khí {item.itemType} trong inventory");
             }
         }
 
@@ -130,25 +117,16 @@ public class Inventory : MonoBehaviour
     {
         if (item == null) return;
 
-        switch (item.itemType)
+        if (item.itemType == Item.ItemType.bullet)
         {
-            case Item.ItemType.bullet:
-                // Xử lý sử dụng đạn
-                RemoveItem(new Item { itemType = Item.ItemType.bullet, amount = 1 });
-                break;
-
-            case Item.ItemType.HealthPotion:
-                // Xử lý sử dụng health potion
-                if (HasItem(Item.ItemType.HealthPotion))
-                {
-                    RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
-                    // Thêm logic hồi máu ở đây
-                }
-                break;
-
-            default:
-                Debug.Log($"Không có logic xử lý cho item type: {item.itemType}");
-                break;
+            // Xử lý sử dụng đạn
+            RemoveItem(new Item { itemType = Item.ItemType.bullet, amount = 1 });
         }
     }
+    public Item GetCurrentWeapon()
+    {
+        Item equippedWeapon = itemList.Find(i => i.itemType == Item.ItemType.Pistol); // Or any other logic for weapon selection
+        return equippedWeapon;
+    }
+
 }
