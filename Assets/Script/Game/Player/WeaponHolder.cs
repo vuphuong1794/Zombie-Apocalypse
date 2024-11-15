@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour
 {
@@ -40,10 +40,10 @@ public class WeaponHolder : MonoBehaviour
         }
 
         // Mặc định cầm pistol (index 0)
-        weaponUnlocked[3] = true;
-        guns[3].SetActive(true);
-        currentGun = guns[3];
-        currentIndex = 3;
+        weaponUnlocked[0] = true;
+        guns[0].SetActive(true);
+        currentGun = guns[0];
+        currentIndex = 0;
 
         Debug.Log("Weapon system initialized"); // Debug log
     }

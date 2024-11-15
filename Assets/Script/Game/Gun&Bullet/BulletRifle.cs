@@ -13,17 +13,25 @@ public class BulletRifle : MonoBehaviour
     private AudioSource audioSource;
     private float timeCount;
     private bool hasReflected = false; // Trạng thái để ngăn phản xạ liên tiếp
-
+    
     [SerializeField]
     private float _damageAmount;
+    private Inventory inventory;
+    private static Inventory playerInventory;
 
     private void Start()
+    {
+        InitializeBullet();
+        DecreaseBulletCount();
+    }
+
+    private void InitializeBullet()
     {
         Debug.Log("Dan sinh ra");
         transform.Rotate(new Vector3(0, 0, 90));
         transform.localScale = new Vector3(10, 10, 10);
-        // Định dạng kích thước mặc định của viên đạn
         gameObject.transform.localScale = new Vector3(defScaleBullet, defScaleBullet, defScaleBullet);
+
         bulletBody = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         timeCount = 0;
@@ -34,10 +42,29 @@ public class BulletRifle : MonoBehaviour
             return;
         }
 
-        // Bắt đầu đường bay của đạn
         if (trailRenderer != null)
         {
             trailRenderer.Clear();
+        }
+
+        // Tìm inventory nếu chưa có
+        if (playerInventory == null)
+        {
+            playerInventory = FindObjectOfType<Inventory>();
+            if (playerInventory == null)
+            {
+                Debug.LogError("Không tìm thấy Inventory trong scene!");
+            }
+        }
+    }
+
+    private void DecreaseBulletCount()
+    {
+        if (playerInventory != null )
+        {
+            // Giảm số đạn trong inventory
+            Item bulletItem = new Item { itemType = Item.ItemType.bullet, amount = 1 };
+            playerInventory.RemoveItem(bulletItem);
         }
     }
 
@@ -124,6 +151,17 @@ public class BulletRifle : MonoBehaviour
     // Phương thức hủy viên đạn và tạo hiệu ứng vụn nổ nếu cần
     private void DestroyBullet()
     {
+        if (playerInventory != null )
+        {
+            // Only reduce the bullet count if the weapon is not a Pistol
+            Item currentWeapon = playerInventory.GetCurrentWeapon();
+            if (currentWeapon.itemType != Item.ItemType.Pistol)
+            {
+                Item bulletItem = new Item { itemType = Item.ItemType.bullet, amount = 1 };
+                playerInventory.RemoveItem(bulletItem);
+            }
+        }
+
         if (impactEffect != null)
         {
             GameObject effect = Instantiate(impactEffect, transform.position, transform.rotation);
@@ -132,6 +170,8 @@ public class BulletRifle : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+
 
     private void ShowImpactEffect(Vector2 position)
     {

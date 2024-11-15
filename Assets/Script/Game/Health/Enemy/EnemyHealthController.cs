@@ -107,6 +107,8 @@ public class EnemyHealthController : MonoBehaviour
     private void Die()
     {
         OnEnemyDestroyed?.Invoke();
+        SpawnCorpse spawnCorpse = this.GetComponentInChildren<SpawnCorpse>();
+        spawnCorpse.SpawningCorpses();
         Destroy(gameObject);
     }
 

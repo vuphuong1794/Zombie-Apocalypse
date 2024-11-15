@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -12,21 +12,23 @@ public class HealthController : MonoBehaviour
 
     [SerializeField]
     private float _maximumHealth;
+    [SerializeField] private bool canExceedMaxHealth = false; // Có cho phép máu vượt quá giới hạn không
 
     public HealthBarUI healthBarUI;
     public Sound[] sounds;
     private float timeCount = 0f;
     private float soundCooldown = 3f;
+
+    public float CurrentHealth => _currentHealth;
+    public float MaximumHealth => _maximumHealth;
+
     void Start()
     {
         SetupAudioSources();
-
         _currentHealth = _maximumHealth;
-        if (healthBarUI != null)
-        {
-            healthBarUI.SetMaxHealth(_maximumHealth);
-        }
+        UpdateHealthBar();
     }
+
     private void SetupAudioSources()
     {
         foreach (Sound s in sounds)
@@ -94,6 +96,46 @@ public class HealthController : MonoBehaviour
             healthBarUI.SetHealth(_currentHealth);
         }
     }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBarUI != null)
+        {
+            healthBarUI.SetHealth(_currentHealth);
+        }
+    }
+
+    public void AddHealth(float amountToAdd)
+    {
+        // Nếu đã ở máu tối đa thì không hồi nữa
+        if (_currentHealth >= _maximumHealth)
+        {
+            return;
+        }
+
+        // Tính toán lượng máu sau khi hồi
+        float newHealth = _currentHealth + amountToAdd;
+
+        // Đảm bảo máu không vượt quá giới hạn tối đa
+        _currentHealth = Mathf.Min(newHealth, _maximumHealth);
+
+        // Cập nhật thanh máu
+        UpdateHealthBar();
+
+        // Hiệu ứng hồi máu (nếu có)
+        PlayHealEffect();
+    }
+
+    private void PlayHealEffect()
+    {
+        // Thêm hiệu ứng particle hoặc âm thanh khi hồi máu
+        ParticleSystem healEffect = GetComponent<ParticleSystem>();
+        if (healEffect != null)
+        {
+            healEffect.Play();
+        }
+    }
+
     private void PlayDamageSound()
     {
         if (timeCount >= soundCooldown)
@@ -139,23 +181,4 @@ public class HealthController : MonoBehaviour
         }
     }
 
-    public void AddHealth(float amountToAdd)
-    {
-        if (_currentHealth == _maximumHealth)
-        {
-            return;
-        }
-
-        _currentHealth += amountToAdd;
-
-        if (_currentHealth > _maximumHealth)
-        {
-            _currentHealth = _maximumHealth;
-        }
-
-        if (healthBarUI != null)
-        {
-            healthBarUI.SetHealth(_currentHealth);
-        }
-    }
 }
