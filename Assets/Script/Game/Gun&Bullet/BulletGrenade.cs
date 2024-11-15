@@ -52,7 +52,7 @@ public class BulletGrenade : MonoBehaviour
         if (playerInventory != null)
         {
             // Giảm số đạn trong inventory
-            Item bulletItem = new Item { itemType = Item.ItemType.bullet, amount = 1 };
+            Item bulletItem = new Item { itemType = Item.ItemType.grenadeBullet, amount = 1 };
             playerInventory.RemoveItem(bulletItem);
         }
     }

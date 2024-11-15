@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
             if (existingItem != null)
             {
                 // Chỉ xử lý đạn
-                if (item.itemType == Item.ItemType.bullet)
+                if (item.itemType == Item.ItemType.bullet || item.itemType == Item.ItemType.grenadeBullet)
                 {
                     int newAmount = existingItem.amount + item.amount;
                     existingItem.amount = Mathf.Min(newAmount, MAX_BULLETS);
@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
             else
             {
                 // Chỉ xử lý đạn mới
-                if (item.itemType == Item.ItemType.bullet)
+                if (item.itemType == Item.ItemType.bullet || item.itemType == Item.ItemType.grenadeBullet)
                 {
                     item.amount = Mathf.Min(item.amount, MAX_BULLETS);
                     itemList.Add(item);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootGrenade : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletPrefab; // Prefab của viên đạn
+    [SerializeField] private GameObject grenadeBulletPrefab; // Prefab của viên đạn
     [SerializeField] private Transform firePos;       // Vị trí mà viên đạn sẽ được spawn ra
     [SerializeField] private float timeBetweenShots = 1f; // Thời gian chờ giữa các lần bắn
     [SerializeField] private float bulletSpeed = 20; // Tốc độ bay của viên đạn
@@ -73,18 +73,18 @@ public class ShootGrenade : MonoBehaviour
 
     private bool CanShoot()
     {
-        return inventory != null && inventory.HasItem(Item.ItemType.bullet);
+        return inventory != null && inventory.HasItem(Item.ItemType.grenadeBullet);
     }
 
     private void FireBullet()
     {
-        if (!inventory.HasItem(Item.ItemType.bullet))
+        if (!inventory.HasItem(Item.ItemType.grenadeBullet))
         {
             PlayEmptyGunSound();
             return;
         }
 
-        GameObject bulletInstance = Instantiate(bulletPrefab, firePos.position, transform.rotation);
+        GameObject bulletInstance = Instantiate(grenadeBulletPrefab, firePos.position, transform.rotation);
         Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
         if (bulletRb != null)
         {
@@ -125,6 +125,6 @@ public class ShootGrenade : MonoBehaviour
 
     public int GetRemainingBullets()
     {
-        return inventory != null ? inventory.GetItemCount(Item.ItemType.bullet) : 0;
+        return inventory != null ? inventory.GetItemCount(Item.ItemType.grenadeBullet) : 0;
     }
 }

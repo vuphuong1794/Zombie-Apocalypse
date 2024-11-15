@@ -3229,8 +3229,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -349.29202, y: 180.36606}
-  m_SizeDelta: {x: 271.6284, y: 118.8279}
+  m_AnchoredPosition: {x: -398.12625, y: 155.67134}
+  m_SizeDelta: {x: 369.2968, y: 69.4467}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618153318
 MonoBehaviour:
@@ -3786,7 +3786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.867, y: -3.2853}
+  m_AnchoredPosition: {x: -0.0000095367, y: -6.5706}
   m_SizeDelta: {x: 39.7336, y: 35.9424}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &895196946
@@ -3985,7 +3985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.867, y: -3.2853}
+  m_AnchoredPosition: {x: -0.0000095367, y: -6.5706}
   m_SizeDelta: {x: 53.3169, y: 29.3718}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &941842419
@@ -4994,7 +4994,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: 5.3}
+  m_AnchoredPosition: {x: 1.3, y: 6}
   m_SizeDelta: {x: 42.6256, y: 73.1937}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1197554756
@@ -5339,8 +5339,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 135.2, y: -58.5}
-  m_SizeDelta: {x: 222.5866, y: 85.7039}
+  m_AnchoredPosition: {x: 183.727, y: -34.236465}
+  m_SizeDelta: {x: 319.6407, y: 37.1769}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1293082827
 MonoBehaviour:
@@ -5395,12 +5395,12 @@ GameObject:
   - component: {fileID: 1379317032}
   - component: {fileID: 1379317031}
   m_Layer: 0
-  m_Name: Tudo_healthPotion (1)
+  m_Name: Tudo_grenadeBullet
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1379317030
 Transform:
   m_ObjectHideFlags: 0
@@ -5410,7 +5410,7 @@ Transform:
   m_GameObject: {fileID: 1379317029}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.0052480483, w: 0.9999863}
-  m_LocalPosition: {x: 6.21, y: 3.59, z: 0.1423893}
+  m_LocalPosition: {x: -0.71, y: -8.26, z: 0.1423893}
   m_LocalScale: {x: 7.240407, y: 8.331049, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5429,8 +5429,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemType: 4
-    amount: 1
+    itemType: 6
+    amount: 10
 --- !u!114 &1379317032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16071,6 +16071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSlotContainer: {fileID: 1869407747}
   itemSlotTemplate: {fileID: 1197554755}
+  background: {fileID: 618153316}
 --- !u!225 &1788214932
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -16252,7 +16253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -438.6, y: 202.8}
+  m_AnchoredPosition: {x: -535.7, y: 156.1}
   m_SizeDelta: {x: 37.1461, y: 37.087}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1869407748
@@ -16262,7 +16263,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869407746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -16327,7 +16328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 46.231262, y: -15.474108}
+  m_AnchoredPosition: {x: 25.4, y: -18.1}
   m_SizeDelta: {x: 32.6626, y: 21.7482}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1901805517
@@ -16612,6 +16613,7 @@ MonoBehaviour:
   grenadeSprite: {fileID: 21300000, guid: 84e7c902e06a85f4db78a90c91f99f86, type: 3}
   healthPotionSprite: {fileID: 21300000, guid: 9f16fc6abf85239419a3b4691c0d8973, type: 3}
   bulletSprite: {fileID: 21300000, guid: fc988bac1b22af24da95097825ffdfff, type: 3}
+  grenadeBulletSprite: {fileID: 21300000, guid: d207c4515961ded42ad369aea0ff2318, type: 3}
 --- !u!1 &1946041136
 GameObject:
   m_ObjectHideFlags: 0
@@ -17351,6 +17353,10 @@ PrefabInstance:
       propertyPath: uiInventory
       value: 
       objectReference: {fileID: 1788214931}
+    - target: {fileID: 3193228965529369033, guid: 035846ddd8588ff4dabff380c69e4911, type: 3}
+      propertyPath: grenadeBulletPrefab
+      value: 
+      objectReference: {fileID: 7311422464202619382, guid: f3104f1eb02a45848ae15721bad34808, type: 3}
     - target: {fileID: 5716613743993328103, guid: 035846ddd8588ff4dabff380c69e4911, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.34

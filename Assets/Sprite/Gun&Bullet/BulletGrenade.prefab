@@ -5078,7 +5078,7 @@ MonoBehaviour:
   timeMaxExist: 3
   defScaleBullet: 0.1
   hitSound: {fileID: 8300000, guid: d9783635130a30943924e83eed23e818, type: 3}
-  impactEffect: {fileID: 1521305775188045284, guid: e3dbda7f670348d4384dc2fb0cb947cb, type: 3}
+  impactEffect: {fileID: 1521305775188045284, guid: 31d0ef9df8198b34cabd8070339c54f8, type: 3}
   impactEffectLifetime: 0.5
   trailRenderer: {fileID: 0}
   explosionRadius: 3
@@ -5091,6 +5091,7 @@ MonoBehaviour:
   explosionEffect: {fileID: 1521305775188045284, guid: f5a05c57e240d3147836123c7fbab0cd, type: 3}
   explosionEffectLifetime: 0.3
   _damageAmount: 200
+  inventory: {fileID: 0}
 --- !u!95 &8094150186782376464
 Animator:
   serializedVersion: 5
