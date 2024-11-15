@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 public class UINetWorkManager : MonoBehaviour
 {
-    private Dictionary<string, string> ipMapping = new Dictionary<string, string>();
+    public Dictionary<string, string> ipMapping = new Dictionary<string, string>();
 
     [SerializeField]
     private SceneController _sceneController;
@@ -35,14 +35,14 @@ public class UINetWorkManager : MonoBehaviour
         _sceneController.LoadScene("Multiplayer Gamemode");
         transport=this.GetComponent<UnityTransport>();
         StartCoroutine(WaitForSceneLoadAndStartHost());
-        GetLocalIPAddress();
-        //string ipAddress = GetLocalIPAddress();
-        //string randomKey = GenerateRandomKey();
+        //GetLocalIPAddress();
+        string ipAddress = GetLocalIPAddress();
+        string randomKey = GenerateRandomKey();
 
         //// Lưu vào mảng 2 chiều dưới dạng Dictionary
-        //ipMapping[randomKey] = ipAddress;
+        ipMapping[randomKey] = ipAddress;
 
-        
+
     }
 
     // Hàm riêng để khởi chạy Client
@@ -50,7 +50,7 @@ public class UINetWorkManager : MonoBehaviour
     {
         // Load scene và chờ cho đến khi nó được tải xong
         _sceneController.LoadScene("Multiplayer Gamemode");
-        ipAddress = ip.text;
+        ipAddress = ipMapping[ip.text];
         SetIpAddress();
         StartCoroutine(WaitForSceneLoadAndStartClient());
     }
@@ -112,7 +112,6 @@ public class UINetWorkManager : MonoBehaviour
         {
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
-                Debug.Log("Found id!!!!!!!!");
                 ipAddressText.text = ip.ToString();
                 ipAddress = ip.ToString();
                 transport.ConnectionData.Address=ipAddress;
