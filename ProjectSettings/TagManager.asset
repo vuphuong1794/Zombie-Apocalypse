@@ -7,6 +7,7 @@ TagManager:
   - Zombie
   - Wall
   - ExplorGrenade
+  - Chest
   layers:
   - Default
   - TransparentFX

@@ -184,4 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 100
-  explosionRadius: 3
+  explosionRadius: 4
+  damageableLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
