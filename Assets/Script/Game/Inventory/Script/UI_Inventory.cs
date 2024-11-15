@@ -83,7 +83,7 @@ public class UI_Inventory : MonoBehaviour
             itemSlot.gameObject.SetActive(true);
             i+= 1;
 
-            itemSlot.anchoredPosition = new Vector2(background.transform.localPosition.x+totalCellSize+235+85*i, background.transform.localPosition.y-145);
+            itemSlot.anchoredPosition = new Vector2(background.transform.localPosition.x+totalCellSize+235+85*i, background.transform.localPosition.y-150);
 
             Image image = itemSlot.Find("image")?.GetComponent<Image>();
             if (image != null)
