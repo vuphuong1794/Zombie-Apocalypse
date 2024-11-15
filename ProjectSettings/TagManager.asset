@@ -7,6 +7,7 @@ TagManager:
   - Zombie
   - Wall
   - ExplorGrenade
+  - SceneController
   layers:
   - Default
   - TransparentFX

@@ -147,6 +147,9 @@ MonoBehaviour:
   timeBetweenShots: 1
   bulletSpeed: 40
   damage: 1
+  maxAmmo: 12
+  m_ShoottingPistol: {fileID: 0}
+  emptyGunSound: {fileID: 0}
 --- !u!1 &1649091379398960435
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +206,7 @@ GameObject:
   - component: {fileID: 1397176895456688258}
   - component: {fileID: 3560864720905673198}
   m_Layer: 6
-  m_Name: Player 1
+  m_Name: Player_Mul
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,6 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: 100
   _maximumHealth: 100
+  canExceedMaxHealth: 0
+  Canvas: {fileID: 5012431301249928926, guid: c87abe10bb3393942ae853f822b9c55c, type: 3}
   healthBarUI: {fileID: 0}
   sounds:
   - name: 
@@ -503,6 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiInventory: {fileID: 0}
   _speed: 5
+  Mycamera: {fileID: 0}
 --- !u!114 &-8996542489705109013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1116,7 +1122,9 @@ MonoBehaviour:
   timeBetweenShots: 0.2
   bulletSpeed: 20
   damage: 1
+  maxAmmo: 12
   m_ShoottingPistol: {fileID: 685212304142565804}
+  emptyGunSound: {fileID: 0}
 --- !u!82 &685212304142565804
 AudioSource:
   m_ObjectHideFlags: 0

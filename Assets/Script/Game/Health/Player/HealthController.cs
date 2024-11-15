@@ -14,20 +14,68 @@ public class HealthController : MonoBehaviour
     private float _maximumHealth;
     [SerializeField] private bool canExceedMaxHealth = false; // Có cho phép máu vượt quá giới hạn không
 
-    public HealthBarUI healthBarUI;
+    public GameObject Canvas;
+    private HealthBarUI healthBarUI;
+    private GameObject gameOverBroad;
     public Sound[] sounds;
     private float timeCount = 0f;
     private float soundCooldown = 3f;
-
     public float CurrentHealth => _currentHealth;
     public float MaximumHealth => _maximumHealth;
 
     void Start()
     {
+        Canvas canvas = Instantiate(Canvas).GetComponent<Canvas>();
+        healthBarUI = canvas.GetComponentInChildren<HealthBarUI>();
+        // Tìm GameOverBoard trong Canvas bằng tên hoặc qua cấu trúc Hierarchy
+        Transform gameOverTransform = canvas.transform.Find("Game Over Board");
+        if (gameOverTransform != null)
+        {
+            gameOverBroad = gameOverTransform.gameObject;
+            gameOverBroad.SetActive(false); // Ẩn màn hình Game Over lúc đầu
+        }
+        else
+        {
+            Debug.LogError("GameOverBoard not found in Canvas!");
+        }
+
         SetupAudioSources();
         _currentHealth = _maximumHealth;
         UpdateHealthBar();
     }
+
+    public void TakeDamage(float damageAmount)
+    {
+        if (_currentHealth == 0) return;
+        if (IsInvincible) return;
+
+        _currentHealth -= damageAmount;
+        PlayDamageSound();
+
+        if (_currentHealth < 0)
+        {
+            _currentHealth = 0;
+        }
+
+        if (_currentHealth == 0)
+        {
+            OnDied.Invoke();
+            if (gameOverBroad != null)
+            {
+                gameOverBroad.SetActive(true); // Hiển thị màn hình Game Over
+            }
+        }
+        else
+        {
+            OnDamaged.Invoke();
+        }
+
+        if (healthBarUI != null)
+        {
+            healthBarUI.SetHealth(_currentHealth);
+        }
+    }
+
 
     private void SetupAudioSources()
     {
@@ -54,48 +102,13 @@ public class HealthController : MonoBehaviour
     public UnityEvent OnDied;
 
     public UnityEvent OnDamaged;
+    private object instanate;
 
     private void Update()
     {
         timeCount += Time.deltaTime;
     }
 
-    public void TakeDamage(float damageAmount)
-    {
-        if (_currentHealth == 0)
-        {
-
-            return;
-        }
-
-        if (IsInvincible)
-        {
-            return;
-        }
-
-        _currentHealth -= damageAmount;
-        PlayDamageSound();
-
-
-        if (_currentHealth < 0)
-        {
-            _currentHealth = 0;
-        }
-
-        if (_currentHealth == 0)
-        {
-            OnDied.Invoke();
-        }
-        else
-        {
-            OnDamaged.Invoke();
-        }
-
-        if (healthBarUI != null)
-        {
-            healthBarUI.SetHealth(_currentHealth);
-        }
-    }
 
     private void UpdateHealthBar()
     {

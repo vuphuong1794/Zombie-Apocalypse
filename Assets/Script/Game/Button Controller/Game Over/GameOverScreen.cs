@@ -9,8 +9,12 @@ public class GameOverScreen : MonoBehaviour
     public Text pointsText;
 
     [SerializeField]
-    private SceneController _sceneController;
+    public SceneController _sceneController;
 
+    public void Start()
+    {
+        _sceneController = GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>();
+    }
     public void SetUp(int score)
     {
         gameObject.SetActive(true);
