@@ -16,9 +16,11 @@ public class MulPlayerMovement : NetworkBehaviour
     private Inventory inventory;
     private Vector3 ortherPos;
 
+    public GameObject Mycamera;
     private void Start()
     {
-        Debug.Log("Player xuat hien");
+        Mycamera = GameObject.Find(this.gameObject.name + "_Camera");
+        Debug.Log("MulMOVEMENT find camera by name:" + this.gameObject.name + "_Camera");
         _rigidbody = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
         uiInventory.SetInventory(inventory);
@@ -53,6 +55,10 @@ public class MulPlayerMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (Mycamera == null)
+        {
+            Mycamera = GameObject.Find(this.gameObject.name + "_Camera");
+        }
         if (IsOwner)
         {
             MovePlayer();
@@ -84,7 +90,8 @@ public class MulPlayerMovement : NetworkBehaviour
 
     private void RotateTowardsMouse()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Use Mycamera directly without .main
+        Vector3 mousePos = Mycamera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
