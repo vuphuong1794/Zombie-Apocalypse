@@ -191,17 +191,40 @@ public class BulletGrenade : MonoBehaviour
         Light2D light = lightObject.AddComponent<Light2D>(); // Thêm Light2D
         light.lightType = Light2D.LightType.Point; // Đặt loại ánh sáng (Point, Spot, Global, etc.)
         light.color = new Color(1f, 0.5f, 0.2f); // Màu ánh sáng (màu cam lửa)
-        light.intensity = 30f; // Độ sáng
-        light.pointLightOuterRadius = 10f; // Bán kính ngoài (phạm vi sáng)
-        light.pointLightInnerRadius = 5f; // Bán kính trong
+        light.intensity = 10f; // Độ sáng
+        light.pointLightOuterRadius = 5f; // Bán kính ngoài (phạm vi sáng)
+        light.pointLightInnerRadius = 3f; // Bán kính trong
 
         // Đặt vị trí của Light trùng với vị trí của vụ nổ
         lightObject.transform.position = transform.position;
 
+        // Đính ánh sáng vào đối tượng vụ nổ (tùy chọn)
+        //lightObject.transform.SetParent(this.transform);
 
-        // Hủy đối tượng ánh sáng sau khi fade-out
-        Destroy(lightObject);
+        //// Tạo hiệu ứng giảm độ sáng
+        //StartCoroutine(FadeAndDestroyLight(light, lightObject));
+        Destroy(lightObject,0.5f);
     }
+
+    //private IEnumerator FadeAndDestroyLight(Light2D light, GameObject lightObject)
+    //{
+    //    float fadeDuration = 3f;
+    //    float timer = 0f;
+
+    //    while (timer < fadeDuration)
+    //    {
+    //        timer += Time.deltaTime;
+    //        light.intensity = Mathf.Lerp(5f, 0f, timer / fadeDuration);
+    //        yield return null;
+    //    }
+
+    //    // Hủy đối tượng ánh sáng
+    //    if (lightObject != null)
+    //    {
+    //        //timer = 0f;
+    //        //Destroy(lightObject);
+    //    }
+    //}
 
     private void OnDrawGizmosSelected()
     {
