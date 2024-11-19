@@ -17,6 +17,8 @@ public class EnemyHealthController : MonoBehaviour
     private float timeCount = 0f;
     private float soundCooldown = 3f;
 
+    public GameOverScreen gameOverScreen;
+
     private void Start()
     {
         SetupAudioSources();
@@ -59,7 +61,9 @@ public class EnemyHealthController : MonoBehaviour
             enemyHealthBarUI.SetHealth(_currentHealth);
 
         if (_currentHealth <= 0)
+        {
             Die();
+        }
     }
 
     private void PlayDamageEffect()
@@ -110,7 +114,8 @@ public class EnemyHealthController : MonoBehaviour
         SpawnCorpse spawnCorpse = this.GetComponentInChildren<SpawnCorpse>();
         spawnCorpse.SpawningCorpses();
         Destroy(gameObject);
+        ScoreManager.Instance.AddScore(1); // Thêm 1 điểm
     }
 
-   
+
 }

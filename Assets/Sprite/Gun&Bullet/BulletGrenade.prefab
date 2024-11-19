@@ -5081,7 +5081,7 @@ MonoBehaviour:
   impactEffect: {fileID: 1521305775188045284, guid: 31d0ef9df8198b34cabd8070339c54f8, type: 3}
   impactEffectLifetime: 0.5
   trailRenderer: {fileID: 0}
-  explosionRadius: 3
+  explosionRadius: 52.4
   damageableLayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -5092,6 +5092,8 @@ MonoBehaviour:
   explosionEffectLifetime: 0.3
   _damageAmount: 200
   inventory: {fileID: 0}
+  muzzleFlashEffect: {fileID: 9200930991307864426, guid: 6705608f8de8a39478363afd9986e9dc, type: 3}
+  muzzleFlashLifetime: 0.2
 --- !u!95 &8094150186782376464
 Animator:
   serializedVersion: 5
@@ -5125,7 +5127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1490229393
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

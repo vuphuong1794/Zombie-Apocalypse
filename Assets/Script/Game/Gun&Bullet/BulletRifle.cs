@@ -79,31 +79,48 @@ public class BulletRifle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Zombie") || collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Zombie"))
         {
-            HealthController healthController = null;
             EnemyHealthController enemyHealthController = null;
 
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                healthController = collision.gameObject.GetComponent<HealthController>();
-            }
-            else if (collision.gameObject.CompareTag("Zombie"))
-            {
-                enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
-            }
+            enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
 
-            if (healthController != null)
-            {
-                healthController.TakeDamage(_damageAmount);
-            }
-            else if (enemyHealthController != null)
+
+            if (enemyHealthController != null)
             {
                 enemyHealthController.TakeDamage(_damageAmount);
             }
             else
             {
-                Debug.LogWarning("Không tìm thấy HealthController hoặc EnemyHealthController trên đối tượng va chạm.");
+                Debug.LogWarning("Không tìm thấy EnemyHealthController trên đối tượng va chạm.");
+            }
+            DestroyBullet();
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            HealthController healthController = null;
+            healthController = collision.gameObject.GetComponent<HealthController>();
+            if (healthController != null)
+            {
+                healthController.TakeDamage(_damageAmount);
+            }
+            else
+            {
+                Debug.LogWarning("Không tìm thấy HealthController trên đối tượng va chạm.");
+            }
+            DestroyBullet();
+        }
+        else if (collision.gameObject.CompareTag("Chest"))
+        {
+            ChestHealthController chestHealthController = null;
+            chestHealthController = collision.gameObject.GetComponent<ChestHealthController>();
+            if (chestHealthController != null)
+            {
+                chestHealthController.TakeDamage(_damageAmount);
+            }
+            else
+            {
+                Debug.LogWarning("Không tìm thấy ChestHealthController trên đối tượng va chạm.");
             }
             DestroyBullet();
         }

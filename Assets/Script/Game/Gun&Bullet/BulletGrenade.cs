@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal; // Đảm bảo namespace này được thêm vào
 
 public class BulletGrenade : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class BulletGrenade : MonoBehaviour
     private Inventory inventory;
     private static Inventory playerInventory;
 
+    [SerializeField] private GameObject muzzleFlashEffect; // Hiệu ứng bắn đạn (như ánh sáng hoặc lửa từ nòng súng)
+    [SerializeField] private float muzzleFlashLifetime = 0.2f; // Thời gian tồn tại của hiệu ứng bắn đạn
+
+
     private void Start()
     {
         bulletBody = GetComponent<Rigidbody2D>();
@@ -44,6 +49,9 @@ public class BulletGrenade : MonoBehaviour
 
         if (trailRenderer != null) trailRenderer.Clear();
         DecreaseBulletCount();
+
+        // Gọi hiệu ứng bắn đạn
+        ShowMuzzleFlashEffect();
     }
 
 
@@ -67,30 +75,24 @@ public class BulletGrenade : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Zombie"))
         {
-            //HealthController healthController = null;
             EnemyHealthController enemyHealthController = null;
+            enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
 
-                //if (collision.gameObject.CompareTag("Player"))
-                //{
-                //    healthController = collision.gameObject.GetComponent<HealthController>();
-                //}
-            if (collision.gameObject.CompareTag("Zombie"))
-            {
-                enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
-            }
-
-            //if (healthController != null)
-            //{
-            //    healthController.TakeDamage(_damageAmount);
-            //}
             if (enemyHealthController != null)
             {
                 enemyHealthController.TakeDamage(_damageAmount);
             }
-            //else
-            //{
-            //    Debug.LogWarning("Không tìm thấy HealthController hoặc EnemyHealthController trên đối tượng va chạm.");
-            //}
+            DestroyBullet();
+        }
+        else if (collision.gameObject.CompareTag("Chest"))
+        {
+            ChestHealthController chestHealthController = null;
+            chestHealthController = collision.gameObject.GetComponent<ChestHealthController>();
+
+            if (chestHealthController != null)
+            {
+                chestHealthController.TakeDamage(_damageAmount);
+            }
             DestroyBullet();
         }
         else if (collision.gameObject.CompareTag("Wall") && !hasReflected)
@@ -136,6 +138,7 @@ public class BulletGrenade : MonoBehaviour
             Destroy(effect, impactEffectLifetime);
         }
 
+        CreateExplosionLight(); // Thêm hiệu ứng phát 
         Explode();
         Destroy(gameObject);
     }
@@ -167,6 +170,61 @@ public class BulletGrenade : MonoBehaviour
         //    }
         //}
     }
+
+    private void ShowMuzzleFlashEffect()
+    {
+        if (muzzleFlashEffect != null)
+        {
+            // Tạo hiệu ứng nòng súng tại vị trí hiện tại của viên đạn
+            GameObject flash = Instantiate(muzzleFlashEffect, transform.position, transform.rotation);
+
+            // Hủy hiệu ứng sau một thời gian ngắn
+            Destroy(flash, muzzleFlashLifetime);
+        }
+    }
+
+
+    private void CreateExplosionLight()
+    {
+        // Tạo một đối tượng Light
+        GameObject lightObject = new GameObject("ExplosionLight");
+        Light2D light = lightObject.AddComponent<Light2D>(); // Thêm Light2D
+        light.lightType = Light2D.LightType.Point; // Đặt loại ánh sáng (Point, Spot, Global, etc.)
+        light.color = new Color(1f, 0.5f, 0.2f); // Màu ánh sáng (màu cam lửa)
+        light.intensity = 10f; // Độ sáng
+        light.pointLightOuterRadius = 5f; // Bán kính ngoài (phạm vi sáng)
+        light.pointLightInnerRadius = 3f; // Bán kính trong
+
+        // Đặt vị trí của Light trùng với vị trí của vụ nổ
+        lightObject.transform.position = transform.position;
+
+        // Đính ánh sáng vào đối tượng vụ nổ (tùy chọn)
+        //lightObject.transform.SetParent(this.transform);
+
+        //// Tạo hiệu ứng giảm độ sáng
+        //StartCoroutine(FadeAndDestroyLight(light, lightObject));
+        Destroy(lightObject,0.5f);
+    }
+
+    //private IEnumerator FadeAndDestroyLight(Light2D light, GameObject lightObject)
+    //{
+    //    float fadeDuration = 3f;
+    //    float timer = 0f;
+
+    //    while (timer < fadeDuration)
+    //    {
+    //        timer += Time.deltaTime;
+    //        light.intensity = Mathf.Lerp(5f, 0f, timer / fadeDuration);
+    //        yield return null;
+    //    }
+
+    //    // Hủy đối tượng ánh sáng
+    //    if (lightObject != null)
+    //    {
+    //        //timer = 0f;
+    //        //Destroy(lightObject);
+    //    }
+    //}
 
     private void OnDrawGizmosSelected()
     {

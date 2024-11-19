@@ -13,20 +13,11 @@ public class Item
         HealthPotion,
         bullet,
         grenadeBullet
+
     }
 
     public ItemType itemType;
     public int amount;
-    public int ammoCount; // Thêm thuộc tính đạn
-
-    // Định nghĩa số đạn tối đa cho mỗi loại súng
-    private static readonly int[] MaxAmmoPerGun = new int[]
-    {
-        30,  // Pistol max ammo
-        45,  // Rifle max ammo
-        10,  // Sniper max ammo
-        5    // Grenade max ammo
-    };
 
     public Sprite GetSprite()
     {
@@ -50,10 +41,7 @@ public class Item
 
     public bool IsGun()
     {
-        return itemType == ItemType.Pistol ||
-               itemType == ItemType.Sniper ||
-               itemType == ItemType.Grenade ||
-               itemType == ItemType.Rifle;
+        return itemType == ItemType.Pistol || itemType == ItemType.Sniper || itemType == ItemType.Grenade || itemType == ItemType.Rifle;
     }
 
     public bool IsPistol()
@@ -61,6 +49,8 @@ public class Item
         return itemType == ItemType.Pistol;
     }
 
+
+    //điều kiện tăng số lượng vật phẩm
     public bool IsStackable()
     {
         switch (itemType)
@@ -75,6 +65,7 @@ public class Item
             case ItemType.bullet:
             case ItemType.grenadeBullet:
                 return true;
+
         }
     }
 
@@ -83,55 +74,11 @@ public class Item
         switch (itemType)
         {
             case ItemType.Pistol: return 0;
-            case ItemType.Rifle: return 1;
-            case ItemType.Sniper: return 2;
+            case ItemType.Rifle: return 1; // Rifle là index 1
+            case ItemType.Sniper: return 2; // Sniper là index 2
             case ItemType.Grenade: return 3;
             default: return -1;
         }
     }
 
-    // Thêm các phương thức mới để xử lý đạn
-    public int GetMaxAmmo()
-    {
-        int gunIndex = GetGunIndex();
-        if (gunIndex >= 0 && gunIndex < MaxAmmoPerGun.Length)
-        {
-            return MaxAmmoPerGun[gunIndex];
-        }
-        return 0;
-    }
-
-    public void AddAmmo(int amount)
-    {
-        if (IsGun())
-        {
-            ammoCount = Mathf.Min(ammoCount + amount, GetMaxAmmo());
-        }
-    }
-
-    public bool HasAmmo()
-    {
-        return IsGun() && ammoCount > 0;
-    }
-
-    public bool UseAmmo(int amount = 1)
-    {
-        if (IsGun() && ammoCount >= amount)
-        {
-            ammoCount -= amount;
-            return true;
-        }
-        return false;
-    }
-
-    // Constructor mới để tạo súng với số đạn ban đầu
-    public static Item CreateGun(ItemType gunType, int initialAmmo = 0)
-    {
-        Item gun = new Item { itemType = gunType, amount = 1 };
-        if (gun.IsGun())
-        {
-            gun.ammoCount = Mathf.Min(initialAmmo, gun.GetMaxAmmo());
-        }
-        return gun;
-    }
 }

@@ -10,8 +10,6 @@ using System.Collections.Generic;
 
 public class UINetWorkManager : MonoBehaviour
 {
-    public Dictionary<string, string> ipMapping = new Dictionary<string, string>();
-
     [SerializeField]
     private SceneController _sceneController;
 
@@ -35,12 +33,7 @@ public class UINetWorkManager : MonoBehaviour
         _sceneController.LoadScene("Multiplayer Gamemode");
         transport=this.GetComponent<UnityTransport>();
         StartCoroutine(WaitForSceneLoadAndStartHost());
-        //GetLocalIPAddress();
-        string ipAddress = GetLocalIPAddress();
-        string randomKey = GenerateRandomKey();
-
-        //// Lưu vào mảng 2 chiều dưới dạng Dictionary
-        ipMapping[randomKey] = ipAddress;
+        GetLocalIPAddress();
 
 
     }
@@ -50,7 +43,7 @@ public class UINetWorkManager : MonoBehaviour
     {
         // Load scene và chờ cho đến khi nó được tải xong
         _sceneController.LoadScene("Multiplayer Gamemode");
-        ipAddress = ipMapping[ip.text];
+        ipAddress = ip.text;
         SetIpAddress();
         StartCoroutine(WaitForSceneLoadAndStartClient());
     }
@@ -58,22 +51,7 @@ public class UINetWorkManager : MonoBehaviour
     // Coroutine chờ scene load và bắt đầu Host
     private IEnumerator WaitForSceneLoadAndStartHost()
     {
-        // Đăng ký sự kiện để xử lý khi scene mới được tải
-        AsyncOperation sceneLoadOperation = SceneManager.LoadSceneAsync("Multiplayer Gamemode");
-        sceneLoadOperation.allowSceneActivation = false; // Tạm dừng chuyển cảnh cho đến khi ta chuẩn bị xong
-
-        // Hiển thị hiệu ứng chuyển cảnh
-        while (!sceneLoadOperation.isDone)
-        {
-            // Đợi cho đến khi scene tải xong (bắt đầu từ 90%)
-            if (sceneLoadOperation.progress >= 0.9f)
-            {
-                // Có thể thêm code ở đây để hiển thị loading spinner hoặc một thông báo nào đó
-                sceneLoadOperation.allowSceneActivation = true; // Kích hoạt chuyển cảnh
-            }
-
-            yield return null;
-        }
+        yield return new WaitForSeconds(1f);
 
         // Khi scene đã được tải hoàn toàn, bắt đầu Host
         NetworkManager.Singleton.StartHost();
@@ -81,23 +59,8 @@ public class UINetWorkManager : MonoBehaviour
 
     // Coroutine chờ scene load và bắt đầu Client
     private IEnumerator WaitForSceneLoadAndStartClient()
-    {
-        // Đăng ký sự kiện để xử lý khi scene mới được tải
-        AsyncOperation sceneLoadOperation = SceneManager.LoadSceneAsync("Multiplayer Gamemode");
-        sceneLoadOperation.allowSceneActivation = false; // Tạm dừng chuyển cảnh cho đến khi ta chuẩn bị xong
-
-        // Hiển thị hiệu ứng chuyển cảnh
-        while (!sceneLoadOperation.isDone)
-        {
-            // Đợi cho đến khi scene tải xong (bắt đầu từ 90%)
-            if (sceneLoadOperation.progress >= 0.9f)
-            {
-                // Có thể thêm code ở đây để hiển thị loading spinner hoặc một thông báo nào đó
-                sceneLoadOperation.allowSceneActivation = true; // Kích hoạt chuyển cảnh
-            }
-
-            yield return null;
-        }
+    {   
+        yield return new WaitForSeconds(1f);
 
         // Khi scene đã được tải hoàn toàn, bắt đầu Client
         NetworkManager.Singleton.StartClient();
