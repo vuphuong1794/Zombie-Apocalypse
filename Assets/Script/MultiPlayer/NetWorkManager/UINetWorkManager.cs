@@ -134,9 +134,4 @@ public class UINetWorkManager : MonoBehaviour
         }
     }
 
-    string GenerateRandomKey()
-    {
-        return Random.Range(1000, 9999).ToString(); // Tạo mã ngẫu nhiên 4 chữ số
-    }
-
 }

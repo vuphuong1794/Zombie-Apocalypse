@@ -9,9 +9,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject enemyPrefab; 
     [SerializeField]
-    private int maxEnemies = 10; // Số lượng kẻ thù tối đa trên màn hình
+    private int maxEnemies = 5; // Số lượng kẻ thù tối đa trên màn hình
     [SerializeField]
-    private float spawnInterval = 5f; // Thời gian giữa các lần spawn
+    private float spawnInterval = 10f; // Thời gian giữa các lần spawn
     [SerializeField]
     private float minDistanceFromPlayer = 8f; // Khoảng cách tối thiểu từ Player
     [SerializeField]
@@ -39,8 +39,6 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(spawnInterval);
-
             // Kiểm tra số lượng kẻ thù hiện tại
             spawnedEnemies.RemoveAll(enemy => enemy == null); // Loại bỏ các kẻ thù đã bị tiêu diệt
             if (spawnedEnemies.Count >= maxEnemies) continue;
@@ -55,6 +53,8 @@ public class EnemySpawner : MonoBehaviour
                 GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
                 spawnedEnemies.Add(spawnedEnemy);
             }
+
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 
