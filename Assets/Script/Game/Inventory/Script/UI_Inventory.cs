@@ -13,6 +13,7 @@ public class UI_Inventory : MonoBehaviour
 
     private Inventory inventory;
     private PlayerMovement player;
+    public GameObject background;
 
     public void SetPlayer(PlayerMovement player)
     {
@@ -74,13 +75,15 @@ public class UI_Inventory : MonoBehaviour
         int x = 0;
         int y = 0;
         float totalCellSize = 75f;
+        int i = 0;
 
         foreach (Item item in inventory.GetItemList())
         {
             RectTransform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
             itemSlot.gameObject.SetActive(true);
+            i += 1;
 
-            itemSlot.anchoredPosition = new Vector2(x * totalCellSize, y * totalCellSize);
+            itemSlot.anchoredPosition = new Vector2(background.transform.localPosition.x + totalCellSize + 200 + 85 * i, background.transform.localPosition.y - 157);
 
             Image image = itemSlot.Find("image")?.GetComponent<Image>();
             if (image != null)

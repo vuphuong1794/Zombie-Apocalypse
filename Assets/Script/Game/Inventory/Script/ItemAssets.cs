@@ -11,6 +11,7 @@ public class ItemAssets : MonoBehaviour
     public Sprite grenadeSprite;
     public Sprite healthPotionSprite;
     public Sprite bulletSprite;
+    public Sprite grenadeBulletSprite;
 
     private void Awake()
     {

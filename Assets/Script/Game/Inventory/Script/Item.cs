@@ -11,7 +11,8 @@ public class Item
         Sniper,   // index 2
         Grenade, //index 3
         HealthPotion,
-        bullet
+        bullet,
+        grenadeBullet
 
     }
 
@@ -34,6 +35,7 @@ public class Item
             case ItemType.Grenade: return ItemAssets.Instance.grenadeSprite;
             case ItemType.HealthPotion: return ItemAssets.Instance.healthPotionSprite;
             case ItemType.bullet: return ItemAssets.Instance.bulletSprite;
+            case ItemType.grenadeBullet: return ItemAssets.Instance.grenadeBulletSprite;
         }
     }
 
@@ -61,6 +63,7 @@ public class Item
             case ItemType.HealthPotion:
                 return false;
             case ItemType.bullet:
+            case ItemType.grenadeBullet:
                 return true;
 
         }
