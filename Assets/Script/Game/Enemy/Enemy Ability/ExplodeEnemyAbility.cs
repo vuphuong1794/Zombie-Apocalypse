@@ -83,10 +83,10 @@ public class ExplodeEnemyAbility : MonoBehaviour
         Destroy(gameObject);
 
         // Gọi hàm từ EnemySpawner để đặt _spawnedEnemy = null
-        if (enemySpawner != null)
-        {
-            enemySpawner.HandleEnemyDestroyed(); // Thông báo cho spawner rằng enemy đã bị tiêu diệt
-        }
+        //if (enemySpawner != null)
+        //{
+        //    enemySpawner.HandleEnemyDestroyed(); // Thông báo cho spawner rằng enemy đã bị tiêu diệt
+        //}
 
         healthController.TakeDamage(40); // Gây sát thương cho người chơi
     }

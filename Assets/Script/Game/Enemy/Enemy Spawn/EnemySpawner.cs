@@ -5,92 +5,98 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _enemyPrefab;
-
-    // Biến lưu lại kẻ thù đã spawn
-    private GameObject _spawnedEnemy;
-
-    // Biến kiểm tra kẻ thù có đang chờ để spawn lại không
-    private bool _isWaitingForRespawn = false;
-
-    // Khoảng cách tối thiểu để spawn zombie
+    private List<Transform> spawnPoints; // Các điểm spawn
     [SerializeField]
-    private float minSpawnDistance = 5f;
+    private GameObject enemyPrefab; 
+    [SerializeField]
+    private int maxEnemies = 10; // Số lượng kẻ thù tối đa trên màn hình
+    [SerializeField]
+    private float spawnInterval = 5f; // Thời gian giữa các lần spawn
+    [SerializeField]
+    private float minDistanceFromPlayer = 8f; // Khoảng cách tối thiểu từ Player
+    [SerializeField]
+    private float maxDistanceFromPlayer = 30f; // Khoảng cách tối đa từ Player
+    [SerializeField]
+    private float destroyDistance = 30f; // Khoảng cách tự hủy zombie
 
+    private List<GameObject> spawnedEnemies = new List<GameObject>();
+    private Transform player;
+
+    private void Start()
+    {
+        // Tìm Player
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // Bắt đầu quá trình spawn định kỳ
+        StartCoroutine(SpawnEnemies());
+    }
     private void Update()
     {
-        // Kiểm tra player có đang gần spawner hay không
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        CheckEnemiesDistance();
+    }
 
-            // Nếu player ở xa hơn khoảng cách tối thiểu, spawn zombie nếu cần
-            if (distanceToPlayer > minSpawnDistance && _spawnedEnemy == null && !_isWaitingForRespawn)
+    private IEnumerator SpawnEnemies()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnInterval);
+
+            // Kiểm tra số lượng kẻ thù hiện tại
+            spawnedEnemies.RemoveAll(enemy => enemy == null); // Loại bỏ các kẻ thù đã bị tiêu diệt
+            if (spawnedEnemies.Count >= maxEnemies) continue;
+
+            // Lựa chọn điểm spawn
+            Transform spawnPoint = GetValidSpawnPoint();
+
+            if (spawnPoint != null)
             {
-                SpawnEnemy();
+                // Spawn ngẫu nhiên một loại enemy
+                //GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                spawnedEnemies.Add(spawnedEnemy);
             }
         }
     }
-    // Khi Player vào vùng spawner
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Player" && _spawnedEnemy == null && !_isWaitingForRespawn)
-    //    {
-    //        // Tạo enemy tại vị trí spawner
-    //        //_spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
-    //        //_spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
-    //        SpawnEnemy();
-    //    }
-    //}
 
-    // Khi Player rời khỏi vùng spawner
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        // Xóa enemy nếu Player rời khỏi vùng
-    //        if (_spawnedEnemy != null)
-    //        {
-    //            Destroy(_spawnedEnemy);
-    //            _spawnedEnemy = null;   
-    //        }
-    //    }
-    //}
-
-    // Spawn zombie
-    private void SpawnEnemy()
+    private Transform GetValidSpawnPoint()
     {
-        // Tạo enemy tại vị trí spawner
-        _spawnedEnemy = Instantiate(_enemyPrefab, this.transform.position, this.transform.rotation);
-        Debug.Log("Spawnzombie object locate at: " + this.transform.position);
-        Debug.Log("Zombie spawn at: "+_spawnedEnemy.transform.position);
-        _spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
-        var explodeAbility = _spawnedEnemy.GetComponent<ExplodeEnemyAbility>();
+        // Tìm các điểm spawn hợp lệ
+        List<Transform> validPoints = new List<Transform>();
 
-        // Truyền EnemySpawner vào ExplodeEnemyAbility để quản lý respawn
-        if(explodeAbility) explodeAbility.SetSpawner(this);
-    }
-
-    // Xử lý khi enemy bị tiêu diệt
-    public void HandleEnemyDestroyed()
-    {
-        // Đặt biến _spawnedEnemy về null và bắt đầu Coroutine để đợi respawn
-        _spawnedEnemy = null;
-        StartCoroutine(RespawnEnemyAfterDelay(3f));
-    }
-
-    // Coroutine để đợi 5 giây trước khi spawn lại enemy
-    private IEnumerator RespawnEnemyAfterDelay(float delay)
-    {
-        _isWaitingForRespawn = true;
-        yield return new WaitForSeconds(delay);
-        _isWaitingForRespawn = false;
-
-        if (_spawnedEnemy == null)
+        foreach (Transform spawnPoint in spawnPoints)
         {
-            // Tạo lại enemy sau khi đợi
-            SpawnEnemy();
+            float distanceToPlayer = Vector2.Distance(spawnPoint.position, player.position);
+
+            if (distanceToPlayer > minDistanceFromPlayer && distanceToPlayer < maxDistanceFromPlayer)
+            {
+                validPoints.Add(spawnPoint);
+            }
+        }
+
+        // Trả về một điểm spawn ngẫu nhiên trong danh sách hợp lệ
+        if (validPoints.Count > 0)
+        {
+            return validPoints[Random.Range(0, validPoints.Count)];
+        }
+
+        return null; // Không có điểm spawn hợp lệ
+    }
+    private void CheckEnemiesDistance()
+    {
+        // Kiểm tra khoảng cách từ mỗi zombie tới Player
+        for (int i = spawnedEnemies.Count - 1; i >= 0; i--)
+        {
+            if (spawnedEnemies[i] != null)
+            {
+                float distanceToPlayer = Vector2.Distance(spawnedEnemies[i].transform.position, player.position);
+
+                if (distanceToPlayer >= destroyDistance)
+                {
+                    // Xóa zombie nếu quá xa Player
+                    Destroy(spawnedEnemies[i]);
+                    spawnedEnemies.RemoveAt(i);
+                }
+            }
         }
     }
 }
