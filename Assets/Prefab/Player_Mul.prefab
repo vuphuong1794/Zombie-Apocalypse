@@ -8,9 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2465826428918363762}
+  - component: {fileID: 1393335689119875114}
+  - component: {fileID: 9176344514828065537}
+  - component: {fileID: 7305007672838080848}
+  - component: {fileID: 5866881923407616839}
   m_Layer: 0
-  m_Name: firePos
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

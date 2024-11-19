@@ -10,8 +10,6 @@ using System.Collections.Generic;
 
 public class UINetWorkManager : MonoBehaviour
 {
-    public Dictionary<string, string> ipMapping = new Dictionary<string, string>();
-
     [SerializeField]
     private SceneController _sceneController;
 
@@ -33,16 +31,10 @@ public class UINetWorkManager : MonoBehaviour
     {
         // Load scene và chờ cho đến khi nó được tải xong
         _sceneController.LoadScene("Multiplayer Gamemode");
-        transport=this.GetComponent<UnityTransport>();
+
+        GetLocalIPAddress();
+
         StartCoroutine(WaitForSceneLoadAndStartHost());
-        //GetLocalIPAddress();
-        string ipAddress = GetLocalIPAddress();
-        string randomKey = GenerateRandomKey();
-
-        //// Lưu vào mảng 2 chiều dưới dạng Dictionary
-        ipMapping[randomKey] = ipAddress;
-
-
     }
 
     // Hàm riêng để khởi chạy Client
@@ -50,7 +42,7 @@ public class UINetWorkManager : MonoBehaviour
     {
         // Load scene và chờ cho đến khi nó được tải xong
         _sceneController.LoadScene("Multiplayer Gamemode");
-        ipAddress = ipMapping[ip.text];
+        ipAddress = ip.text;
         SetIpAddress();
         StartCoroutine(WaitForSceneLoadAndStartClient());
     }
@@ -114,7 +106,6 @@ public class UINetWorkManager : MonoBehaviour
             {
                 ipAddressText.text = ip.ToString();
                 ipAddress = ip.ToString();
-                transport.ConnectionData.Address=ipAddress;
                 return ip.ToString();
             }
         }
@@ -124,9 +115,23 @@ public class UINetWorkManager : MonoBehaviour
     // ONLY FOR CLIENT SIDE
     public void SetIpAddress()
     {
-        transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-        transport.ConnectionData.Address = ipAddress;
-        ipAddressText.text = ipAddress;
+        if (NetworkManager.Singleton != null && transport == null)
+        {
+            ipAddressText.text = ipAddress;
+
+        }
+
+        if (transport != null)
+        {
+            transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+            transport.ConnectionData.Address = ipAddress;
+            ipAddressText.text = ipAddress; // Hiển thị IP trên màn hình
+            Debug.Log("IP Address set to: " + ipAddress);
+        }
+        else
+        {
+            Debug.LogError("UnityTransport is not found!");
+        }
     }
 
     string GenerateRandomKey()
