@@ -13,34 +13,50 @@ public class EnemySpawner : MonoBehaviour
     // Biến kiểm tra kẻ thù có đang chờ để spawn lại không
     private bool _isWaitingForRespawn = false;
 
-    private void Start()
-    {
-    }
-    // Khi Player vào vùng spawner
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player" && _spawnedEnemy == null && !_isWaitingForRespawn)
-        {
-            // Tạo enemy tại vị trí spawner
-            //_spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
-            //_spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
-            SpawnEnemy();
-        }
-    }
+    // Khoảng cách tối thiểu để spawn zombie
+    [SerializeField]
+    private float minSpawnDistance = 5f;
 
-    // Khi Player rời khỏi vùng spawner
-    private void OnTriggerExit2D(Collider2D collision)
+    private void Update()
     {
-        if (collision.gameObject.tag == "Player")
+        // Kiểm tra player có đang gần spawner hay không
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            // Xóa enemy nếu Player rời khỏi vùng
-            if (_spawnedEnemy != null)
+            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+
+            // Nếu player ở xa hơn khoảng cách tối thiểu, spawn zombie nếu cần
+            if (distanceToPlayer > minSpawnDistance && _spawnedEnemy == null && !_isWaitingForRespawn)
             {
-                Destroy(_spawnedEnemy);
-                _spawnedEnemy = null;   
+                SpawnEnemy();
             }
         }
     }
+    // Khi Player vào vùng spawner
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player" && _spawnedEnemy == null && !_isWaitingForRespawn)
+    //    {
+    //        // Tạo enemy tại vị trí spawner
+    //        //_spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
+    //        //_spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
+    //        SpawnEnemy();
+    //    }
+    //}
+
+    // Khi Player rời khỏi vùng spawner
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        // Xóa enemy nếu Player rời khỏi vùng
+    //        if (_spawnedEnemy != null)
+    //        {
+    //            Destroy(_spawnedEnemy);
+    //            _spawnedEnemy = null;   
+    //        }
+    //    }
+    //}
 
     // Spawn zombie
     private void SpawnEnemy()
@@ -74,8 +90,6 @@ public class EnemySpawner : MonoBehaviour
         if (_spawnedEnemy == null)
         {
             // Tạo lại enemy sau khi đợi
-            //_spawnedEnemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
-            //_spawnedEnemy.GetComponent<EnemyHealthController>().OnEnemyDestroyed += HandleEnemyDestroyed;
             SpawnEnemy();
         }
     }
