@@ -8,6 +8,7 @@ public class PlayerData
     public int point;
     public int health;
     public float[] position;
+    public int currentBullet;
 
     public PlayerData (PlayerSave playerSave)
     {
@@ -19,6 +20,7 @@ public class PlayerData
         position[1] = playerSave.transform.position.y;
         position[2] = playerSave.transform.position.z;
 
+        currentBullet = playerSave.currentBullets;
     }
 
 }
