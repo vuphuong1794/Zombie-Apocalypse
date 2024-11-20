@@ -1271,6 +1271,7 @@ MonoBehaviour:
   damageParticlePrefab: {fileID: 0}
   enemyHealthBarUI: {fileID: 0}
   sounds: []
+  gameOverScreen: {fileID: 0}
 --- !u!114 &5198526859188774451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1387,7 +1388,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.025988817, y: 0.20003867}
   serializedVersion: 2
-  m_Radius: 3.7167995
+  m_Radius: 2.49
 --- !u!114 &1097147462538243912
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class EnemyHealthBarUI : MonoBehaviour
 
     void Start()
     {
-        _target = transform.parent.gameObject;
+        _target = transform.parent.parent.gameObject;
         Debug.Log("_target: "+_target);
         if (_camera == null)
         {

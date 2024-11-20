@@ -52,14 +52,15 @@ public class ExplodeEnemyAbility : MonoBehaviour
             EnemyMovement moveScript = GetComponent<EnemyMovement>(); // Lấy script di chuyển của zombie
             moveScript.canMove = false; // Ngăn không cho zombie di chuyển
 
-            HealthController healthController = collision.gameObject.GetComponent<HealthController>(); // Lấy HealthController của người chơi
-            StartCoroutine(ExplodeDelay(healthController)); // Bắt đầu coroutine để xử lý hiệu ứng nổ
+            
+            StartCoroutine(ExplodeDelay(collision)); // Bắt đầu coroutine để xử lý hiệu ứng nổ
         }
     }
 
     // Coroutine để xử lý quá trình nổ
-    private IEnumerator ExplodeDelay(HealthController healthController)
+    private IEnumerator ExplodeDelay(Collider2D collision)
     {
+        HealthController healthController = collision.gameObject.GetComponent<HealthController>(); // Lấy HealthController của người chơi
         isExploding = true; // Đánh dấu là đang nổ
 
         // Tính toán kích thước tăng thêm cho mỗi lần tăng kích thước
@@ -77,17 +78,16 @@ public class ExplodeEnemyAbility : MonoBehaviour
         // Tạo hiệu ứng nổ
         GameObject explosion = (GameObject)Instantiate(explosionRef);
         // Đặt vị trí của hiệu ứng nổ
-        explosion.transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z); 
+        explosion.transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z);
 
+        float distanceToPlayer = Vector2.Distance(transform.position, collision.gameObject.transform.position);
         // Xóa đối tượng kẻ thù sau khi nổ
         Destroy(gameObject);
 
-        // Gọi hàm từ EnemySpawner để đặt _spawnedEnemy = null
-        //if (enemySpawner != null)
-        //{
-        //    enemySpawner.HandleEnemyDestroyed(); // Thông báo cho spawner rằng enemy đã bị tiêu diệt
-        //}
 
-        healthController.TakeDamage(40); // Gây sát thương cho người chơi
+        if (distanceToPlayer <= 8)
+        {
+            healthController.TakeDamage(40); // Gây sát thương cho người chơi
+        }
     }
 }

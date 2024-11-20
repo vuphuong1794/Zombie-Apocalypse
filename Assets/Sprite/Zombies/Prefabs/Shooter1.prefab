@@ -102,6 +102,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &2552877685152279375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4921176258771963417}
+  m_Layer: 0
+  m_Name: firePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4921176258771963417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552877685152279375}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.52, y: 1.68, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4875006903029527996}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4174093915178393278
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +436,7 @@ GameObject:
   - component: {fileID: 6978613197646713890}
   - component: {fileID: 2388436052533064689}
   - component: {fileID: 5121764200583057763}
+  - component: {fileID: 4771443751116771832}
   - component: {fileID: 4126036464107585677}
   m_Layer: 0
   m_Name: Shooter1
@@ -428,6 +460,7 @@ Transform:
   m_Children:
   - {fileID: 3864096856624219008}
   - {fileID: 4345763365226388135}
+  - {fileID: 4921176258771963417}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6552327468310308475
@@ -469,8 +502,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43eef7554cf7fd54ea83b2055c598c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
   _speed: 2
   _rotationSpeed: 100
+  _obstacleCheckCircleRadius: 0.45
+  _obstacleCheckDistance: 1
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &746698364048451962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 20
+  animator: {fileID: 0}
 --- !u!61 &6978613197646713890
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -632,6 +672,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.20803452, y: 0.8695431}
   m_EdgeRadius: 0
+--- !u!114 &4771443751116771832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076292599321774562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ddb29165405e4344b3c0b1b22d58a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 7311422464202619382, guid: e55ad1b22b3aa6e40a6909076d779878, type: 3}
+  firePos: {fileID: 4921176258771963417}
+  timeBetweenShots: 0.4
+  bulletSpeed: 20
+  damage: 1
 --- !u!114 &4126036464107585677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,13 +703,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: 100
   _maximumHealth: 100
+  damageParticlePrefab: {fileID: 0}
   enemyHealthBarUI: {fileID: 9003871078882196237}
-  OnDied:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDamaged:
-    m_PersistentCalls:
-      m_Calls: []
+  sounds: []
+  gameOverScreen: {fileID: 0}
 --- !u!1 &9065887317060305803
 GameObject:
   m_ObjectHideFlags: 0
