@@ -128,5 +128,4 @@ public class Inventory : MonoBehaviour
         Item equippedWeapon = itemList.Find(i => i.itemType == Item.ItemType.Pistol); // Or any other logic for weapon selection
         return equippedWeapon;
     }
-
 }

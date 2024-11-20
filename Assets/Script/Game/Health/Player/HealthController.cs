@@ -55,6 +55,8 @@ public class HealthController : MonoBehaviour
 
     public UnityEvent OnDamaged;
 
+    public UnityEvent OnRevevi;
+
     private void Update()
     {
         timeCount += Time.deltaTime;
@@ -89,6 +91,7 @@ public class HealthController : MonoBehaviour
         else
         {
             OnDamaged.Invoke();
+            
         }
 
         if (healthBarUI != null)
@@ -179,6 +182,19 @@ public class HealthController : MonoBehaviour
         {
             healthBarUI.SetHealth(_currentHealth);
         }
+    }
+    public void Revive()
+    {
+        // Đặt lại máu về mức tối đa
+        _currentHealth = _maximumHealth;
+
+        // Cập nhật thanh máu
+        UpdateHealthBar();
+
+        OnRevevi.Invoke();
+
+
+        
     }
 
 }
