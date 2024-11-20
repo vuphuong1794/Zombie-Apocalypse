@@ -1,12 +1,15 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerSave : MonoBehaviour
 {
     [SerializeField] private HealthController healthController;
+    [SerializeField]
+    private TextMeshProUGUI pointsText;
     public int curentHealth => (int)healthController.CurrentHealth;
-    public int point;
+    public int point => ScoreManager.Instance.GetScore();
     public int health;
 
 
@@ -27,8 +30,10 @@ public class PlayerSave : MonoBehaviour
     public void LoadPlayer()
     {
         PlayerData data = SaveSystem.LoadPlayer();
-        point = data.point;
+        ScoreManager.Instance.SetScore(data.point);
+        ScoreManager.Instance.AddScore(0);
         health = 100;
+
 
         Vector3 position;
         position.x = data.position[0];

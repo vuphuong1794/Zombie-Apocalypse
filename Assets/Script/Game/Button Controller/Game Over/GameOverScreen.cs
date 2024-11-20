@@ -37,6 +37,7 @@ public class GameOverScreen : MonoBehaviour
             healthController.Revive(); // Gọi hàm hồi sinh
         }
         gameObject.SetActive(false);
+        
     }
 
 

@@ -38,4 +38,8 @@ public class ScoreManager : MonoBehaviour
     {
         _score = 0;
     }
+    public void SetScore(int score)
+    {
+        _score = score;
+    }
 }
