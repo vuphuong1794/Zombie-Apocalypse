@@ -28,6 +28,11 @@ public class ExplodeEnemyAbility : MonoBehaviour
 
     public Animator animator;
 
+    [Header("Audio Settings")]
+    [SerializeField]
+    private AudioClip explodeSound; // Âm thanh khi nổ
+    private AudioSource audioSource; // Nguồn phát âm thanh
+
     // Hàm thiết lập EnemySpawner
     public void SetSpawner(EnemySpawner spawner)
     {
@@ -40,6 +45,12 @@ public class ExplodeEnemyAbility : MonoBehaviour
         explosionRef = Resources.Load("Explosion"); // Tải tài nguyên nổ từ thư mục Resources
         animator = GetComponent<Animator>();
 
+        // Kiểm tra và thêm AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     // Phương thức xử lý va chạm
@@ -81,13 +92,22 @@ public class ExplodeEnemyAbility : MonoBehaviour
         explosion.transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z);
 
         float distanceToPlayer = Vector2.Distance(transform.position, collision.gameObject.transform.position);
+        PlaySound(explodeSound); // Phát âm thanh nổ
         // Xóa đối tượng kẻ thù sau khi nổ
         Destroy(gameObject);
-
+        
 
         if (distanceToPlayer <= 8)
         {
             healthController.TakeDamage(40); // Gây sát thương cho người chơi
+        }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
 }

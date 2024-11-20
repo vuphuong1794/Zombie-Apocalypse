@@ -84,7 +84,6 @@ public class ShadowCaster2DTileMapEditor : Editor
         }
         EditorGUILayout.EndHorizontal();
     }
-
 }
 
 #endif

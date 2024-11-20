@@ -21,7 +21,6 @@ public class EnemyHealthBarUI : MonoBehaviour
     void Start()
     {
         _target = transform.parent.parent.gameObject;
-        Debug.Log("_target: "+_target);
         if (_camera == null)
         {
             _camera = Camera.main; // Camera chính sẽ tự động được gán.

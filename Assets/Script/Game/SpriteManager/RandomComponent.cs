@@ -51,16 +51,16 @@ public class RandomComponent : MonoBehaviour
                         this.spriteRenderer.sortingOrder = 5;
                         break;
                 }
-                Debug.Log("Random sprite selected: " + selectedSprite.name + " Order:"+this.spriteRenderer.sortingOrder+"\n"+", "+this.spriteRenderer.transform.position);
+                //Debug.Log("Random sprite selected: " + selectedSprite.name + " Order:"+this.spriteRenderer.sortingOrder+"\n"+", "+this.spriteRenderer.transform.position);
             }
             else
             {
-                Debug.LogWarning("Selected object at index " + randomIndex + " does not have a SpriteRenderer.");
+                //Debug.LogWarning("Selected object at index " + randomIndex + " does not have a SpriteRenderer.");
             }
         }
         else
         {
-            Debug.LogWarning("spriteRandomRenderers list is empty.");
+            //Debug.LogWarning("spriteRandomRenderers list is empty.");
         }
     }
 }

@@ -5,24 +5,34 @@ using static UnityEngine.GraphicsBuffer;
 
 public class InteractableObject : CollidableObject
 {
-    private bool z_Interacted = false;
-
+    private bool isOpened = false;
     protected override void OnCollided(GameObject collidedObject)
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             OnInteract();
         }
     }
 
+
+
     protected virtual void OnInteract()
     {
-        if (!z_Interacted)
+        if (isOpened==false)
         {
-            z_Interacted = true;
+            isOpened = true;
             Debug.Log("INTERACT WITH " + name);
             GameObject _target = transform.parent.gameObject;
             _target.transform.rotation = Quaternion.Euler(0, 0, 90);
+
+        }
+        else
+        {
+            isOpened = false;
+            Debug.Log("INTERACT WITH " + name);
+            GameObject _target = transform.parent.gameObject;
+            _target.transform.rotation = Quaternion.Euler(0, 0, 0);
+
         }
     }
 }

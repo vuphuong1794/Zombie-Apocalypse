@@ -41,7 +41,13 @@ public class EnemySpawner : MonoBehaviour
         {
             // Kiểm tra số lượng kẻ thù hiện tại
             spawnedEnemies.RemoveAll(enemy => enemy == null); // Loại bỏ các kẻ thù đã bị tiêu diệt
-            if (spawnedEnemies.Count >= maxEnemies) continue;
+
+            // Kiểm tra nếu số lượng enemy đạt giới hạn
+            if (spawnedEnemies.Count >= maxEnemies)
+            {
+                yield return null; // Đợi frame tiếp theo
+                continue;
+            }
 
             // Lựa chọn điểm spawn
             Transform spawnPoint = GetValidSpawnPoint();
@@ -51,6 +57,7 @@ public class EnemySpawner : MonoBehaviour
                 // Spawn ngẫu nhiên một loại enemy
                 //GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
                 GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                Debug.LogWarning("Spawned" + name);
                 spawnedEnemies.Add(spawnedEnemy);
             }
 
