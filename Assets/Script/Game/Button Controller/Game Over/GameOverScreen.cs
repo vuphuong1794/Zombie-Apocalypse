@@ -29,6 +29,18 @@ public class GameOverScreen : MonoBehaviour
         _sceneController.LoadScene("Game");
     }
 
+    public void Revive()
+    {
+        HealthController healthController = FindObjectOfType<HealthController>();
+        if (healthController != null)
+        {
+            healthController.Revive(); // Gọi hàm hồi sinh
+        }
+        gameObject.SetActive(false);
+    }
+
+
+
     //chuyển đến scene Main Menu
     public void ExitButton()
     {
