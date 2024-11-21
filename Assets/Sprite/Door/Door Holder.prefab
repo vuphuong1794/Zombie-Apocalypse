@@ -140,6 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4506405336055113421}
   - component: {fileID: 6089464585532197626}
+  - component: {fileID: 1269605510994995153}
   m_Layer: 0
   m_Name: Door Holder
   m_TagString: Untagged
@@ -179,3 +180,33 @@ MonoBehaviour:
   interactionKey: 101
   openSound: {fileID: 8300000, guid: 86d5146d61832d541b5d2ce21a6cdbac, type: 3}
   closeSound: {fileID: 8300000, guid: 19fa0cb9c838cf245a544852aba472f5, type: 3}
+--- !u!114 &1269605510994995153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4022507892136491686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 7f6b26e700000000
+  m_ShapePath:
+  - {x: -0.050147057, y: 0.13979053, z: 0}
+  - {x: -0.040150642, y: 2.0994759, z: 0}
+  - {x: 0.21009493, y: 2.089479, z: 0}
+  - {x: 0.22009134, y: 0.13979053, z: 0}
+  m_ShapePathHash: -233815427
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -87382
+  m_LocalBounds:
+    m_Center: {x: 0.08497214, y: 1.1196332, z: 0}
+    m_Extent: {x: 0.1351192, y: 0.97984266, z: 0}
