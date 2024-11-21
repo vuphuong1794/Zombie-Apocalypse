@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundController : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] Slider slider;
+    [SerializeField] Text textUI;
+    private float num;
 
     // Static instance để giữ SoundController duy nhất
     private static SoundController instance;
@@ -32,10 +36,13 @@ public class SoundController : MonoBehaviour
         }
 
         // Phát nhạc nếu chưa phát
-        if (!audioSource.isPlaying)
-        {
+        
+            slider.value = PlayerPrefs.GetFloat("sldkey");
+            num = slider.value * 100;
+            textUI.text = num.ToString("0") + "%";
+            AudioListener.volume = slider.value;
             audioSource.Play();
             audioSource.loop = true;
-        }
+        
     }
 }
