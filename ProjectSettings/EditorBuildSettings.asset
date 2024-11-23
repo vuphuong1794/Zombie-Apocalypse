@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Game.unity
     guid: 8d09394d275919043b61645a5adc4b3b
   - enabled: 1
-    path: Assets/Scenes/Multiplayer Gamemode.unity
+    path: Assets/Scenes/Multiplayer_Gamemode.unity
     guid: bbde289ec2ae9d140931c6c9fedd4760
   - enabled: 1
     path: Assets/Scenes/Matchmaking.unity

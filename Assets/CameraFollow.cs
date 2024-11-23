@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollow : NetworkBehaviour
 {
     public GameObject Player;
     // Start is called before the first frame update
@@ -15,4 +16,5 @@ public class CameraFollow : MonoBehaviour
         newPosition.z = -2;  // Fix the z position
         this.transform.position = newPosition;
     }
+
 }

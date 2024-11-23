@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField]
     private GameObject Sniper;
-    Transform target;
+    public Vector3 target;
     Vector3 velocity = Vector3.zero;
 
     [Range(0, 1)]
@@ -14,14 +14,10 @@ public class CameraController : MonoBehaviour
 
     public Vector3 positionOffset;
 
-    private void Awake()
-    {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-    }
 
     private void LateUpdate()
     {
-        Vector3 targetPosition = target.position+positionOffset;
+        Vector3 targetPosition = target+positionOffset;
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 
         Camera thisCamera= this.GetComponent<Camera>() ;

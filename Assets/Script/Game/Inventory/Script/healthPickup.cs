@@ -1,6 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Progress;
-
 public class healthPickup : MonoBehaviour
 {
     [SerializeField] private float healAmount = 20f; // Số máu được hồi mỗi lần nhặt

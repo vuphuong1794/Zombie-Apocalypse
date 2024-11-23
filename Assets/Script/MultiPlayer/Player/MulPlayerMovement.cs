@@ -19,12 +19,21 @@ public class MulPlayerMovement : NetworkBehaviour
     public GameObject Mycamera;
     private void Start()
     {
-        Mycamera = GameObject.Find(this.gameObject.name + "_Camera");
-        Debug.Log("MulMOVEMENT find camera by name:" + this.gameObject.name + "_Camera");
+        if (IsOwner) // Only update for the owning player  
+        {
+            this.gameObject.name += this.OwnerClientId;
+            Debug.Log("MulMOVEMENT: Owner Client ID: " + OwnerClientId);
+            Debug.Log("MulMOVEMENT find camera by name:" + this.gameObject.name + "_Camera");
+
+        }
+
+
         _rigidbody = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
+
         uiInventory.SetInventory(inventory);
         uiInventory.SetPlayer(this);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -53,11 +62,12 @@ public class MulPlayerMovement : NetworkBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (Mycamera == null)
         {
             Mycamera = GameObject.Find(this.gameObject.name + "_Camera");
+
         }
         if (IsOwner)
         {
