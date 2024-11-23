@@ -11,7 +11,7 @@ public class SpawnCamera : NetworkBehaviour
     public GameObject Mycamera;
     private void Start()
     {
-        if (IsServer) // Ensure this runs only on the server  
+        if (IsOwner) // Ensure this runs only on the server  
         {
             Debug.Log("Onsceneloaded in multi mode");
             GameObject myCamera = Instantiate(Mycamera, this.transform.position, this.transform.rotation);

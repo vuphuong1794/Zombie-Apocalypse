@@ -167,7 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 3990326960167037494, guid: 3a8cf02c327608b41ab06c917ff93693, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &80189751
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -258,7 +264,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 4bf3eeb1c6805b44aa3a749aa4fb9b06, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &96652290
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -655,7 +667,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 8a8d4c86c93f7514ebbfdcff04c45cd7, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &288457488
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -766,6 +784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSlotContainer: {fileID: 150021566}
   itemSlotTemplate: {fileID: 1782902942}
+  background: {fileID: 0}
 --- !u!1 &324994861
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +820,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &371267961
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029704520814867439, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211194023222569519, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7258a7185aa60a8468d49d86600e1cd3, type: 3}
 --- !u!1 &386045784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1443,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 3990326960167037494, guid: 3a8cf02c327608b41ab06c917ff93693, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &1076216994
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1458,7 +1540,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 4bf3eeb1c6805b44aa3a749aa4fb9b06, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &1132916997
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1549,7 +1637,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 4bf3eeb1c6805b44aa3a749aa4fb9b06, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &1198031985
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1640,7 +1734,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 4bf3eeb1c6805b44aa3a749aa4fb9b06, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &1236709129
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1815,7 +1915,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 4bf3eeb1c6805b44aa3a749aa4fb9b06, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &1258166701
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1906,7 +2012,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 8a8d4c86c93f7514ebbfdcff04c45cd7, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &1400457049
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11954,7 +12066,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 4bf3eeb1c6805b44aa3a749aa4fb9b06, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &1580349477
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13567,7 +13685,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 4bf3eeb1c6805b44aa3a749aa4fb9b06, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &1899508903
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13859,7 +13983,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f17930fe8a792428d30e850685f60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 1376639043028672402, guid: 4bf3eeb1c6805b44aa3a749aa4fb9b06, type: 3}
+  spawnPoints: []
+  enemyPrefab: {fileID: 0}
+  maxEnemies: 5
+  spawnInterval: 10
+  minDistanceFromPlayer: 8
+  maxDistanceFromPlayer: 30
+  destroyDistance: 30
 --- !u!61 &2136915083
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13915,3 +14045,4 @@ SceneRoots:
   - {fileID: 1893135702}
   - {fileID: 571236066}
   - {fileID: 136926305}
+  - {fileID: 371267961}
