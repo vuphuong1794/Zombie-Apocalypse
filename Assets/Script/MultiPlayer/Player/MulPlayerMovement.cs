@@ -2,7 +2,6 @@
 using UnityEngine;
 using Unity.Netcode;
 
-
 public class MulPlayerMovement : NetworkBehaviour
 {
     [Header("Required References")]
@@ -14,9 +13,10 @@ public class MulPlayerMovement : NetworkBehaviour
     private Rigidbody2D _rigidbody;
     private Vector2 _movementInput;
     private Inventory inventory;
-    private Vector3 ortherPos;
+    private Vector3 otherPos;
 
     public GameObject Mycamera;
+
     private void Start()
     {
         if (IsOwner) // Only update for the owning player  
@@ -24,16 +24,13 @@ public class MulPlayerMovement : NetworkBehaviour
             this.gameObject.name += this.OwnerClientId;
             Debug.Log("MulMOVEMENT: Owner Client ID: " + OwnerClientId);
             Debug.Log("MulMOVEMENT find camera by name:" + this.gameObject.name + "_Camera");
-
         }
-
 
         _rigidbody = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
 
         uiInventory.SetInventory(inventory);
         uiInventory.SetPlayer(this);
-
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -67,29 +64,28 @@ public class MulPlayerMovement : NetworkBehaviour
         if (Mycamera == null)
         {
             Mycamera = GameObject.Find(this.gameObject.name + "_Camera");
-
         }
-        if (IsOwner)
+
+        if (IsClient)
         {
             MovePlayer();
             RotateTowardsMouse();
-            if (NetworkManager.Singleton.IsClient)
-            {
-                SyncPlayerPosServerRpc(transform.position);
-            }
-            
+            SyncPlayerStateServerRpc(transform.position, transform.rotation);
         }
         else
         {
-            transform.position = ortherPos;
+            // Update the position and rotation of the non-owner  
+            transform.position = otherPos;
+            // Ensure the rotation is also synchronized  
+            transform.rotation = Quaternion.Euler(0, 0, otherRotation);
         }
-        
     }
 
     [ServerRpc]
-    void SyncPlayerPosServerRpc(Vector3 pos)
+    void SyncPlayerStateServerRpc(Vector3 pos, Quaternion rot)
     {
-        ortherPos = pos;
+        otherPos = pos;
+        otherRotation = rot.eulerAngles.z; // Store only the Z rotation  
     }
 
     private void MovePlayer()
@@ -100,7 +96,7 @@ public class MulPlayerMovement : NetworkBehaviour
 
     private void RotateTowardsMouse()
     {
-        // Use Mycamera directly without .main
+        // Use Mycamera directly without .main  
         Vector3 mousePos = Mycamera.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -116,4 +112,6 @@ public class MulPlayerMovement : NetworkBehaviour
     {
         return transform.position;
     }
+
+    private float otherRotation; // Variable to store the rotation for syncing  
 }
