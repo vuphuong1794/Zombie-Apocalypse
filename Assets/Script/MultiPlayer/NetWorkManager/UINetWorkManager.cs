@@ -51,7 +51,7 @@ public class UINetWorkManager : MonoBehaviour
     private IEnumerator WaitForSceneLoadAndStartHost()
     {
         // Đăng ký sự kiện để xử lý khi scene mới được tải
-        AsyncOperation sceneLoadOperation = SceneManager.LoadSceneAsync("Multiplayer Gamemode");
+        AsyncOperation sceneLoadOperation = SceneManager.LoadSceneAsync("Multiplayer_Gamemode");
         sceneLoadOperation.allowSceneActivation = false; // Tạm dừng chuyển cảnh cho đến khi ta chuẩn bị xong
 
         // Hiển thị hiệu ứng chuyển cảnh
@@ -75,7 +75,7 @@ public class UINetWorkManager : MonoBehaviour
     private IEnumerator WaitForSceneLoadAndStartClient()
     {
         // Đăng ký sự kiện để xử lý khi scene mới được tải
-        AsyncOperation sceneLoadOperation = SceneManager.LoadSceneAsync("Multiplayer Gamemode");
+        AsyncOperation sceneLoadOperation = SceneManager.LoadSceneAsync("Multiplayer_Gamemode");
         sceneLoadOperation.allowSceneActivation = false; // Tạm dừng chuyển cảnh cho đến khi ta chuẩn bị xong
 
         // Hiển thị hiệu ứng chuyển cảnh
