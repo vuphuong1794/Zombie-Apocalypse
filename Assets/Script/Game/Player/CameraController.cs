@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField]
     private GameObject Sniper;
+    public GameObject Player;
     public Vector3 target;
     Vector3 velocity = Vector3.zero;
 
@@ -17,6 +18,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
+        target=Player.transform.position;
         Vector3 targetPosition = target+positionOffset;
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 

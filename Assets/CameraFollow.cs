@@ -13,7 +13,7 @@ public class CameraFollow : NetworkBehaviour
     {
         // Set the position of the camera, but keep the z value fixed at -2
         Vector3 newPosition = Player.transform.position;
-        newPosition.z = -2;  // Fix the z position
+        newPosition.z = -15;  // Fix the z position
         this.transform.position = newPosition;
     }
 
