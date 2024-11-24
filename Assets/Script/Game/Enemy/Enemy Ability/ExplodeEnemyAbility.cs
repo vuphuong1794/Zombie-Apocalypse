@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class ExplodeEnemyAbility : MonoBehaviour
 {
@@ -28,10 +29,12 @@ public class ExplodeEnemyAbility : MonoBehaviour
 
     public Animator animator;
 
-    [Header("Audio Settings")]
-    [SerializeField]
-    private AudioClip explodeSound; // Âm thanh khi nổ
-    private AudioSource audioSource; // Nguồn phát âm thanh
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     // Hàm thiết lập EnemySpawner
     public void SetSpawner(EnemySpawner spawner)
@@ -45,12 +48,6 @@ public class ExplodeEnemyAbility : MonoBehaviour
         explosionRef = Resources.Load("Explosion"); // Tải tài nguyên nổ từ thư mục Resources
         animator = GetComponent<Animator>();
 
-        // Kiểm tra và thêm AudioSource
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
     }
 
     // Phương thức xử lý va chạm
@@ -92,7 +89,8 @@ public class ExplodeEnemyAbility : MonoBehaviour
         explosion.transform.position = new Vector3(transform.position.x, transform.position.y + .3f, transform.position.z);
 
         float distanceToPlayer = Vector2.Distance(transform.position, collision.gameObject.transform.position);
-        PlaySound(explodeSound); // Phát âm thanh nổ
+        CreateExplosionLight(); // Thêm hiệu ứng phát 
+        audioManager.PlaySFX(audioManager.explode); // Phát âm thanh nổ
         // Xóa đối tượng kẻ thù sau khi nổ
         Destroy(gameObject);
         
@@ -103,11 +101,25 @@ public class ExplodeEnemyAbility : MonoBehaviour
         }
     }
 
-    private void PlaySound(AudioClip clip)
+    private void CreateExplosionLight()
     {
-        if (audioSource != null && clip != null)
-        {
-            audioSource.PlayOneShot(clip);
-        }
+        // Tạo một đối tượng Light
+        GameObject lightObject = new GameObject("ExplosionLight");
+        Light2D light = lightObject.AddComponent<Light2D>(); // Thêm Light2D
+        light.lightType = Light2D.LightType.Point; // Đặt loại ánh sáng (Point, Spot, Global, etc.)
+        light.color = new Color(1f, 0.5f, 0.2f); // Màu ánh sáng (màu cam lửa)
+        light.intensity = 10f; // Độ sáng
+        light.pointLightOuterRadius = 5f; // Bán kính ngoài (phạm vi sáng)
+        light.pointLightInnerRadius = 3f; // Bán kính trong
+
+        // Đặt vị trí của Light trùng với vị trí của vụ nổ
+        lightObject.transform.position = transform.position;
+
+        // Đính ánh sáng vào đối tượng vụ nổ (tùy chọn)
+        //lightObject.transform.SetParent(this.transform);
+
+        //// Tạo hiệu ứng giảm độ sáng
+        //StartCoroutine(FadeAndDestroyLight(light, lightObject));
+        Destroy(lightObject, 0.5f);
     }
 }
