@@ -6,8 +6,16 @@ public class SpawnBullet : MonoBehaviour
 {
     public GameObject itemDrop;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     private void OnDestroy()
     {
+        audioManager.PlaySFX(audioManager.chestBreak);
         // Tạo instance mới của itemDrop trước
         GameObject newItem = Instantiate(itemDrop, gameObject.transform.position, gameObject.transform.rotation);
 

@@ -31,10 +31,12 @@ public class BulletGrenade : MonoBehaviour
     [SerializeField] private GameObject muzzleFlashEffect; // Hiệu ứng bắn đạn (như ánh sáng hoặc lửa từ nòng súng)
     [SerializeField] private float muzzleFlashLifetime = 0.2f; // Thời gian tồn tại của hiệu ứng bắn đạn
 
-    [Header("Audio Settings")]
-    [SerializeField]
-    private AudioClip explodeSound; // Âm thanh khi nổ
-    //private AudioSource audioSource; // Nguồn phát âm thanh
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     private void Start()
     {
@@ -160,7 +162,8 @@ public class BulletGrenade : MonoBehaviour
         {
             GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
             Destroy(explosion, explosionEffectLifetime);
-            PlaySound(explodeSound); // Phát âm thanh nổ
+            audioManager.PlaySFX(audioManager.explode);
+            //PlaySound(explodeSound); // Phát âm thanh nổ
         }
 
         //Collider2D[] hitTargets = Physics2D.OverlapCircleAll(transform.position, explosionRadius, damageableLayer);
@@ -256,12 +259,12 @@ public class BulletGrenade : MonoBehaviour
         }
     }
 
-    private void PlaySound(AudioClip clip)
-    {
-        Debug.LogError("BOOM");
-        if (audioSource != null && clip != null)
-        {
-            audioSource.PlayOneShot(clip);
-        }
-    }
+    //private void PlaySound(AudioClip clip)
+    //{
+    //    Debug.LogError("BOOM");
+    //    if (audioSource != null && clip != null)
+    //    {
+    //        audioSource.PlayOneShot(clip);
+    //    }
+    //}
 }

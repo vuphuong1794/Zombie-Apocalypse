@@ -12,6 +12,13 @@ public class ShootPistol : MonoBehaviour
 
     private float timeSinceLastShot = 0f;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
@@ -26,6 +33,7 @@ public class ShootPistol : MonoBehaviour
 
     private void FireBullet()
     {
+        audioManager.PlaySFX(audioManager.shootPistol);
         // Tạo viên đạn tại vị trí firePos với góc quay mặc định
         GameObject bulletInstance = Instantiate(bulletPrefab, firePos.position, transform.rotation);
 

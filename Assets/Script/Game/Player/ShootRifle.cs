@@ -20,6 +20,11 @@ public class GunShooting : MonoBehaviour
     private Inventory inventory;
     private bool isReloading = false;
 
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     private void Start()
     {
         InitializeComponents();
@@ -85,6 +90,8 @@ public class GunShooting : MonoBehaviour
             return;
         }
 
+        audioManager.PlaySFX(audioManager.shootRifle);
+
         GameObject bulletInstance = Instantiate(bulletPrefab, firePos.position, transform.rotation);
         Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
         if (bulletRb != null)
@@ -94,7 +101,7 @@ public class GunShooting : MonoBehaviour
 
         if (m_ShoottingPistol != null)
         {
-            m_ShoottingPistol.Play();
+            //m_ShoottingPistol.Play();
         }
     }
 

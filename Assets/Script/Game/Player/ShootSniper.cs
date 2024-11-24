@@ -20,6 +20,12 @@ public class ShootSniper : MonoBehaviour
     private Inventory inventory;
     private bool isReloading = false;
 
+    AudioManager audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     private void Start()
     {
         InitializeComponents();
@@ -85,6 +91,7 @@ public class ShootSniper : MonoBehaviour
             return;
         }
 
+        audioManager.PlaySFX(audioManager.shootSniper);
         GameObject bulletInstance = Instantiate(bulletPrefab, firePos.position, transform.rotation);
         Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
         if (bulletRb != null)

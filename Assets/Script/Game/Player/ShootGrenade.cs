@@ -20,6 +20,12 @@ public class ShootGrenade : MonoBehaviour
     private Inventory inventory;
     private bool isReloading = false;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     private void Start()
     {
         InitializeComponents();
@@ -85,6 +91,7 @@ public class ShootGrenade : MonoBehaviour
             return;
         }
 
+        audioManager.PlaySFX(audioManager.shootGrenade);
         GameObject bulletInstance = Instantiate(grenadeBulletPrefab, firePos.position, transform.rotation);
         Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
         if (bulletRb != null)
@@ -92,10 +99,10 @@ public class ShootGrenade : MonoBehaviour
             bulletRb.velocity = transform.up * bulletSpeed;
         }
 
-        if (m_ShoottingPistol != null)
-        {
-            m_ShoottingPistol.Play();
-        }
+        //if (m_ShoottingPistol != null)
+        //{
+        //    m_ShoottingPistol.Play();
+        //}
     }
 
     private void PlayEmptyGunSound()
